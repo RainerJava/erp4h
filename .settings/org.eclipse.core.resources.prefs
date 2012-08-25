@@ -1,0 +1,7 @@
+eclipse.preferences.version=1
+encoding//src/Center/frmThietBi.java=UTF-8
+encoding//src/DataAccessLayer/ConnectMySQL.java=UTF-8
+encoding//src/DataAccessLayer/ConnectOracle.java=UTF-8
+encoding//src/DataAccessLayer/ConnectionFactory.java=UTF-8
+encoding//src/DataTranferObject/MenuDTO.java=UTF-8
+encoding//src/Utilities/NumberRenderer.java=UTF-8

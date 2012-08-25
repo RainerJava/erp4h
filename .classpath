@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="Image/|Connector/|Images/" kind="src" path="src"/>
+	<classpathentry kind="src" path="src/Image"/>
+	<classpathentry kind="src" path="src/Connector"/>
+	<classpathentry excluding="src/|src/Image/|src/Connector/" kind="src" path=""/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="D:/project/indigo/erp4h/src/Connector/mysql-connector-java-5.1.20-bin.jar"/>
+	<classpathentry kind="lib" path="D:/project/indigo/erp4h/src/Connector/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="forms-1.3.0.jar" sourcepath="forms-1.3.0-src.zip"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
