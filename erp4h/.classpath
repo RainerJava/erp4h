@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry excluding="Connector/|Image/" kind="src" path="src"/>
+	<classpathentry kind="src" path="src/Connector"/>
+	<classpathentry kind="src" path="src/Image"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="D:/project/erp4h/src/Connector/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="D:/project/erp4h/src/Connector/mysql-connector-java-5.1.20-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
