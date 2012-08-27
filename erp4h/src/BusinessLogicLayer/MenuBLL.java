@@ -1,6 +1,7 @@
 package BusinessLogicLayer;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -84,5 +85,29 @@ public class MenuBLL {
 	public void Delete(HashSet<MenuDTO> HS_Menu) throws Exception{
 		for(MenuDTO DTO_Menu:HS_Menu)
 			this.Delete(DTO_Menu);		
+	}
+	
+	public ArrayList<MenuDTO> getArrayMenu(String Condition, String OrderBy) throws Exception{
+		ResultSet rs=this.connect.Select("tblMenu", Condition, OrderBy);
+		ArrayList<MenuDTO>arrMenu=new ArrayList<MenuDTO>();
+		while(rs.next()){
+			MenuDTO dtoMenu=new MenuDTO();
+			dtoMenu.setMenuID(rs.getInt("MenuID"));
+			dtoMenu.setMenuPosition(rs.getInt("MenuPosition"));
+			dtoMenu.setMenuValue(rs.getString("MenuValue"));
+			dtoMenu.setMenuFiliationID(rs.getInt("MenuFiliationID"));
+			dtoMenu.setFormName(rs.getString("FormName"));
+			dtoMenu.setPhanHeID(rs.getInt("PhanHeID"));
+			arrMenu.add(dtoMenu);
+		}
+		return arrMenu;
+	}
+	
+	public ArrayList<MenuDTO> getArrayMenu(String Condition) throws Exception{
+		return getArrayMenu(Condition, null);
+	}
+	
+	public ArrayList<MenuDTO> getArrayMenu() throws Exception{
+		return getArrayMenu(null);
 	}
 }

@@ -2,10 +2,6 @@ package DataTranferObject;
 
 import java.sql.Timestamp;
 
-import BusinessLogicLayer.PhanHeBLL;
-
-
-
 public class MenuDTO {
 	private int MenuID;
 	private int MenuPosition;
@@ -13,7 +9,6 @@ public class MenuDTO {
 	private int MenuFiliationID;
 	private String FormName;
 	private int PhanHeID;
-	private PhanHeDTO DTO_PhanHe;
 	private String ShortcutKey;
 	private Timestamp CreatedDate;
 	private String UserID;
@@ -30,7 +25,6 @@ public class MenuDTO {
 			int MenuFiliationID,
 			String FormName,
 			int PhanHeID,
-			PhanHeDTO DTO_PhanHe,
 			String ShortcutKey,
 			Timestamp CreatedDate,
 			String UserID){
@@ -40,7 +34,6 @@ public class MenuDTO {
 		this.MenuFiliationID=MenuFiliationID;
 		this.FormName=FormName;
 		this.PhanHeID=PhanHeID;
-		this.DTO_PhanHe=DTO_PhanHe;
 		this.ShortcutKey=ShortcutKey;
 		this.CreatedDate=CreatedDate;
 		this.UserID=UserID;
@@ -85,18 +78,6 @@ public class MenuDTO {
 	}
 	public void setPhanHeID(int phanHeID) {
 		PhanHeID = phanHeID;
-	}
-	
-	public PhanHeDTO getDTO_PhanHe() throws Exception {
-		if(this.DTO_PhanHe==null)
-		{
-			PhanHeBLL BLL_PhanHe=new PhanHeBLL();
-			this.DTO_PhanHe=BLL_PhanHe.getByID(PhanHeID);
-		}
-		return DTO_PhanHe;
-	}
-	public void setDTO_PhanHe(PhanHeDTO dTO_PhanHe) {
-		DTO_PhanHe = dTO_PhanHe;
 	}
 	
 	String getShortcutKey() {
