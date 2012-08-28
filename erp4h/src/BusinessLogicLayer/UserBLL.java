@@ -14,6 +14,30 @@ public class UserBLL {
 		this.connect=DataAccessLayer.DataAccess.getDAL();
 	}
 	
+	public void Delete(HashSet<UserDTO>HS_User) throws Exception{
+		for(UserDTO DTO_User:HS_User)
+			this.Delete(DTO_User);		
+	}
+	
+	public void Delete(UserDTO DTO_User) throws Exception{
+		this.connect.Delete("tblUser", "LoginID"+DTO_User.getLoginID());		
+	}
+	
+	public UserDTO getByID(int id) throws Exception{
+		HashSet<UserDTO>HS_User=this.getUser("LoginID="+id);
+		if(HS_User.size()>0)
+			return HS_User.toArray(new UserDTO[HS_User.size()])[0];
+		return null;
+	}
+	
+	public HashSet<UserDTO>getUser() throws Exception{
+		return getUser(null);
+	}
+	
+	public HashSet<UserDTO>getUser(String Condition) throws Exception{
+		return getUser(Condition, null);
+	}
+	
 	public HashSet<UserDTO>getUser(String Condition, String OrderBy) throws Exception{
 		ResultSet rs=this.connect.Select("tblUser", Condition, OrderBy);
 		HashSet<UserDTO>HS_User=new HashSet<UserDTO>();
@@ -36,19 +60,9 @@ public class UserBLL {
 		return HS_User;
 	}
 	
-	public HashSet<UserDTO>getUser(String Condition) throws Exception{
-		return getUser(Condition, null);
-	}
-	
-	public HashSet<UserDTO>getUser() throws Exception{
-		return getUser(null);
-	}
-	
-	public UserDTO getByID(int id) throws Exception{
-		HashSet<UserDTO>HS_User=this.getUser("LoginID="+id);
-		if(HS_User.size()>0)
-			return HS_User.toArray(new UserDTO[HS_User.size()])[0];
-		return null;
+	public void Insert(HashSet<UserDTO> HS_User) throws Exception{
+		for(UserDTO DTO_User:HS_User)
+			this.Insert(DTO_User);
 	}
 	
 	public void Insert(UserDTO DTO_User) throws Exception{
@@ -68,9 +82,9 @@ public class UserBLL {
 		this.connect.Insert("tblUser", map);
 	}
 	
-	public void Insert(HashSet<UserDTO> HS_User) throws Exception{
+	public void Update(HashSet<UserDTO>HS_User) throws Exception{
 		for(UserDTO DTO_User:HS_User)
-			this.Insert(DTO_User);
+			this.Update(DTO_User);
 	}
 	
 	public void Update(UserDTO DTO_User) throws Exception{
@@ -88,19 +102,5 @@ public class UserBLL {
 		map.put("LastChangedPassword", DTO_User.getLastChangedPassword());
 		map.put("DeadlineOfUsing", DTO_User.getDeadlineOfUsing());
 		this.connect.Update("tblUser", map, "LoginID"+DTO_User.getLoginID());
-	}
-	
-	public void Update(HashSet<UserDTO>HS_User) throws Exception{
-		for(UserDTO DTO_User:HS_User)
-			this.Update(DTO_User);
-	}
-	
-	public void Delete(UserDTO DTO_User) throws Exception{
-		this.connect.Delete("tblUser", "LoginID"+DTO_User.getLoginID());		
-	}
-	
-	public void Delete(HashSet<UserDTO>HS_User) throws Exception{
-		for(UserDTO DTO_User:HS_User)
-			this.Delete(DTO_User);		
 	}
 }

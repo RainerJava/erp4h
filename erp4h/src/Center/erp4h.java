@@ -7,7 +7,6 @@ import javax.swing.JFrame;
 
 public class erp4h {
 
-	private JFrame frame;
 	/**
 	 * Launch the application.
 	 */
@@ -23,6 +22,7 @@ public class erp4h {
 			}
 		});
 	}
+	private JFrame frame;
 
 	/**
 	 * Create the application.

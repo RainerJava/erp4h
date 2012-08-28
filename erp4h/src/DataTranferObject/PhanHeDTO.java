@@ -26,7 +26,7 @@ public class PhanHeDTO {
 	public HashSet<MenuDTO> getMenu() throws Exception {
 		if(this.Menu==null){
 			MenuBLL BLL_Menu=new MenuBLL();
-			this.Menu=BLL_Menu.getMenu("MenuID"+this.PhanHeID);
+			this.Menu=BLL_Menu.getMenuDTO("MenuID"+this.PhanHeID);
 		}
 		return Menu;
 	}

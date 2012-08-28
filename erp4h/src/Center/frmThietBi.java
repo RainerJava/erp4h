@@ -26,13 +26,13 @@ public class frmThietBi extends JFrame implements TreeSelectionListener{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JSplitPane firstSplit;
-	private JSplitPane secondSplit;
-	private DefaultMutableTreeNode root;
-	private DefaultTreeModel treeModel;
-	private JTree KhoaPhong;
-	private JTable ThietBi;
 	MySQLConnectUnit connect;
+	private JSplitPane firstSplit;
+	private JTree KhoaPhong;
+	private DefaultMutableTreeNode root;
+	private JSplitPane secondSplit;
+	private JTable ThietBi;
+	private DefaultTreeModel treeModel;
 	
 	public frmThietBi() throws Exception{
 		this.connect=DataAccessLayer.DataAccess.getDAL();
@@ -40,6 +40,17 @@ public class frmThietBi extends JFrame implements TreeSelectionListener{
 		initialize();
 		getTree();
 		
+	}
+	
+	public void getTree() throws Exception{
+		ResultSet rs=this.connect.Select("tblKhoaPhong");
+		while(rs.next()){
+			KhoaPhongDTO kp=new KhoaPhongDTO(rs.getInt("KhoaPhongID"),rs.getString("TenKhoaPhong"));
+			DefaultMutableTreeNode node=new DefaultMutableTreeNode(kp);
+			System.out.println(rs.getInt("KhoaPhongID")+"	"+rs.getString("TenKhoaPhong"));
+			root.add(node);
+		}
+		KhoaPhong.expandRow(0);
 	}
 	
 	public void initialize() throws Exception{
@@ -69,17 +80,6 @@ public class frmThietBi extends JFrame implements TreeSelectionListener{
 		pKhoaPhong.setPreferredSize(new Dimension(200,300));
 		pThietBi.add(new JScrollPane(ThietBi));
 		
-	}
-	
-	public void getTree() throws Exception{
-		ResultSet rs=this.connect.Select("tblKhoaPhong");
-		while(rs.next()){
-			KhoaPhongDTO kp=new KhoaPhongDTO(rs.getInt("KhoaPhongID"),rs.getString("TenKhoaPhong"));
-			DefaultMutableTreeNode node=new DefaultMutableTreeNode(kp);
-			System.out.println(rs.getInt("KhoaPhongID")+"	"+rs.getString("TenKhoaPhong"));
-			root.add(node);
-		}
-		KhoaPhong.expandRow(0);
 	}
 	
 	@Override

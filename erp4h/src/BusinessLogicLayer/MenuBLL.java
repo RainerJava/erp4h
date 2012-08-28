@@ -15,32 +15,40 @@ public class MenuBLL {
 		this.connect=DataAccessLayer.DataAccess.getDAL();
 	}
 	
-	public HashSet<MenuDTO>getMenu(String Condition, String OrderBy) throws Exception{
+	public HashSet<MenuDTO>getMenuDTO(String Condition, String OrderBy) throws Exception{
 		ResultSet rs=this.connect.Select("tblMenu", Condition, OrderBy);
-		HashSet<MenuDTO>HS_Menu=new HashSet<MenuDTO>();
+		HashSet<MenuDTO>hsMenu=new HashSet<MenuDTO>();
 		while(rs.next()){
-			MenuDTO DTO_Menu=new MenuDTO();
-			DTO_Menu.setMenuID(rs.getInt("MenuID"));
-			DTO_Menu.setMenuPosition(rs.getInt("MenuPosition"));
-			DTO_Menu.setMenuValue(rs.getString("MenuValue"));
-			DTO_Menu.setMenuFiliationID(rs.getInt("MenuFiliationID"));
-			DTO_Menu.setFormName(rs.getString("FormName"));
-			DTO_Menu.setPhanHeID(rs.getInt("PhanHeID"));
-			HS_Menu.add(DTO_Menu);
+			MenuDTO dtoMenu=new MenuDTO();
+			dtoMenu.setMenuID(rs.getInt("MenuID"));
+			dtoMenu.setMenuPosition(rs.getInt("MenuPosition"));
+			dtoMenu.setMenuValue(rs.getString("MenuValue"));
+			dtoMenu.setMenuFiliationID(rs.getInt("MenuFiliationID"));
+			dtoMenu.setFormName(rs.getString("FormName"));
+			dtoMenu.setMenuEnable(rs.getInt("MenuEnable"));
+			dtoMenu.setShortcutKey(rs.getString("ShortcutKey"));
+			dtoMenu.setMenuIcon(rs.getString("MenuIcon"));
+			dtoMenu.setMenuType(rs.getInt("MenuType"));
+			dtoMenu.setMenuStatus(rs.getInt("MenuStatus"));
+			dtoMenu.setMnemonic(rs.getString("Mnemonic"));
+			dtoMenu.setPhanHeID(rs.getInt("PhanHeID"));
+			dtoMenu.setCreatedDate(rs.getTimestamp("CreatedDate"));
+			dtoMenu.setUserID(rs.getString("UserID"));
+			hsMenu.add(dtoMenu);
 		}
-		return HS_Menu;
+		return hsMenu;
 	}
 	
-	public HashSet<MenuDTO>getMenu(String Condition) throws Exception{
-		return getMenu(Condition, null);
+	public HashSet<MenuDTO>getMenuDTO(String Condition) throws Exception{
+		return getMenuDTO(Condition, null);
 	}
 	
-	public HashSet<MenuDTO>getMenu() throws Exception{
-		return getMenu(null);
+	public HashSet<MenuDTO>getMenuDTO() throws Exception{
+		return getMenuDTO(null);
 	}
 	
 	public MenuDTO getByID(int id) throws Exception{
-		HashSet<MenuDTO>HS_Menu=this.getMenu("MenuID="+id);
+		HashSet<MenuDTO>HS_Menu=this.getMenuDTO("MenuID="+id);
 		if(HS_Menu.size()>0)
 			return HS_Menu.toArray(new MenuDTO[HS_Menu.size()])[0];
 		return null;
@@ -87,7 +95,7 @@ public class MenuBLL {
 			this.Delete(DTO_Menu);		
 	}
 	
-	public ArrayList<MenuDTO> getArrayMenu(String Condition, String OrderBy) throws Exception{
+	public ArrayList<MenuDTO> getMenuArray(String Condition, String OrderBy) throws Exception{
 		ResultSet rs=this.connect.Select("tblMenu", Condition, OrderBy);
 		ArrayList<MenuDTO>arrMenu=new ArrayList<MenuDTO>();
 		while(rs.next()){
@@ -97,17 +105,25 @@ public class MenuBLL {
 			dtoMenu.setMenuValue(rs.getString("MenuValue"));
 			dtoMenu.setMenuFiliationID(rs.getInt("MenuFiliationID"));
 			dtoMenu.setFormName(rs.getString("FormName"));
+			dtoMenu.setMenuEnable(rs.getInt("MenuEnable"));
+			dtoMenu.setShortcutKey(rs.getString("ShortcutKey"));
+			dtoMenu.setMenuIcon(rs.getString("MenuIcon"));
+			dtoMenu.setMenuType(rs.getInt("MenuType"));
+			dtoMenu.setMenuStatus(rs.getInt("MenuStatus"));
+			dtoMenu.setMnemonic(rs.getString("Mnemonic"));
 			dtoMenu.setPhanHeID(rs.getInt("PhanHeID"));
+			dtoMenu.setCreatedDate(rs.getTimestamp("CreatedDate"));
+			dtoMenu.setUserID(rs.getString("UserID"));
 			arrMenu.add(dtoMenu);
 		}
 		return arrMenu;
 	}
 	
-	public ArrayList<MenuDTO> getArrayMenu(String Condition) throws Exception{
-		return getArrayMenu(Condition, null);
+	public ArrayList<MenuDTO> getMenuArray(String Condition) throws Exception{
+		return getMenuArray(Condition, null);
 	}
 	
-	public ArrayList<MenuDTO> getArrayMenu() throws Exception{
-		return getArrayMenu(null);
+	public ArrayList<MenuDTO> getMenuArray() throws Exception{
+		return getMenuArray(null);
 	}
 }
