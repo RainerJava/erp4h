@@ -25,10 +25,11 @@ public class MenuBLL {
 			dtoMenu.setMenuValue(rs.getString("MenuValue"));
 			dtoMenu.setMenuFiliationID(rs.getInt("MenuFiliationID"));
 			dtoMenu.setFormName(rs.getString("FormName"));
+			dtoMenu.setMenuAction(rs.getString("FormName"));
 			dtoMenu.setMenuEnable(rs.getInt("MenuEnable"));
 			dtoMenu.setMenuHotKey(rs.getString("MenuHotKey"));
 			dtoMenu.setMenuIcon(rs.getString("MenuIcon"));
-			dtoMenu.setMenuType(rs.getInt("MenuType"));
+			dtoMenu.setMenuTypeID(rs.getInt("MenuTypeID"));
 			dtoMenu.setMenuStatus(rs.getInt("MenuStatus"));
 			dtoMenu.setMnemonic(rs.getString("Mnemonic"));
 			dtoMenu.setPhanHeID(rs.getInt("PhanHeID"));
@@ -105,10 +106,12 @@ public class MenuBLL {
 			dtoMenu.setMenuValue(rs.getString("MenuValue"));
 			dtoMenu.setMenuFiliationID(rs.getInt("MenuFiliationID"));
 			dtoMenu.setFormName(rs.getString("FormName"));
+			dtoMenu.setMenuAction(rs.getString("MenuAction"));
+			dtoMenu.setMenuActionTypeID(rs.getByte("MenuActionTypeID"));
 			dtoMenu.setMenuEnable(rs.getInt("MenuEnable"));
 			dtoMenu.setMenuHotKey(rs.getString("MenuHotKey"));
 			dtoMenu.setMenuIcon(rs.getString("MenuIcon"));
-			dtoMenu.setMenuType(rs.getInt("MenuType"));
+			dtoMenu.setMenuTypeID(rs.getInt("MenuTypeID"));
 			dtoMenu.setMenuStatus(rs.getInt("MenuStatus"));
 			dtoMenu.setMnemonic(rs.getString("Mnemonic"));
 			dtoMenu.setPhanHeID(rs.getInt("PhanHeID"));

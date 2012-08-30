@@ -15,20 +15,20 @@ import BusinessLogicLayer.MenuActionListener;
 import DataTranferObject.MenuDTO;
 
 
-public class SystemMenu extends JFrame {
+public class SystemMenu1 extends JFrame {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	public static void main(String[] args) throws Exception{
-		SystemMenu window = new SystemMenu();
+		SystemMenu1 window = new SystemMenu1();
 		window.setVisible(true);
 	}
 	JMenu mnu,mnuName;
 	JMenuBar mnuBar;
 	JMenuItem mnuItem;
 	
-	public SystemMenu() throws Exception{
+	public SystemMenu1() throws Exception{
 		setName("abc");
 		setTitle("Menu demo");
 		setBounds(100, 100, 1024, 768);
@@ -49,7 +49,7 @@ public class SystemMenu extends JFrame {
 			else if(dtoMenu.getMenuFiliationID()!=0 & dtoMenu.getPhanHeID()==1){
 				if(dtoMenu.getMenuIcon()!=null){
 					mnuItem=new JMenuItem(dtoMenu.getMenuValue());
-					mnuItem.setIcon(new ImageIcon(SystemMenu.class.getResource(dtoMenu.getMenuIcon())));
+					mnuItem.setIcon(new ImageIcon(SystemMenu1.class.getResource(dtoMenu.getMenuIcon())));
 					mnuItem.addActionListener(new MenuActionListener());
 					System.out.println(dtoMenu.getMenuHotKey());
 				}else{

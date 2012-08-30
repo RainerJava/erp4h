@@ -8,10 +8,12 @@ public class MenuDTO {
 	private String MenuValue;
 	private int MenuFiliationID;
 	private String FormName;
+	private String MenuAction;
+	private byte MenuActionTypeID;
 	private int MenuEnable;
 	private String MenuHotKey;
 	private String MenuIcon;
-	private int MenuType;
+	private int MenuTypeID;
 	private int MenuStatus;
 	private String Mnemonic;
 	private int PhanHeID;
@@ -31,7 +33,7 @@ public class MenuDTO {
 			int MenuEnable,
 			String MenuHotKey,
 			String MenuIcon,
-			int MenuType,
+			int MenuTypeID,
 			int MenuStatus,
 			String Mnemonic,
 			int PhanHeID,
@@ -46,7 +48,7 @@ public class MenuDTO {
 		this.setMenuEnable(MenuEnable);
 		this.setMenuHotKey(MenuHotKey);
 		this.setMenuIcon(MenuIcon);
-		this.setMenuType(MenuType);
+		this.setMenuTypeID(MenuTypeID);
 		this.setMenuStatus(MenuStatus);
 		this.setMnemonic(Mnemonic);
 		this.setPhanHeID(PhanHeID);
@@ -84,6 +86,18 @@ public class MenuDTO {
 	public void setFormName(String formName) {
 		FormName = formName;
 	}
+	public String getMenuAction() {
+		return MenuAction;
+	}
+	public void setMenuAction(String menuAction) {
+		MenuAction = menuAction;
+	}
+	public byte getMenuActionTypeID() {
+		return MenuActionTypeID;
+	}
+	public void setMenuActionTypeID(byte menuActionTypeID) {
+		MenuActionTypeID = menuActionTypeID;
+	}
 	public int getMenuEnable() {
 		return MenuEnable;
 	}
@@ -102,11 +116,12 @@ public class MenuDTO {
 	public void setMenuIcon(String menuIcon) {
 		MenuIcon = menuIcon;
 	}
-	public int getMenuType() {
-		return MenuType;
+	public int getMenuTypeID() {
+		return MenuTypeID;
 	}
-	public void setMenuType(int menuType) {
-		MenuType = menuType;
+
+	public void setMenuTypeID(int menuTypeID) {
+		MenuTypeID = menuTypeID;
 	}
 	public int getMenuStatus() {
 		return MenuStatus;
@@ -142,5 +157,7 @@ public class MenuDTO {
 	@Override
 	public String toString(){
 		return getMenuValue();
-	}	
+	}
+
+
 }
