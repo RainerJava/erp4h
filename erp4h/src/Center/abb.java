@@ -2,20 +2,21 @@ package Center;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.MenuBar;
 
 import javax.swing.JFrame;
-import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import BusinessLogicLayer.SystemMenu;
-import Demo.MenuBarDemo;
 
 public class abb extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JMenuBar mb;
+
 
 	/**
 	 * Launch the application.

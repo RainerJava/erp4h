@@ -2,7 +2,7 @@ package DataTranferObject;
 
 
 import java.sql.Timestamp;
-import java.util.Date;
+import java.sql.Date;
 
 public class UserDTO {
 	private int LoginID;
@@ -17,9 +17,39 @@ public class UserDTO {
 	private Timestamp LastLogIn;
 	private Timestamp LastChangedPassword;
 	private Date DeadlineOfUsing;
-	private GroupDTO Group;
-	private PhanHeDTO PhanHe;
-	
+	private String NhanVienID;
+
+	public UserDTO(){
+		super();
+	}
+	public UserDTO(	
+			int LoginID,
+			String Password,
+			String PWDLevel2,
+			String UserName,
+			String Email,
+			Timestamp CreatedDate,
+			Boolean LockedUser,
+			Date LockedDate,
+			String LockedReason,
+			Timestamp LastLogIn,
+			Timestamp LastChangedPassword,
+			Date DeadlineOfUsing,
+			String NhanVienID){
+		this.LoginID=LoginID;
+		this.Password=Password;
+		this.PWDLevel2=PWDLevel2;
+		this.UserName=UserName;
+		this.Email=Email;
+		this.CreatedDate=CreatedDate;
+		this.LockedUser=LockedUser;
+		this.LockedDate=LockedDate;
+		this.LockedReason=LockedReason;
+		this.LastLogIn=LastLogIn;
+		this.LastChangedPassword=LastChangedPassword;
+		this.DeadlineOfUsing=DeadlineOfUsing;
+		this.NhanVienID=NhanVienID;
+	}
 	public int getLoginID() {
 		return LoginID;
 	}
@@ -103,17 +133,15 @@ public class UserDTO {
 	public void setDeadlineOfUsing(Date deadlineOfUsing) {
 		DeadlineOfUsing = deadlineOfUsing;
 	}
-	
-	public GroupDTO getGroup() {
-		return Group;
+
+	@Override
+	public String toString(){
+		return UserName;
 	}
-	public void setGroup(GroupDTO Group) {
-		this.Group = Group;
+	public String getNhanVienID() {
+		return NhanVienID;
 	}
-	public PhanHeDTO getPhanHe() {
-		return PhanHe;
-	}
-	public void setPhanHe(PhanHeDTO phanHe) {
-		PhanHe = phanHe;
+	public void setNhanVienID(String nhanVienID) {
+		NhanVienID = nhanVienID;
 	}
 }
