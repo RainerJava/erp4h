@@ -15,7 +15,7 @@ public class MenuActionListener implements ActionListener {
 			System.out.println("OK");
 			Class c   = Class.forName("Center.abc"); 
 			abc a = (abc)c.newInstance();
-			a.show();
+			a.setVisible(true);
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

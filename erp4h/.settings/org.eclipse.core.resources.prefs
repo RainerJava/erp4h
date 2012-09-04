@@ -1,0 +1,4 @@
+eclipse.preferences.version=1
+encoding//src/BusinessLogicLayer/ConnectDatabase.java=UTF-8
+encoding//src/DataAccessLayer/MySQLConnect.java=UTF-8
+encoding//src/Utilities/StringUtil.java=UTF-8

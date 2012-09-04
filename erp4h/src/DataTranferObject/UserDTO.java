@@ -2,41 +2,41 @@ package DataTranferObject;
 
 
 import java.sql.Timestamp;
-import java.sql.Date;
 
 public class UserDTO {
-	private int LoginID;
+	private String UserID;
 	private String Password;
 	private String PWDLevel2;
 	private String UserName;
 	private String Email;
 	private Timestamp CreatedDate;
 	private Boolean LockedUser;
-	private Date LockedDate;
+	private Timestamp LockedDate;
 	private String LockedReason;
 	private Timestamp LastLogIn;
 	private Timestamp LastChangedPassword;
-	private Date DeadlineOfUsing;
+	private Timestamp DeadlineOfUsing;
 	private String NhanVienID;
-
+	private String Owner;
+	//List PhanHeID;
 	public UserDTO(){
 		super();
 	}
 	public UserDTO(	
-			int LoginID,
+			String UserID,
 			String Password,
 			String PWDLevel2,
 			String UserName,
 			String Email,
 			Timestamp CreatedDate,
 			Boolean LockedUser,
-			Date LockedDate,
+			Timestamp LockedDate,
 			String LockedReason,
 			Timestamp LastLogIn,
 			Timestamp LastChangedPassword,
-			Date DeadlineOfUsing,
+			Timestamp DeadlineOfUsing,
 			String NhanVienID){
-		this.LoginID=LoginID;
+		this.UserID=UserID;
 		this.Password=Password;
 		this.PWDLevel2=PWDLevel2;
 		this.UserName=UserName;
@@ -50,11 +50,11 @@ public class UserDTO {
 		this.DeadlineOfUsing=DeadlineOfUsing;
 		this.NhanVienID=NhanVienID;
 	}
-	public int getLoginID() {
-		return LoginID;
+	public String getUserID() {
+		return UserID;
 	}
-	public void setLoginID(int loginID) {
-		LoginID = loginID;
+	public void setUserID(String loginID) {
+		UserID = loginID;
 	}
 	
 	public String getPassword() {
@@ -99,10 +99,10 @@ public class UserDTO {
 		LockedUser = lockedUser;
 	}
 	
-	public Date getLockedDate() {
+	public Timestamp getLockedDate() {
 		return LockedDate;
 	}
-	public void setLockedDate(Date lockedDate) {
+	public void setLockedDate(java.sql.Timestamp lockedDate) {
 		LockedDate = lockedDate;
 	}
 	
@@ -127,21 +127,27 @@ public class UserDTO {
 		LastChangedPassword = lastChangedPassword;
 	}
 	
-	public Date getDeadlineOfUsing() {
+	public Timestamp getDeadlineOfUsing() {
 		return DeadlineOfUsing;
 	}
-	public void setDeadlineOfUsing(Date deadlineOfUsing) {
+	public void setDeadlineOfUsing(Timestamp deadlineOfUsing) {
 		DeadlineOfUsing = deadlineOfUsing;
-	}
-
-	@Override
-	public String toString(){
-		return UserName;
 	}
 	public String getNhanVienID() {
 		return NhanVienID;
 	}
 	public void setNhanVienID(String nhanVienID) {
 		NhanVienID = nhanVienID;
+	}
+	public String getOwner() {
+		return Owner;
+	}
+	public void setOwner(String owner) {
+		Owner = owner;
+	}	
+	
+	@Override
+	public String toString(){
+		return UserName;
 	}
 }

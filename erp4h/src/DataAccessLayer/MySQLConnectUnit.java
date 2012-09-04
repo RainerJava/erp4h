@@ -6,9 +6,6 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-/*
- * 
- */
 public class MySQLConnectUnit 
 {
 	private ConnectMySQL connect; 
@@ -18,7 +15,7 @@ public class MySQLConnectUnit
         this.connect = new ConnectMySQL(Host, UserName, Password, Database);
     }
 
-	public ResultSet Select(String TableName,String Condition,String OrderBy) throws Exception
+	public ResultSet Select(String TableName, String Condition, String OrderBy) throws Exception
 	{
 		StringBuilder query=new StringBuilder("select * from "+TableName);
 		this.AddCondition(query, Condition);

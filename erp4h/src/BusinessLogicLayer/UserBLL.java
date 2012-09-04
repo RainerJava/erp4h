@@ -19,14 +19,14 @@ public class UserBLL {
 			this.Delete(DTO_User);		
 	}
 	
-	public void Delete(UserDTO DTO_User) throws Exception{
-		this.connect.Delete("tblUser", "LoginID"+DTO_User.getLoginID());		
+	public void Delete(UserDTO dtoUser) throws Exception{
+		this.connect.Delete("tblUser", "UserID"+dtoUser.getUserID());		
 	}
 	
-	public UserDTO getByID(int id) throws Exception{
-		HashSet<UserDTO>HS_User=this.getUser("LoginID="+id);
-		if(HS_User.size()>0)
-			return HS_User.toArray(new UserDTO[HS_User.size()])[0];
+	public UserDTO getByID(String UserID) throws Exception{
+		HashSet<UserDTO> hsUser=this.getUser("UserID="+UserID);
+		if(hsUser.size()>0)
+			return hsUser.toArray(new UserDTO[hsUser.size()])[0];
 		return null;
 	}
 	
@@ -38,26 +38,28 @@ public class UserBLL {
 		return getUser(Condition, null);
 	}
 	
-	public HashSet<UserDTO>getUser(String Condition, String OrderBy) throws Exception{
+	public HashSet<UserDTO> getUser(String Condition, String OrderBy) throws Exception{
 		ResultSet rs=this.connect.Select("tblUser", Condition, OrderBy);
-		HashSet<UserDTO>HS_User=new HashSet<UserDTO>();
+		HashSet<UserDTO>hsUser=new HashSet<UserDTO>();
 		while(rs.next()){
-			UserDTO DTO_User=new UserDTO();
-			DTO_User.setLoginID(rs.getInt("LoginID"));
-			DTO_User.setPassword(rs.getString("Password"));
-			DTO_User.setPWDLevel2(rs.getString("PWDLevel2"));
-			DTO_User.setUserName(rs.getString("UserName"));
-			DTO_User.setEmail(rs.getString("Email"));
-			DTO_User.setCreatedDate(rs.getTimestamp("CreatedDate"));
-			DTO_User.setLockedUser(rs.getBoolean("LockedUser"));
-			DTO_User.setLockedDate(rs.getTimestamp("LockedDate"));
-			DTO_User.setLockedReason(rs.getString("LockedReason"));
-			DTO_User.setLastLogIn(rs.getTimestamp("LastLogIn"));
-			DTO_User.setLastChangedPassword(rs.getTimestamp("LastChangedPassword"));
-			DTO_User.setDeadlineOfUsing(rs.getDate("DeadlineOfUsing"));
-			HS_User.add(DTO_User);
+			UserDTO dtoUser=new UserDTO();
+			dtoUser.setUserID(rs.getString("UserID"));
+			dtoUser.setPassword(rs.getString("Password"));
+			dtoUser.setPWDLevel2(rs.getString("PWDLevel2"));
+			dtoUser.setUserName(rs.getString("UserName"));
+			dtoUser.setEmail(rs.getString("Email"));
+			dtoUser.setCreatedDate(rs.getTimestamp("CreatedDate"));
+			dtoUser.setLockedUser(rs.getBoolean("LockedUser"));
+			dtoUser.setLockedDate(rs.getTimestamp("LockedDate"));
+			dtoUser.setLockedReason(rs.getString("LockedReason"));
+			dtoUser.setLastLogIn(rs.getTimestamp("LastLogIn"));
+			dtoUser.setLastChangedPassword(rs.getTimestamp("LastChangedPassword"));
+			dtoUser.setDeadlineOfUsing(rs.getTimestamp("DeadlineOfUsing"));
+			dtoUser.setNhanVienID(rs.getString("NhanVienID"));
+			dtoUser.setOwner(rs.getString("Owner"));
+			hsUser.add(dtoUser);
 		}
-		return HS_User;
+		return hsUser;
 	}
 	
 	public void Insert(HashSet<UserDTO> HS_User) throws Exception{
@@ -65,20 +67,20 @@ public class UserBLL {
 			this.Insert(DTO_User);
 	}
 	
-	public void Insert(UserDTO DTO_User) throws Exception{
+	public void Insert(UserDTO dtoUser) throws Exception{
 		HashMap<String, Object>map=new HashMap<String, Object>();
-		map.put("LoginID", DTO_User.getLoginID());
-		map.put("Password", DTO_User.getPassword());
-		map.put("PWDLevel2", DTO_User.getPWDLevel2());
-		map.put("UserName", DTO_User.getUserName());
-		map.put("Email", DTO_User.getEmail());
-		map.put("CreatedDate", DTO_User.getCreatedDate());
-		map.put("LockedUser", DTO_User.getLockedUser());
-		map.put("LockedDate", DTO_User.getLockedDate());
-		map.put("LockedReason", DTO_User.getLockedReason());
-		map.put("LastLogIn", DTO_User.getLastLogIn());
-		map.put("LastChangedPassword", DTO_User.getLastChangedPassword());
-		map.put("DeadlineOfUsing", DTO_User.getDeadlineOfUsing());
+		map.put("LoginID", dtoUser.getUserID());
+		map.put("Password", dtoUser.getPassword());
+		map.put("PWDLevel2", dtoUser.getPWDLevel2());
+		map.put("UserName", dtoUser.getUserName());
+		map.put("Email", dtoUser.getEmail());
+		map.put("CreatedDate", dtoUser.getCreatedDate());
+		map.put("LockedUser", dtoUser.getLockedUser());
+		map.put("LockedDate", dtoUser.getLockedDate());
+		map.put("LockedReason", dtoUser.getLockedReason());
+		map.put("LastLogIn", dtoUser.getLastLogIn());
+		map.put("LastChangedPassword", dtoUser.getLastChangedPassword());
+		map.put("DeadlineOfUsing", dtoUser.getDeadlineOfUsing());
 		this.connect.Insert("tblUser", map);
 	}
 	
@@ -87,20 +89,20 @@ public class UserBLL {
 			this.Update(DTO_User);
 	}
 	
-	public void Update(UserDTO DTO_User) throws Exception{
+	public void Update(UserDTO dtoUser) throws Exception{
 		HashMap<String, Object>map=new HashMap<String, Object>();
-		map.put("LoginID", DTO_User.getLoginID());
-		map.put("Password", DTO_User.getPassword());
-		map.put("PWDLevel2", DTO_User.getPWDLevel2());
-		map.put("UserName", DTO_User.getUserName());
-		map.put("Email", DTO_User.getEmail());
-		map.put("CreatedDate", DTO_User.getCreatedDate());
-		map.put("LockedUser", DTO_User.getLockedUser());
-		map.put("LockedDate", DTO_User.getLockedDate());
-		map.put("LockedReason", DTO_User.getLockedReason());
-		map.put("LastLogIn", DTO_User.getLastLogIn());
-		map.put("LastChangedPassword", DTO_User.getLastChangedPassword());
-		map.put("DeadlineOfUsing", DTO_User.getDeadlineOfUsing());
-		this.connect.Update("tblUser", map, "LoginID"+DTO_User.getLoginID());
+		map.put("LoginID", dtoUser.getUserID());
+		map.put("Password", dtoUser.getPassword());
+		map.put("PWDLevel2", dtoUser.getPWDLevel2());
+		map.put("UserName", dtoUser.getUserName());
+		map.put("Email", dtoUser.getEmail());
+		map.put("CreatedDate", dtoUser.getCreatedDate());
+		map.put("LockedUser", dtoUser.getLockedUser());
+		map.put("LockedDate", dtoUser.getLockedDate());
+		map.put("LockedReason", dtoUser.getLockedReason());
+		map.put("LastLogIn", dtoUser.getLastLogIn());
+		map.put("LastChangedPassword", dtoUser.getLastChangedPassword());
+		map.put("DeadlineOfUsing", dtoUser.getDeadlineOfUsing());
+		this.connect.Update("tblUser", map, "LoginID"+dtoUser.getUserID());
 	}
 }
