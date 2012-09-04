@@ -9,7 +9,6 @@ public class UserDTO {
 	private String PWDLevel2;
 	private String UserName;
 	private String Email;
-	private Timestamp CreatedDate;
 	private Boolean LockedUser;
 	private Timestamp LockedDate;
 	private String LockedReason;
@@ -17,6 +16,7 @@ public class UserDTO {
 	private Timestamp LastChangedPassword;
 	private Timestamp DeadlineOfUsing;
 	private String NhanVienID;
+	private Timestamp CreatedDate;
 	private String Owner;
 	//List PhanHeID;
 	public UserDTO(){
@@ -144,7 +144,7 @@ public class UserDTO {
 	}
 	public void setOwner(String owner) {
 		Owner = owner;
-	}	
+	}
 	
 	@Override
 	public String toString(){

@@ -48,6 +48,9 @@ public class SystemMenu extends JMenuBar implements ActionListener{
 				mnuItem=new JMenuItem(dtoMenu.getMenuValue());
 				mnuItem.setActionCommand(dtoMenu.getMenuAction());
 				mnuItem.addActionListener(this);
+				if(dtoMenu.getMnemonic()!=null){
+					mnuItem.setMnemonic(dtoMenu.getMnemonic().charAt(0));
+				}
 				getMenu(dtoMenu.getMenuFiliationID()-1).add(mnuItem);
 			}
 		}

@@ -1,6 +1,6 @@
 package DataAccessLayer;
 import java.sql.*;
-import java.util.concurrent.Delayed;
+import java.util.Calendar;
 
 public class MySQLConnect {
 	String Host="";
@@ -12,7 +12,8 @@ public class MySQLConnect {
 	Connection connect=null;
 	Statement statement=null;
 	ResultSet result=null;
-	
+	long timeBegin; 
+	long timeEnd;
 	public MySQLConnect(String Host,String UserName,String Password,String DataBase)
 	{
 		this.Host=Host;
@@ -22,18 +23,22 @@ public class MySQLConnect {
 	}
 	
 	public boolean driverTest() throws Exception
-	{
+	{	
+		timeBegin=Calendar.getInstance().getTimeInMillis();
 		try
 		{
 			Class.forName("org.gjt.mm.mysql.Driver");
-			System.out.println("Đang nạp trình điều khiển...");
-			ThongBao="Đang nạp trình điều khiển...";
+			//System.out.println("Đang nạp trình điều khiển...");
+			ThongBao="Nạp trình điều khiển thanh cong";
+			timeEnd= Calendar.getInstance().getTimeInMillis(); 
+			System.out.println(timeEnd-timeBegin);
 			return true;
 		}
 		catch (java.lang.ClassNotFoundException e)
 		{
 			ThongBao="Không tìm thấy trình điều khiển...";
 			throw new Exception("Không tìm thấy trình điều khiển...");
+			//timeEnd= Calendar.getInstance().getTimeInMillis(); 
 		}
 	}
 	
@@ -46,7 +51,6 @@ public class MySQLConnect {
 			try
 			{
 				this.connect=DriverManager.getConnection(url, this.UserName, this.Password);
-				System.out.println("Kết nối thành công.");
 				ThongBao="Kết nối thành công.";
 			}
 			catch(java.sql.SQLException e) {

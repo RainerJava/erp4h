@@ -59,6 +59,7 @@ public class SystemLogin extends JPanel {
 						System.out.println("OK");
 					}else{
 						System.out.println("Sai mat khau"+txtMatKhau.getPassword().toString());
+						txtMatKhau.requestFocus(true);
 					}
 					
 					System.out.println(dtoUser.getUserName());
@@ -68,7 +69,8 @@ public class SystemLogin extends JPanel {
 						//thong bao nhap sai qua so lan quy dinh va thoat chuong trinh
 						System.exit(0);
 					}
-					e1.printStackTrace();
+					System.out.println("Khong hop le...");
+					//e1.printStackTrace();
 				}
 			}
 		});
