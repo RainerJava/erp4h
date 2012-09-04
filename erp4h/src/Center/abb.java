@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import BusinessLogicLayer.SystemMenu;
+import BusinessLogicLayer.SystemParameters;
 
 public class abb extends JFrame {
 
@@ -45,7 +46,8 @@ public class abb extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		SystemParameters.PhanHe="PhanHeID=1";
 		
-		this.setJMenuBar(new SystemMenu("PhanHeID=1"));
+		this.setJMenuBar(new SystemMenu(SystemParameters.PhanHe));
 	}
 }

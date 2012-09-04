@@ -106,3 +106,4 @@ public class UserBLL {
 		this.connect.Update("tblUser", map, "LoginID"+dtoUser.getUserID());
 	}
 }
+

@@ -9,11 +9,14 @@ import DataTranferObject.UserDTO;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import Utilities.UpperCaseField;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
 public class SystemLogin extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField txtTaiKhoan;
 	private JPasswordField txtMatKhau;
 	private UserDTO dtoUser;
@@ -87,7 +90,5 @@ public class SystemLogin extends JPanel {
 		add(btnThoat);
 		
 	}
-	private void initialize(){
-		
-	}
+
 }
