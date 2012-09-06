@@ -13,13 +13,15 @@ import DataTranferObject.UserDTO;
 
 public class UserBLL {
 	MySQLConnectUnit connect;
-	public int numCol, numRow;
+	public int ColumnCount, RowCount;
+	public String[] ColumnName;
 	public ArrayList<Class<?>> arrColumnClass;
 	
 	public UserBLL() throws Exception{
 		this.connect=DataAccessLayer.DataAccess.getDAL();
 		getColumnCount();
 		getColumnClass();
+		getRowCount();
 	}
 	
 	public void Delete(HashSet<UserDTO>HS_User) throws Exception{
@@ -116,20 +118,19 @@ public class UserBLL {
 	//trả về tổng số cột (field) của truy vấn rs
 	public int getColumnCount() throws Exception{
 		ResultSet rs=this.connect.Select("tblUser");
-		numCol=rs.getMetaData().getColumnCount();
-		return numCol;
+		ColumnCount=rs.getMetaData().getColumnCount();
+		return ColumnCount;
 	}
 	//trả về tên của từng cột (field)
 	public String[]getColumnName() throws Exception
 	{
 		ResultSet rs=this.connect.Select("tblUser");
 		ResultSetMetaData rsMetaData=rs.getMetaData();
-		int ColumnCount=rsMetaData.getColumnCount();
-		String[]list=new String[ColumnCount];
+		ColumnName=new String[ColumnCount];
 		for(int i=0;i<ColumnCount;i++){
-			list[i]=rsMetaData.getColumnName(i+1);
+			ColumnName[i]=rsMetaData.getColumnName(i+1);
 		}
-		return list;
+		return ColumnName;
 	}
 	
 	public ArrayList<Class<?>> getColumnClass() throws Exception{
@@ -162,11 +163,12 @@ public class UserBLL {
 	}
 	
 	public int getRowCount() throws Exception{
-		int count=0;
-		for(int i=0;i<this.getColumnCount();i++){
-			++count;
+		ResultSet rs=this.connect.Select("tblUser");
+		
+		while(rs.next()){
+			++RowCount;
 		}
-		return count;
+		return RowCount;
 	}
 	public ArrayList<UserDTO> getUserArray(String Condition, String OrderBy) throws Exception{
 		ResultSet rs=this.connect.Select("tblUser", Condition, OrderBy);
@@ -196,6 +198,19 @@ public class UserBLL {
 	}	
 	public ArrayList<UserDTO>getUserArray() throws Exception{
 		return getUserArray(null);
+	}
+	public Object[][] getUserObj() throws Exception{
+		ResultSet rs=this.connect.Select("tblUser");
+		Object[][] value=new Object[this.RowCount][];
+		int j=0;
+		while(rs.next()){
+			Object[] o=new Object[this.ColumnCount];
+			for(int i=0;i<this.ColumnCount;i++){
+				o[i]=rs.getObject(i+1);
+			}
+			value[j]=o;
+		}
+		return value;
 	}
 }
 

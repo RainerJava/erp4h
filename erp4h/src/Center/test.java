@@ -5,9 +5,13 @@ import BusinessLogicLayer.UserBLL;
 public class test {
 	public static void main(String[] arg) throws Exception{
 		UserBLL bllUser=new UserBLL();
-		int j=bllUser.numCol;
-		for(int i=0;i<bllUser.numCol;i++){
-			System.out.println(i+"   "+bllUser.arrColumnClass.get(i));
+		//int j=bllUser.ColumnCount;
+		//System.out.println("   "+bllUser.getColumnClass());
+		//System.out.println("   "+bllUser.getColumnName());
+		Object[][] value=bllUser.getUserObj();
+		for(int i=0;i<bllUser.RowCount;i++){
+			System.out.println(value[0][1]);
+			
 		}
 	}
 }
