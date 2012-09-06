@@ -1,7 +1,9 @@
 package BusinessLogicLayer;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,9 +13,13 @@ import DataTranferObject.UserDTO;
 
 public class UserBLL {
 	MySQLConnectUnit connect;
+	public int numCol, numRow;
+	public ArrayList<Class<?>> arrColumnClass;
 	
-	public UserBLL(){
+	public UserBLL() throws Exception{
 		this.connect=DataAccessLayer.DataAccess.getDAL();
+		getColumnCount();
+		getColumnClass();
 	}
 	
 	public void Delete(HashSet<UserDTO>HS_User) throws Exception{
@@ -107,7 +113,13 @@ public class UserBLL {
 		map.put("DeadlineOfUsing", dtoUser.getDeadlineOfUsing());
 		this.connect.Update("tblUser", map, "LoginID"+dtoUser.getUserID());
 	}
-	
+	//trả về tổng số cột (field) của truy vấn rs
+	public int getColumnCount() throws Exception{
+		ResultSet rs=this.connect.Select("tblUser");
+		numCol=rs.getMetaData().getColumnCount();
+		return numCol;
+	}
+	//trả về tên của từng cột (field)
 	public String[]getColumnName() throws Exception
 	{
 		ResultSet rs=this.connect.Select("tblUser");
@@ -120,12 +132,35 @@ public class UserBLL {
 		return list;
 	}
 	
-	public int getColumnCount() throws Exception{
+	public ArrayList<Class<?>> getColumnClass() throws Exception{
 		ResultSet rs=this.connect.Select("tblUser");
-		int count=rs.getMetaData().getColumnCount();
-		return count;
+		ResultSetMetaData rsMeta=rs.getMetaData();
+		arrColumnClass=new ArrayList<Class<?>>();
+		for(int i=0;i<rsMeta.getColumnCount();i++){
+			switch(rsMeta.getColumnType(i+1)){
+				case Types.INTEGER:
+					arrColumnClass.add(Integer.class);
+					break;
+				case Types.FLOAT:
+					arrColumnClass.add(Float.class);
+					break;
+				case Types.DOUBLE:
+				case Types.REAL:
+					arrColumnClass.add(Double.class);
+					break;
+				case Types.DATE:
+				case Types.TIME:
+				case Types.TIMESTAMP:
+					arrColumnClass.add(Date.class);
+					break;
+				default:
+					arrColumnClass.add(String.class);
+					break;
+			}
+		}
+		return arrColumnClass;
 	}
-
+	
 	public int getRowCount() throws Exception{
 		int count=0;
 		for(int i=0;i<this.getColumnCount();i++){
