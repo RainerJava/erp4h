@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import Center.abc;
 
 public class MenuActionListener implements ActionListener {
-	@SuppressWarnings({ "deprecation", "rawtypes" })
+	@SuppressWarnings({ "rawtypes" })
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("Selected: " + e.getActionCommand());
 		System.out.println("Selected: " + e.getSource());

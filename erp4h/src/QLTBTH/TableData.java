@@ -21,7 +21,7 @@ public class TableData extends AbstractTableModel {
     String[] columnNames;
 
 	
-	Class<?>[] columnClasses;;
+	Class<?>[] columnClasses;
     MySQLConnectUnit connect;
     
     public TableData() throws Exception{
@@ -100,27 +100,22 @@ public class TableData extends AbstractTableModel {
 			contents[i]=rowList.get(i);
 		}
 	}
-
     @Override
     public int getRowCount() {
         return contents.length;
     }
-
     @Override
     public int getColumnCount() {
     	return contents[0].length;
     }
-
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         return contents[rowIndex][columnIndex];
     }
-
     @Override
     public String getColumnName(int col) {
         return columnNames[col];
     }
-    
     @Override
     public Class<?> getColumnClass(int column){
     	Class<?> dataType=super.getColumnClass(column);
@@ -130,10 +125,8 @@ public class TableData extends AbstractTableModel {
     	else if(column==5){
     		dataType=java.util.Date.class;
     	}
-    	
     	return dataType;
     }
-    
     @Override
     public boolean isCellEditable(int row,int column){
     	return true;

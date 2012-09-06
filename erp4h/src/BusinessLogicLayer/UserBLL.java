@@ -1,6 +1,8 @@
 package BusinessLogicLayer;
 
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -104,6 +106,61 @@ public class UserBLL {
 		map.put("LastChangedPassword", dtoUser.getLastChangedPassword());
 		map.put("DeadlineOfUsing", dtoUser.getDeadlineOfUsing());
 		this.connect.Update("tblUser", map, "LoginID"+dtoUser.getUserID());
+	}
+	
+	public String[]getColumnName() throws Exception
+	{
+		ResultSet rs=this.connect.Select("tblUser");
+		ResultSetMetaData rsMetaData=rs.getMetaData();
+		int ColumnCount=rsMetaData.getColumnCount();
+		String[]list=new String[ColumnCount];
+		for(int i=0;i<ColumnCount;i++){
+			list[i]=rsMetaData.getColumnName(i+1);
+		}
+		return list;
+	}
+	
+	public int getColumnCount() throws Exception{
+		ResultSet rs=this.connect.Select("tblUser");
+		int count=rs.getMetaData().getColumnCount();
+		return count;
+	}
+
+	public int getRowCount() throws Exception{
+		int count=0;
+		for(int i=0;i<this.getColumnCount();i++){
+			++count;
+		}
+		return count;
+	}
+	public ArrayList<UserDTO> getUserArray(String Condition, String OrderBy) throws Exception{
+		ResultSet rs=this.connect.Select("tblUser", Condition, OrderBy);
+		ArrayList<UserDTO>arrUser=new ArrayList<UserDTO>();
+		while(rs.next()){
+			UserDTO dtoUser=new UserDTO();
+			dtoUser.setUserID(rs.getString("UserID"));
+			dtoUser.setPassword(rs.getString("Password"));
+			dtoUser.setPWDLevel2(rs.getString("PWDLevel2"));
+			dtoUser.setUserName(rs.getString("UserName"));
+			dtoUser.setEmail(rs.getString("Email"));
+			dtoUser.setLockedUser(rs.getBoolean("LockedUser"));
+			dtoUser.setLockedDate(rs.getTimestamp("LockedDate"));
+			dtoUser.setLockedReason(rs.getString("LockedReason"));
+			dtoUser.setLastLogIn(rs.getTimestamp("LastLogIn"));
+			dtoUser.setLastChangedPassword(rs.getTimestamp("LastChangedPassword"));
+			dtoUser.setDeadlineOfUsing(rs.getTimestamp("DeadlineOfUsing"));
+			dtoUser.setNhanVienID(rs.getString("NhanVienID"));
+			dtoUser.setCreatedDate(rs.getTimestamp("CreatedDate"));
+			dtoUser.setOwner(rs.getString("Owner"));
+			arrUser.add(dtoUser);
+		}
+		return arrUser;
+	}
+	public ArrayList<UserDTO>getUserArray(String Condition) throws Exception{
+		return getUserArray(Condition, null);
+	}	
+	public ArrayList<UserDTO>getUserArray() throws Exception{
+		return getUserArray(null);
 	}
 }
 
