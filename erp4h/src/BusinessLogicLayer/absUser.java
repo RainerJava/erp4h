@@ -4,6 +4,10 @@ import javax.swing.table.AbstractTableModel;
 
 public class absUser extends AbstractTableModel{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String[] colName;
 	Class<?>[] colClass;
 	Object[][] value;
@@ -11,43 +15,30 @@ public class absUser extends AbstractTableModel{
 	public absUser(){
 		try {
 			UserBLL bllUser=new UserBLL();
-			colName=bllUser.ColumnName;
+			colName=bllUser.getColumnName();
+			value=bllUser.getUserObj();
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-
-	private Object[][] setValue(){
-		value=new Object[bllUser.RowCount][];
-		for(int i=0;i<value.length;i++){
-			Object o=(Object)bllUser.getUserArray().get(i);
-			value[i]=(Object[])bllUser.getUserArray().get(i);
-		}
-		return value;
-	}
 	@Override
 	public int getColumnCount() {
-		return 0;
+		return value[0].length;
 	}
 
 	@Override
 	public int getRowCount() {
-		return 0;
+		return value.length;
 	}
 
 	@Override
-	public Object getValueAt(int arg0, int arg1) {
-		return null;
+	public Object getValueAt(int rowIndex, int colIndex) {
+		return value[rowIndex][colIndex];
 	}
     @Override
     public String getColumnName(int col) {
         return colName[col];
-    }
-    public Class<?> getColumnClass(int col){
-    	Class<?> dataType=super.getColumnClass(col);
-    	return dataType;
     }
 }

@@ -10,7 +10,7 @@ public class test {
 		//System.out.println("   "+bllUser.getColumnName());
 		Object[][] value=bllUser.getUserObj();
 		for(int i=0;i<bllUser.RowCount;i++){
-			System.out.println(value[0][1]);
+			System.out.println(value[i][1]);
 			
 		}
 	}

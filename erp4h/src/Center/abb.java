@@ -5,10 +5,13 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 import BusinessLogicLayer.SystemMenu;
 import BusinessLogicLayer.SystemParameters;
+import BusinessLogicLayer.absUser;
 
 public class abb extends JFrame {
 
@@ -49,5 +52,10 @@ public class abb extends JFrame {
 		SystemParameters.PhanHe="PhanHeID=1";
 		
 		this.setJMenuBar(new SystemMenu(SystemParameters.PhanHe));
+		absUser tu=new absUser();
+		JTable table=new JTable(tu);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		JScrollPane jsp = new JScrollPane(table);
+		contentPane.add(jsp, BorderLayout.CENTER);
 	}
 }

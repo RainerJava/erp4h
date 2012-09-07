@@ -14,14 +14,11 @@ import DataTranferObject.UserDTO;
 public class UserBLL {
 	MySQLConnectUnit connect;
 	public int ColumnCount, RowCount;
-	public String[] ColumnName;
+
 	public ArrayList<Class<?>> arrColumnClass;
 	
 	public UserBLL() throws Exception{
 		this.connect=DataAccessLayer.DataAccess.getDAL();
-		getColumnCount();
-		getColumnClass();
-		getRowCount();
 	}
 	
 	public void Delete(HashSet<UserDTO>HS_User) throws Exception{
@@ -122,13 +119,12 @@ public class UserBLL {
 		return ColumnCount;
 	}
 	//trả về tên của từng cột (field)
-	public String[]getColumnName() throws Exception
-	{
+	public String[]getColumnName() throws Exception	{
 		ResultSet rs=this.connect.Select("tblUser");
-		ResultSetMetaData rsMetaData=rs.getMetaData();
-		ColumnName=new String[ColumnCount];
-		for(int i=0;i<ColumnCount;i++){
-			ColumnName[i]=rsMetaData.getColumnName(i+1);
+		ResultSetMetaData rsMeta=rs.getMetaData();
+		String[] ColumnName=new String[rs.getMetaData().getColumnCount()];
+		for(int i=0;i<ColumnName.length;i++){
+			ColumnName[i]=rsMeta.getColumnName(i+1);
 		}
 		return ColumnName;
 	}
@@ -199,18 +195,30 @@ public class UserBLL {
 	public ArrayList<UserDTO>getUserArray() throws Exception{
 		return getUserArray(null);
 	}
-	public Object[][] getUserObj() throws Exception{
-		ResultSet rs=this.connect.Select("tblUser");
-		Object[][] value=new Object[this.RowCount][];
+	
+	public Object[][] getUserObj(String Condition, String OrderBy)throws Exception {
+		int rowCount=0;
+		ResultSet rs = this.connect.Select("tblUser",Condition, OrderBy);
+		while(rs.next()){
+			rowCount++;
+		}
+		Object[][] UserObj=new Object[rowCount][];
+		rs.beforeFirst();
 		int j=0;
 		while(rs.next()){
-			Object[] o=new Object[this.ColumnCount];
-			for(int i=0;i<this.ColumnCount;i++){
+			Object[] o=new Object[rs.getMetaData().getColumnCount()];
+			for(int i=0;i<o.length;i++){
 				o[i]=rs.getObject(i+1);
 			}
-			value[j]=o;
+			UserObj[j++]=o;
 		}
-		return value;
+		rs.close();
+		return UserObj;
+	}
+	public Object[][] getUserObj(String Condition) throws Exception {
+		return getUserObj(Condition,null);
+	}
+	public Object[][] getUserObj() throws Exception {
+		return getUserObj(null);
 	}
 }
-
