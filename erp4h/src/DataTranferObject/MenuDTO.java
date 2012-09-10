@@ -18,7 +18,7 @@ public class MenuDTO {
 	private String Mnemonic;
 	private int PhanHeID;
 	private Timestamp CreatedDate;
-	private String UserID;
+	private String Owner;
 	
 	public MenuDTO(){
 		super();
@@ -38,7 +38,7 @@ public class MenuDTO {
 			String Mnemonic,
 			int PhanHeID,
 			Timestamp CreatedDate,
-			String UserID
+			String Owner
 			){
 		this.setMenuID(MenuID);
 		this.setMenuPosition(MenuPosition);
@@ -53,7 +53,7 @@ public class MenuDTO {
 		this.setMnemonic(Mnemonic);
 		this.setPhanHeID(PhanHeID);
 		this.setCreatedDate(CreatedDate);
-		this.setUserID(UserID);
+		this.setOwner(Owner);
 	}
 
 	public int getMenuID() {
@@ -147,16 +147,19 @@ public class MenuDTO {
 	public void setCreatedDate(Timestamp createdDate) {
 		CreatedDate = createdDate;
 	}
-	public String getUserID() {
-		return UserID;
-	}
-	public void setUserID(String userID) {
-		UserID = userID;
-	}
+
 
 	@Override
 	public String toString(){
 		return getMenuValue();
+	}
+
+	public String getOwner() {
+		return Owner;
+	}
+
+	public void setOwner(String owner) {
+		Owner = owner;
 	}
 
 

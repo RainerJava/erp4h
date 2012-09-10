@@ -102,6 +102,7 @@ public class MenuBLL {
 		while(rs.next()){
 			MenuDTO dtoMenu=new MenuDTO();
 			dtoMenu.setMenuID(rs.getInt("MenuID"));
+			dtoMenu.setPhanHeID(rs.getInt("PhanHeID"));
 			dtoMenu.setMenuPosition(rs.getInt("MenuPosition"));
 			dtoMenu.setMenuValue(rs.getString("MenuValue"));
 			dtoMenu.setMenuFiliationID(rs.getInt("MenuFiliationID"));
@@ -114,9 +115,9 @@ public class MenuBLL {
 			dtoMenu.setMenuTypeID(rs.getInt("MenuTypeID"));
 			dtoMenu.setMenuStatus(rs.getInt("MenuStatus"));
 			dtoMenu.setMnemonic(rs.getString("Mnemonic"));
-			dtoMenu.setPhanHeID(rs.getInt("PhanHeID"));
+			
 			dtoMenu.setCreatedDate(rs.getTimestamp("CreatedDate"));
-			dtoMenu.setUserID(rs.getString("UserID"));
+			dtoMenu.setOwner(rs.getString("Owner"));
 			arrMenu.add(dtoMenu);
 		}
 		return arrMenu;

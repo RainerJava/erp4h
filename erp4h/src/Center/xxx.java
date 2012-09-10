@@ -6,12 +6,13 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import BusinessLogicLayer.DataTableUser;
-import QLTBTH.TableData;
 import Demo.SimpleTableDemo;
 
-public class xxx extends JFrame {
 
+
+
+
+public class xxx extends JFrame {
 	private JPanel contentPane;
 	/**
 	 * @wbp.nonvisual location=43,71

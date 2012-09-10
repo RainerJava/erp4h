@@ -9,46 +9,52 @@ public class UserDTO {
 	private String PWDLevel2;
 	private String UserName;
 	private String Email;
-	private Boolean LockedUser;
+	private boolean LockedUser;
 	private Timestamp LockedDate;
 	private String LockedReason;
 	private Timestamp LastLogIn;
 	private Timestamp LastChangedPassword;
 	private Timestamp DeadlineOfUsing;
 	private String NhanVienID;
+	private boolean Delegate;
 	private Timestamp CreatedDate;
 	private String Owner;
-	//List PhanHeID;
+	
 	public UserDTO(){
 		super();
 	}
+	
 	public UserDTO(	
 			String UserID,
 			String Password,
 			String PWDLevel2,
 			String UserName,
 			String Email,
-			Timestamp CreatedDate,
 			Boolean LockedUser,
 			Timestamp LockedDate,
 			String LockedReason,
 			Timestamp LastLogIn,
 			Timestamp LastChangedPassword,
 			Timestamp DeadlineOfUsing,
-			String NhanVienID){
+			boolean Delegate,
+			String NhanVienID,
+			Timestamp CreatedDate,
+			String Owner
+			){
 		this.UserID=UserID;
 		this.Password=Password;
 		this.PWDLevel2=PWDLevel2;
 		this.UserName=UserName;
 		this.Email=Email;
-		this.CreatedDate=CreatedDate;
-		this.LockedUser=LockedUser;
+		this.setLockedUser(LockedUser);
 		this.LockedDate=LockedDate;
 		this.LockedReason=LockedReason;
 		this.LastLogIn=LastLogIn;
 		this.LastChangedPassword=LastChangedPassword;
 		this.DeadlineOfUsing=DeadlineOfUsing;
 		this.NhanVienID=NhanVienID;
+		this.CreatedDate=CreatedDate;
+		this.Owner=Owner;
 	}
 	public String getUserID() {
 		return UserID;
@@ -92,10 +98,10 @@ public class UserDTO {
 		CreatedDate = createdDate;
 	}
 	
-	public Boolean getLockedUser() {
+	public boolean isLockedUser() {
 		return LockedUser;
 	}
-	public void setLockedUser(Boolean lockedUser) {
+	public void setLockedUser(boolean lockedUser) {
 		LockedUser = lockedUser;
 	}
 	
@@ -133,6 +139,12 @@ public class UserDTO {
 	public void setDeadlineOfUsing(Timestamp deadlineOfUsing) {
 		DeadlineOfUsing = deadlineOfUsing;
 	}
+	public boolean isDelegate() {
+		return Delegate;
+	}
+	public void setDelegate(boolean delegate) {
+		Delegate = delegate;
+	}	
 	public String getNhanVienID() {
 		return NhanVienID;
 	}

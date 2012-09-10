@@ -13,7 +13,6 @@ import DataTranferObject.UserDTO;
 
 public class UserBLL {
 	MySQLConnectUnit connect;
-	public int ColumnCount, RowCount;
 
 	public ArrayList<Class<?>> arrColumnClass;
 	
@@ -82,7 +81,7 @@ public class UserBLL {
 		map.put("UserName", dtoUser.getUserName());
 		map.put("Email", dtoUser.getEmail());
 		map.put("CreatedDate", dtoUser.getCreatedDate());
-		map.put("LockedUser", dtoUser.getLockedUser());
+		map.put("LockedUser", dtoUser.isLockedUser());
 		map.put("LockedDate", dtoUser.getLockedDate());
 		map.put("LockedReason", dtoUser.getLockedReason());
 		map.put("LastLogIn", dtoUser.getLastLogIn());
@@ -104,7 +103,7 @@ public class UserBLL {
 		map.put("UserName", dtoUser.getUserName());
 		map.put("Email", dtoUser.getEmail());
 		map.put("CreatedDate", dtoUser.getCreatedDate());
-		map.put("LockedUser", dtoUser.getLockedUser());
+		map.put("LockedUser", dtoUser.isLockedUser());
 		map.put("LockedDate", dtoUser.getLockedDate());
 		map.put("LockedReason", dtoUser.getLockedReason());
 		map.put("LastLogIn", dtoUser.getLastLogIn());
@@ -115,7 +114,7 @@ public class UserBLL {
 	//trả về tổng số cột (field) của truy vấn rs
 	public int getColumnCount() throws Exception{
 		ResultSet rs=this.connect.Select("tblUser");
-		ColumnCount=rs.getMetaData().getColumnCount();
+		int ColumnCount=rs.getMetaData().getColumnCount();
 		return ColumnCount;
 	}
 	//trả về tên của từng cột (field)
@@ -124,7 +123,50 @@ public class UserBLL {
 		ResultSetMetaData rsMeta=rs.getMetaData();
 		String[] ColumnName=new String[rs.getMetaData().getColumnCount()];
 		for(int i=0;i<ColumnName.length;i++){
-			ColumnName[i]=rsMeta.getColumnName(i+1);
+			switch(rsMeta.getColumnName(i+1)){
+			case "UserID":
+				ColumnName[i]="Tai khoan";
+				break;
+			case "Password":
+				ColumnName[i]="Mat Khau";
+				break;
+			case "PWDLevel2":
+				ColumnName[i]="Mat khau cap 2";
+				break;
+			case "UserName":
+				ColumnName[i]="Ten nguoi dung";
+				break;
+			case "Email":
+				ColumnName[i]="Dia chi Email";
+				break;
+			case "LockedUser":
+				ColumnName[i]="Tai khoan bi khoa";
+				break;
+			case "LockedDate":
+				ColumnName[i]="Ngay khoa";
+				break;
+			case "LockedReason":
+				ColumnName[i]="Ly do Khoa";
+				break;
+			case "LastLogIn":
+				ColumnName[i]="Dang nhap lan cuoi";
+				break;
+			case "LastChangedPassword":
+				ColumnName[i]="Doi mat khau lan cuoi";
+				break;
+			case "DeadlineOfUsing":
+				ColumnName[i]="Ngay het han dung";
+				break;
+			case "NhanVienID":
+				ColumnName[i]="Ma nhan vien";
+				break;
+			case "CreatedDate":
+				ColumnName[i]="Ngay tao";
+				break;
+			case "Owner":
+				ColumnName[i]="Nguoi tao";
+				break;
+			}
 		}
 		return ColumnName;
 	}
@@ -159,10 +201,13 @@ public class UserBLL {
 	}
 	
 	public int getRowCount() throws Exception{
+		int RowCount=0;
 		ResultSet rs=this.connect.Select("tblUser");
-		
-		while(rs.next()){
-			++RowCount;
+		if(!rs.isBeforeFirst()){
+			rs.beforeFirst();
+			while(rs.next()){
+				++RowCount;
+			}
 		}
 		return RowCount;
 	}

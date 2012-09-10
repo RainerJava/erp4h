@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50525
 File Encoding         : 65001
 
-Date: 2012-09-01 09:37:05
+Date: 2012-09-10 17:51:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -3345,28 +3345,38 @@ DROP TABLE IF EXISTS `tblgroup`;
 CREATE TABLE `tblgroup` (
   `GroupID` int(3) NOT NULL AUTO_INCREMENT,
   `GroupName` varchar(45) DEFAULT NULL,
-  `Note` varchar(45) DEFAULT NULL,
-  `IsAdmin` bit(1) DEFAULT NULL,
+  `Organizational` bit(1) DEFAULT NULL,
+  `CreateDate` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `Owner` varchar(12) DEFAULT NULL,
   PRIMARY KEY (`GroupID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tblgroup
 -- ----------------------------
+INSERT INTO `tblgroup` VALUES ('1', 'Admin', '', '2012-09-10 17:48:18', null);
+INSERT INTO `tblgroup` VALUES ('2', 'Quản trị hệ thống', '', '2012-09-10 17:48:03', null);
 
 -- ----------------------------
--- Table structure for `tblgroupuser`
+-- Table structure for `tblgroupright`
 -- ----------------------------
-DROP TABLE IF EXISTS `tblgroupuser`;
-CREATE TABLE `tblgroupuser` (
-  `GroupID` int(3) NOT NULL,
-  `UserID` varchar(12) DEFAULT NULL,
-  PRIMARY KEY (`GroupID`)
+DROP TABLE IF EXISTS `tblgroupright`;
+CREATE TABLE `tblgroupright` (
+  `PhanHeID` tinyint(2) NOT NULL DEFAULT '0',
+  `GroupID` int(11) NOT NULL DEFAULT '0',
+  `GroupRight` tinytext,
+  `CreateDate` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `Owner` varchar(12) DEFAULT NULL,
+  PRIMARY KEY (`PhanHeID`,`GroupID`),
+  KEY `GroupID` (`GroupID`),
+  CONSTRAINT `tblgroupright_ibfk_2` FOREIGN KEY (`PhanHeID`) REFERENCES `tblphanhe` (`PhanHeID`),
+  CONSTRAINT `tblgroupright_ibfk_1` FOREIGN KEY (`GroupID`) REFERENCES `tblgroup` (`GroupID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of tblgroupuser
+-- Records of tblgroupright
 -- ----------------------------
+INSERT INTO `tblgroupright` VALUES ('1', '1', ';1;2;3;4;5;6;7;8;9;10;11;', null, null);
 
 -- ----------------------------
 -- Table structure for `tblkhoaphong`
@@ -3424,20 +3434,6 @@ INSERT INTO `tblkhoaphong` VALUES ('1613', 'BO MON GIAI PHAU BENH');
 INSERT INTO `tblkhoaphong` VALUES ('1614', 'BO MON SINH LY');
 
 -- ----------------------------
--- Table structure for `tblkhoaphonguser`
--- ----------------------------
-DROP TABLE IF EXISTS `tblkhoaphonguser`;
-CREATE TABLE `tblkhoaphonguser` (
-  `KhoaPhongID` int(11) NOT NULL DEFAULT '0',
-  `UserID` varchar(12) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`KhoaPhongID`,`UserID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of tblkhoaphonguser
--- ----------------------------
-
--- ----------------------------
 -- Table structure for `tblloaithietbi`
 -- ----------------------------
 DROP TABLE IF EXISTS `tblloaithietbi`;
@@ -3457,6 +3453,7 @@ CREATE TABLE `tblloaithietbi` (
 DROP TABLE IF EXISTS `tblmenu`;
 CREATE TABLE `tblmenu` (
   `MenuID` int(3) NOT NULL AUTO_INCREMENT,
+  `PhanHeID` tinyint(3) DEFAULT NULL,
   `MenuPosition` int(3) DEFAULT NULL,
   `MenuValue` varchar(45) DEFAULT NULL,
   `MenuFiliationID` int(3) DEFAULT NULL,
@@ -3469,28 +3466,27 @@ CREATE TABLE `tblmenu` (
   `MenuTypeID` tinyint(2) DEFAULT NULL,
   `MenuStatus` tinyint(1) DEFAULT NULL,
   `Mnemonic` char(1) DEFAULT NULL,
-  `PhanHeID` int(11) DEFAULT NULL,
   `CreatedDate` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `UserID` varchar(12) DEFAULT NULL,
+  `Owner` varchar(12) DEFAULT NULL,
   PRIMARY KEY (`MenuID`),
-  KEY `PhanHeID` (`PhanHeID`),
-  CONSTRAINT `tblmenu_ibfk_1` FOREIGN KEY (`PhanHeID`) REFERENCES `tblphanhe` (`PhanHeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+  KEY `PhanHeID` (`PhanHeID`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tblmenu
 -- ----------------------------
-INSERT INTO `tblmenu` VALUES ('1', '1', 'Quản lý', '0', null, null, null, null, null, null, null, null, 'Q', '1', '2012-08-28 11:30:03', null);
-INSERT INTO `tblmenu` VALUES ('2', '3', 'Trợ giúp', '0', null, null, null, null, null, null, null, null, 'T', '1', '2012-08-28 11:30:02', null);
-INSERT INTO `tblmenu` VALUES ('3', '4', 'Hệ thống', '0', null, null, null, null, null, null, null, null, 'H', '1', '2012-08-28 11:30:02', null);
-INSERT INTO `tblmenu` VALUES ('4', '1', 'Thiết bị tin học', '1', null, null, null, null, null, null, null, null, null, '1', '2012-08-29 17:02:12', null);
-INSERT INTO `tblmenu` VALUES ('5', '1', 'sub 2.1', '2', null, null, null, null, null, null, null, null, null, '1', '2012-08-28 11:30:01', null);
-INSERT INTO `tblmenu` VALUES ('6', '2', 'Giải chi thu nhập tăng thêm', '1', null, null, null, null, 'G', '/Images/coins.png', null, null, null, '1', '2012-08-29 11:27:48', null);
-INSERT INTO `tblmenu` VALUES ('7', '2', 'Thoát khỏi ứng dụng', '4', null, null, null, null, null, '/Images/shutdown.png', null, null, null, '1', '2012-08-28 13:10:50', null);
-INSERT INTO `tblmenu` VALUES ('8', '3', 'Văn phòng phẩm', '1', null, null, null, null, 'V', null, null, null, null, '1', '2012-08-29 11:26:59', null);
-INSERT INTO `tblmenu` VALUES ('9', '2', 'Thống kê - Báo cáo', '0', null, null, null, null, null, null, null, null, 'B', '1', '2012-08-28 11:29:59', null);
-INSERT INTO `tblmenu` VALUES ('10', '1', 'Thông tin chương trình', '3', null, null, null, null, null, null, null, null, null, '1', '2012-08-28 11:30:00', null);
-INSERT INTO `tblmenu` VALUES ('11', '1', 'Đăng nhập', '4', null, null, null, null, null, '/Images/login.png', null, null, null, '1', '2012-08-28 13:46:13', null);
+INSERT INTO `tblmenu` VALUES ('1', '1', '1', 'Quản lý', '0', null, null, null, null, null, null, null, null, 'Q', '2012-08-28 11:30:03', null);
+INSERT INTO `tblmenu` VALUES ('2', '1', '3', 'Trợ giúp', '0', null, null, null, null, null, null, null, null, 'T', '2012-08-28 11:30:02', null);
+INSERT INTO `tblmenu` VALUES ('3', '1', '4', 'Hệ thống', '0', null, null, null, null, null, null, null, null, 'H', '2012-08-28 11:30:02', null);
+INSERT INTO `tblmenu` VALUES ('4', '1', '1', 'Thiết bị tin học', '1', null, null, null, null, null, null, null, null, null, '2012-08-29 17:02:12', null);
+INSERT INTO `tblmenu` VALUES ('5', '1', '1', 'sub 2.1', '2', null, null, null, null, null, null, null, null, null, '2012-08-28 11:30:01', null);
+INSERT INTO `tblmenu` VALUES ('6', '1', '2', 'Giải chi thu nhập tăng thêm', '1', null, null, null, null, 'G', '/Images/coins.png', null, null, null, '2012-08-29 11:27:48', null);
+INSERT INTO `tblmenu` VALUES ('7', '1', '3', 'Thoát khỏi ứng dụng', '4', null, null, null, null, null, '/Images/shutdown.png', null, null, null, '2012-09-10 13:14:38', null);
+INSERT INTO `tblmenu` VALUES ('8', '1', '3', 'Văn phòng phẩm', '1', null, null, null, null, 'V', null, null, null, null, '2012-08-29 11:26:59', null);
+INSERT INTO `tblmenu` VALUES ('9', '1', '2', 'Thống kê - Báo cáo', '0', null, null, null, null, null, null, null, null, 'B', '2012-08-28 11:29:59', null);
+INSERT INTO `tblmenu` VALUES ('10', '1', '1', 'Thông tin chương trình', '3', null, null, null, null, null, null, null, null, null, '2012-08-28 11:30:00', null);
+INSERT INTO `tblmenu` VALUES ('11', '1', '1', 'Đăng nhập lại', '4', null, null, null, null, null, '/Images/login.png', null, null, null, '2012-09-10 16:55:23', null);
+INSERT INTO `tblmenu` VALUES ('12', '1', '2', 'Quản lý hệ thống', '4', null, null, null, null, null, null, null, null, null, '2012-09-10 16:55:42', null);
 
 -- ----------------------------
 -- Table structure for `tblmenuactiontype`
@@ -3508,20 +3504,6 @@ CREATE TABLE `tblmenuactiontype` (
 INSERT INTO `tblmenuactiontype` VALUES ('1', 'Open form');
 INSERT INTO `tblmenuactiontype` VALUES ('2', 'Open report');
 INSERT INTO `tblmenuactiontype` VALUES ('3', 'Run funtion');
-
--- ----------------------------
--- Table structure for `tblmenugroup`
--- ----------------------------
-DROP TABLE IF EXISTS `tblmenugroup`;
-CREATE TABLE `tblmenugroup` (
-  `GroupID` int(11) NOT NULL,
-  `MenuID` int(11) DEFAULT NULL,
-  PRIMARY KEY (`GroupID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of tblmenugroup
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for `tblmenutype`
@@ -4545,9 +4527,10 @@ INSERT INTO `tblnhanvien` VALUES ('YNG02', '1608', 'Ng« Thµnh ý', '0206177216
 -- ----------------------------
 DROP TABLE IF EXISTS `tblphanhe`;
 CREATE TABLE `tblphanhe` (
-  `PhanHeID` int(11) NOT NULL AUTO_INCREMENT,
+  `PhanHeID` tinyint(3) NOT NULL AUTO_INCREMENT,
   `TenPhanHe` char(255) NOT NULL,
-  PRIMARY KEY (`PhanHeID`)
+  PRIMARY KEY (`PhanHeID`),
+  CONSTRAINT `tblphanhe_ibfk_1` FOREIGN KEY (`PhanHeID`) REFERENCES `tblmenu` (`PhanHeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -4601,22 +4584,48 @@ CREATE TABLE `tblthietbid` (
 DROP TABLE IF EXISTS `tbluser`;
 CREATE TABLE `tbluser` (
   `UserID` varchar(12) NOT NULL,
+  `GroupID` int(3) NOT NULL DEFAULT '0',
   `Password` varchar(12) DEFAULT NULL,
   `PWDLevel2` varchar(12) DEFAULT NULL,
   `UserName` varchar(45) DEFAULT NULL,
   `Email` varchar(45) DEFAULT NULL,
-  `CreatedDate` timestamp NULL DEFAULT NULL,
   `LockedUser` bit(1) DEFAULT NULL,
   `LockedDate` datetime DEFAULT NULL,
   `LockedReason` varchar(150) DEFAULT NULL,
   `LastLogIn` timestamp NULL DEFAULT NULL,
   `LastChangedPassword` timestamp NULL DEFAULT NULL,
   `DeadlineOfUsing` datetime DEFAULT NULL,
-  `UserRight` tinytext,
-  PRIMARY KEY (`UserID`)
+  `Delegate` bit(1) DEFAULT NULL,
+  `NhanVienID` varchar(12) DEFAULT NULL,
+  `CreatedDate` timestamp NULL DEFAULT NULL,
+  `Owner` varchar(12) DEFAULT NULL,
+  PRIMARY KEY (`UserID`,`GroupID`),
+  KEY `GroupID` (`GroupID`),
+  CONSTRAINT `tbluser_ibfk_1` FOREIGN KEY (`GroupID`) REFERENCES `tblgroup` (`GroupID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbluser
 -- ----------------------------
-INSERT INTO `tbluser` VALUES ('hieulv', '352007', null, 'Le Van Hieu', 'hieulvh@gmail.com', '2012-07-01 00:00:00', null, null, null, null, null, null, null);
+INSERT INTO `tbluser` VALUES ('hieulv', '1', '352007', null, 'Le Van Hieu', 'hieulvh@gmail.com', null, null, null, null, null, null, null, null, '2012-07-01 00:00:00', null);
+
+-- ----------------------------
+-- Table structure for `tbluserright`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbluserright`;
+CREATE TABLE `tbluserright` (
+  `PhanHeID` tinyint(3) NOT NULL DEFAULT '0',
+  `UserID` varchar(12) NOT NULL DEFAULT '',
+  `UserRight` tinytext,
+  `CreateDate` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `Owner` varchar(12) DEFAULT NULL,
+  PRIMARY KEY (`PhanHeID`,`UserID`),
+  KEY `UserID` (`UserID`),
+  CONSTRAINT `tbluserright_ibfk_2` FOREIGN KEY (`PhanHeID`) REFERENCES `tblphanhe` (`PhanHeID`),
+  CONSTRAINT `tbluserright_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `tbluser` (`UserID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbluserright
+-- ----------------------------
+INSERT INTO `tbluserright` VALUES ('1', 'hieulv', ';1;2;3;4;5;6;7;8;9;10;11;12;', '2012-09-10 13:19:21', 'hieulv');
