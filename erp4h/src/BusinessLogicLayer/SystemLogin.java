@@ -1,94 +1,130 @@
 package BusinessLogicLayer;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 import DataTranferObject.UserDTO;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-
+/**
+ * 
+ * @author hieulv
+ *
+ */
 public class SystemLogin extends JPanel {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private JTextField txtTaiKhoan;
-	private JPasswordField txtMatKhau;
-	private UserDTO dtoUser;
-
-	/**
-	 * Create the panel.
-	 */
+	//khai bao cac thanh phan
+	private JTextField tfTaiKhoan;
+	private JPasswordField tfMatKhau;
+	private JButton btnDangNhap;
+	private JButton btnThoat;
+	//khai bao doi tuong user 
+	UserDTO dtoUser;
+	UserBLL bllUser;
+	
 	public SystemLogin() {
 		setLayout(null);
 		
-		txtTaiKhoan = new JTextField();
-		txtTaiKhoan.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent arg0) {
-				if(txtTaiKhoan.getText()!=null){
-					System.out.println("khlkj");
-					txtTaiKhoan.setFocusable(true);
-				}
-			}
-		});
-		txtTaiKhoan.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println(e.getSource().toString());
-			}
-		});
-		txtTaiKhoan.setBounds(375, 11, 115, 20);
-		add(txtTaiKhoan);
-		txtTaiKhoan.setColumns(10);
+		tfTaiKhoan = new JTextField();
+		tfTaiKhoan.setBounds(354, 11, 86, 20);
+		add(tfTaiKhoan);
+		tfTaiKhoan.setColumns(10);
 		
-		txtMatKhau = new JPasswordField();
-		txtMatKhau.setBounds(375, 35, 115, 20);
-		add(txtMatKhau);
+		tfMatKhau = new JPasswordField();
+		tfMatKhau.setBounds(354, 42, 86, 20);
+		add(tfMatKhau);
 		
-		JButton btnDangNhap = new JButton("\u0110\u0103ng nh\u1EADp");
-		
-		btnDangNhap.addActionListener(new ActionListener() {
-			int i=0;
-			public void actionPerformed(ActionEvent e) {
-				try {
-					dtoUser= new UserBLL().getByID("\""+txtTaiKhoan.getText()+"\"");
-					//txtMatKhau.getText();
-					if(dtoUser.getPassword().equals(new String(txtMatKhau.getPassword()))){
-						System.out.println("OK");
-					}else{
-						System.out.println("Sai mat khau"+txtMatKhau.getPassword().toString());
-						txtMatKhau.requestFocus(true);
-					}
-					
-					System.out.println(dtoUser.getUserName());
-				} catch (Exception e1) {
-					i++;
-					if(i>4){
-						//thong bao nhap sai qua so lan quy dinh va thoat chuong trinh
-						System.exit(0);
-					}
-					System.out.println("Khong hop le...");
-					//e1.printStackTrace();
-				}
-			}
-		});
-		btnDangNhap.setBounds(399, 266, 91, 23);
+		btnDangNhap = new JButton("Login");
+		btnDangNhap.setBounds(233, 266, 91, 23);
 		add(btnDangNhap);
+		btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	btnDangNhapActionPerformed(evt);
+            }
+        });
 		
-		JButton btnThoat = new JButton("Tho\u00E1t");
-		btnThoat.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				System.exit(0);
-			}
-		});
-		btnThoat.setBounds(298, 266, 91, 23);
+		btnThoat = new JButton("Close");
+		btnThoat.setBounds(349, 266, 91, 23);
 		add(btnThoat);
 		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setIcon(new ImageIcon(SystemLogin.class.getResource("/Images/stock.jpg")));
+		lblNewLabel.setBounds(10, 14, 165, 275);
+		add(lblNewLabel);
+		
+		JLabel lblTaiKhoan = new JLabel("Tai khoan");
+		lblTaiKhoan.setBounds(258, 14, 86, 14);
+		add(lblTaiKhoan);
+		
+		JLabel lblMatKhau = new JLabel("Mat khau");
+		lblMatKhau.setBounds(258, 45, 86, 14);
+		add(lblMatKhau);
+		btnThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	btnThoatActionPerformed(evt);
+            }
+        });
 	}
-
+	private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt){
+		String stTaiKhoan=tfTaiKhoan.getText();
+		if(!checkEmpty(tfTaiKhoan, stTaiKhoan, "Tai khoan")){
+			return;
+		}
+		String stMatKhau=tfMatKhau.getText();
+		if(!checkEmpty(tfMatKhau, stMatKhau, "Mat khau")){
+			return;
+		}
+		if(!checkPassword(tfMatKhau, stMatKhau, "Mat khau")){
+			return;
+		}
+	}
+	
+	private void btnThoatActionPerformed(java.awt.event.ActionEvent evt){
+		System.exit(0);
+	}
+	
+	private boolean checkEmpty(JTextField tfField, String value, String field){
+		if(value.isEmpty()){
+			JOptionPane.showMessageDialog(null, "Field " + field + " could not be empty", "Thong bao", JOptionPane.ERROR_MESSAGE);
+			tfField.requestFocus();System.getProperties();
+			return false;
+		}
+		return true;	
+	}
+	
+	private boolean checkUserID(JTextField tfField, String value, String field){
+		try {
+			dtoUser=new UserBLL().getByID("\"" + value + "\"");
+			if(dtoUser!=null){
+				System.out.println(dtoUser.getUserID());
+				System.out.println("aaa");
+				return true;
+			} else {
+				JOptionPane.showMessageDialog(null, field + " [" + value + "] " +" khong ton tai", "Thong bao", 1);
+				tfField.requestFocus();
+				
+				return false;
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, field + " [" + value + "] " +" khong ton tai", "Thong bao", 1);
+			tfField.requestFocus();
+			e.printStackTrace();
+			return false;
+		}
+	}
+	private boolean checkPassword(JTextField tfField, String value, String field){
+		String stTaiKhoan=tfTaiKhoan.getText();
+		String stMatKhau=tfMatKhau.getText();
+		if(checkUserID(tfTaiKhoan, stTaiKhoan, "Tai khoan")){
+			if(!dtoUser.getPassword().equals(stMatKhau)){
+				JOptionPane.showMessageDialog(null, field + " khong hop le", "Thong bao", 1);
+				tfField.requestFocus();
+				return false;
+			}
+			return false;
+		}
+		return true;
+	}
 }
