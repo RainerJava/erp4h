@@ -1,5 +1,7 @@
 package BusinessLogicLayer;
 
+import java.util.ArrayList;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -42,7 +44,12 @@ public class SystemLogin extends JPanel {
 		add(btnDangNhap);
 		btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				btnDangNhapActionPerformed(evt);
+				try {
+					btnDangNhapActionPerformed(evt);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 
@@ -70,7 +77,8 @@ public class SystemLogin extends JPanel {
 		});
 	}
 
-	private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {
+	private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt)
+			throws Exception {
 		String stTaiKhoan = tfTaiKhoan.getText();
 		if (!checkEmpty(tfTaiKhoan, stTaiKhoan, "Tai khoan")) {
 			return;
@@ -82,7 +90,8 @@ public class SystemLogin extends JPanel {
 		if (!checkPassword(tfMatKhau, stMatKhau, "Mat khau")) {
 			return;
 		}
-		SystemParameters.CURRENT_USER=dtoUser;
+		createUserRight();
+		System.out.println(SystemParameters.CURRENT_GROUP_RIGHT);
 	}
 
 	private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,17 +126,20 @@ public class SystemLogin extends JPanel {
 		String stMatKhau = tfMatKhau.getText();
 
 		if (checkUserID(tfTaiKhoan, stTaiKhoan, "Tai khoan")) {
-			if (!dtoUser.getPassword().equals(stMatKhau)) {
+			if (dtoUser.getPassword().compareTo(stMatKhau) != 0) {
 				JOptionPane.showMessageDialog(null, field + " khong hop le",
 						"Thong bao", 1);
 				tfField.requestFocus();
 				return false;
 			}
+			return true;
+		} else {
 			return false;
 		}
-		return true;
 	}
-	private void createSystemMenu(){
-		
+
+	private void createUserRight() throws Exception {
+		SystemParameters.CURRENT_GROUP_RIGHT = new GroupRightBLL().getRight(
+				"PhanHeID=1 and GroupID=" + dtoUser.getGroupID(), null);
 	}
 }
