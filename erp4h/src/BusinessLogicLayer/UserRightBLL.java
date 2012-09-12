@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import Utilities.StringUtil;
+
 import DataAccessLayer.MySQLConnectUnit;
 import DataTranferObject.UserRightDTO;
 
@@ -15,7 +17,7 @@ public class UserRightBLL {
 		this.connect=DataAccessLayer.DataAccess.getDAL();
 	}
 	
-	public ArrayList<UserRightDTO> getUserRightArray(String Condition, String OrderBy) throws Exception{
+	public ArrayList<UserRightDTO> getArray(String Condition, String OrderBy) throws Exception{
 		ResultSet rs=connect.Select("tblUserRight", Condition, OrderBy);
 		ArrayList<UserRightDTO> arrUserRight=new ArrayList<UserRightDTO>();
 		while(rs.next()){
@@ -29,14 +31,14 @@ public class UserRightBLL {
 		}
 		return arrUserRight;
 	}
-	public ArrayList<UserRightDTO> getUserRightArray(String Condition) throws Exception{
-		return getUserRightArray(Condition, null);
+	public ArrayList<UserRightDTO> getArray(String Condition) throws Exception{
+		return getArray(Condition, null);
 	}
-	public ArrayList<UserRightDTO> getUserRightArray() throws Exception{
-		return getUserRightArray(null);
+	public ArrayList<UserRightDTO> getArray() throws Exception{
+		return getArray(null);
 	}
 	
-	public HashSet<UserRightDTO> getUserRightDTO(String Condition, String OrderBy) throws Exception{
+	public HashSet<UserRightDTO> getHashSet(String Condition, String OrderBy) throws Exception{
 		ResultSet rs=connect.Select("tblUserRight", Condition, OrderBy);
 		HashSet<UserRightDTO> hsUserRight=new HashSet<UserRightDTO>();
 		while(rs.next()){
@@ -50,18 +52,24 @@ public class UserRightBLL {
 		}
 		return hsUserRight;
 	}
-	public HashSet<UserRightDTO> getUserRightDTO(String Condition) throws Exception{
-		return getUserRightDTO(Condition, null);
+	public HashSet<UserRightDTO> getHashSet(String Condition) throws Exception{
+		return getHashSet(Condition, null);
 	}
-	public HashSet<UserRightDTO> getUserRightDTO() throws Exception{
-		return getUserRightDTO(null);
+	public HashSet<UserRightDTO> getHashSet() throws Exception{
+		return getHashSet(null);
 	}
 	
 	public UserRightDTO getByID(String PhanHeID) throws Exception{
-		HashSet<UserRightDTO> hsUserRight=this.getUserRightDTO(PhanHeID);
+		HashSet<UserRightDTO> hsUserRight=this.getHashSet(PhanHeID);
 		if(hsUserRight.size()==1){
 			return hsUserRight.toArray(new UserRightDTO[hsUserRight.size()])[0];
 		}
 		return null;
+	}
+	
+	public ArrayList<Integer> getRight(String Condition, String OrderBy) throws Exception{
+		ResultSet rs=connect.Select("tblUserRight", Condition, OrderBy);
+		rs.first();
+		return new StringUtil().getIntArray(rs.getString("UserRight"));
 	}
 }

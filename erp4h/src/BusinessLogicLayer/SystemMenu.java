@@ -13,6 +13,7 @@ import javax.swing.KeyStroke;
 
 import Center.SystemMenu1;
 import DataTranferObject.MenuDTO;
+import DataTranferObject.UserDTO;
 import DataTranferObject.UserRightDTO;
 
 
@@ -42,12 +43,16 @@ public class SystemMenu extends JMenuBar implements ActionListener{
 	}
 
 	//Nho them quyen truy cap vao menu item va phan he
+//
+	private void createUserRight(){
+		UserDTO dtoUser=SystemParameters.CURRENT_USER;
+	}
 	public SystemMenu(String PhanHe) throws Exception{
 		bllMenu=new MenuBLL();
 		arrMenu=bllMenu.getMenuArray(PhanHe, "MenuFiliationID, MenuPosition");
 		
 		bllUserRight=new UserRightBLL();
-		dtoUserRight=bllUserRight.getByID(SystemParameters.PhanHe);
+		dtoUserRight=bllUserRight.getByID(SystemParameters.PHAN_HE);
 		System.out.println(dtoUserRight.getUserRight());
 		for(int i=0;i<arrMenu.size();i++){
 			dtoMenu=arrMenu.get(i);
@@ -71,6 +76,7 @@ public class SystemMenu extends JMenuBar implements ActionListener{
 			}
 		}
 	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		//JOptionPane.showMessageDialog((Component) e.getSource(), "Info");
