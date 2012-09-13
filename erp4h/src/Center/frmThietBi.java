@@ -55,7 +55,7 @@ public class frmThietBi extends JFrame implements TreeSelectionListener{
 	
 	public void initialize() throws Exception{
 		//tạo cây
-		root=new DefaultMutableTreeNode("Khoa-Phòng");
+		root=new DefaultMutableTreeNode("Khoa-Ph�ng");
 		treeModel=new DefaultTreeModel(root);
 		KhoaPhong=new JTree(treeModel);
 		KhoaPhong.addTreeSelectionListener(this);
