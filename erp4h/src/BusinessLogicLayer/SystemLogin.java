@@ -1,6 +1,7 @@
 package BusinessLogicLayer;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -96,10 +97,12 @@ public class SystemLogin extends JPanel {
 		}
 		createUserRight();
 		System.out.println(SystemParameters.CURRENT_GROUP_RIGHT);
+		System.out.println(SystemParameters.CURRENT_USER_RIGHT);
 	}
 
 	private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {
 		System.out.println(SystemParameters.CURRENT_USER.getUserName());
+
 		System.exit(0);
 	}
 
@@ -146,7 +149,20 @@ public class SystemLogin extends JPanel {
 	}
 
 	private void createUserRight() throws Exception {
-		SystemParameters.CURRENT_GROUP_RIGHT = new GroupRightBLL().getRight(
-				"PhanHeID=1 and GroupID=" + dtoUser.getGroupID(), null);
+
+		SystemParameters.CURRENT_USER = dtoUser;
+		System.out.println(SystemParameters.CURRENT_USER.getUserName());
+		SystemParameters.CURRENT_USER_RIGHT = new UserRightBLL().getRight(
+				"PhanHeID=1 and UserID=" + "\"" + tfTaiKhoan.getText() + "\"",
+				null);
+		HashSet<Integer> hs = new HashSet<Integer>();
+		ArrayList<Integer> arrGroup = new GroupUserBLL().getGroup("UserID=\""
+				+ dtoUser.getUserID() + "\"", null);
+		for (int i = 0; i < arrGroup.size(); i++) {
+			ArrayList<String> arr = new GroupRightBLL().getRight("GroupID="
+					+ arrGroup.get(i), null);
+			System.out.println("arr: " + arr);
+		}
+		
 	}
 }

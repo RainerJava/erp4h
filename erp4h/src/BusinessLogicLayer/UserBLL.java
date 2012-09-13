@@ -29,7 +29,7 @@ public class UserBLL {
 		while (rs.next()) {
 			UserDTO dtoUser = new UserDTO();
 			dtoUser.setUserID(rs.getString("UserID"));
-			dtoUser.setGroupID(rs.getInt("GroupID"));
+
 			dtoUser.setPassword(rs.getString("Password"));
 			dtoUser.setPWDLevel2(rs.getString("PWDLevel2"));
 			dtoUser.setUserName(rs.getString("UserName"));
@@ -70,7 +70,7 @@ public class UserBLL {
 		while (rs.next()) {
 			UserDTO dtoUser = new UserDTO();
 			dtoUser.setUserID(rs.getString("UserID"));
-			dtoUser.setGroupID(rs.getInt("GroupID"));
+
 			dtoUser.setPassword(rs.getString("Password"));
 			dtoUser.setPWDLevel2(rs.getString("PWDLevel2"));
 			dtoUser.setUserName(rs.getString("UserName"));
@@ -133,7 +133,7 @@ public class UserBLL {
 	public void Insert(UserDTO dtoUser) throws Exception {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("UserID", dtoUser.getUserID());
-		map.put("GroupID", dtoUser.getGroupID());
+
 		map.put("Password", dtoUser.getPassword());
 		map.put("PWDLevel2", dtoUser.getPWDLevel2());
 		map.put("UserName", dtoUser.getUserName());
@@ -159,7 +159,7 @@ public class UserBLL {
 	public void Update(UserDTO dtoUser) throws Exception {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("UserID", dtoUser.getUserID());
-		map.put("GroupID", dtoUser.getGroupID());
+
 		map.put("Password", dtoUser.getPassword());
 		map.put("PWDLevel2", dtoUser.getPWDLevel2());
 		map.put("UserName", dtoUser.getUserName());

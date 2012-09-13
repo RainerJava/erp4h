@@ -75,10 +75,14 @@ public class GroupRightBLL {
 		return null;
 	}
 
-	public ArrayList<Integer> getRight(String Condition, String OrderBy)
+	public ArrayList<String> getRight(String Condition, String OrderBy)
 			throws Exception {
 		ResultSet rs = connect.Select("tblGroupRight", Condition, OrderBy);
-		rs.first();
-		return new StringUtil().getIntArray(rs.getString("GroupRight"));
+		ArrayList<String> arrGroupRight=new ArrayList<String>();
+		while(rs.next()){
+			arrGroupRight.add(rs.getString("GroupRight"));
+			
+		}
+		return arrGroupRight;
 	}
 }

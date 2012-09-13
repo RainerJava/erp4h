@@ -10,7 +10,6 @@ import java.sql.Timestamp;
  */
 public class UserDTO {
 	  String UserID;
-	  int GroupID;
 	  String Password;
 	  String PWDLevel2;
 	  String UserName;
@@ -31,7 +30,6 @@ public class UserDTO {
 	
 	public UserDTO(	
 			  String UserID,
-			  int GroupID,
 			  String Password,
 			  String PWDLevel2,
 			  String UserName,
@@ -47,7 +45,6 @@ public class UserDTO {
 			  Timestamp CreatedDate,
 			  String Owner)	{
 		  this.UserID=UserID;
-		  this.GroupID=GroupID;
 		  this.Password=Password;
 		  this.PWDLevel2=PWDLevel2;
 		  this.UserName=UserName;
@@ -70,14 +67,6 @@ public class UserDTO {
 
 	public void setUserID(String userID) {
 		UserID = userID;
-	}
-
-	public int getGroupID() {
-		return GroupID;
-	}
-
-	public void setGroupID(int groupID) {
-		GroupID = groupID;
 	}
 
 	public String getPassword() {

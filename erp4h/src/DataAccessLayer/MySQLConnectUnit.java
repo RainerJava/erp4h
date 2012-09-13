@@ -103,4 +103,8 @@ public class MySQLConnectUnit
 	public void Close() throws SQLException{
 		this.connect.Close();
 	}
+	
+	public ResultSet Select(String[] tableName){
+		
+	}
 }
