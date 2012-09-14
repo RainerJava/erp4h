@@ -1,42 +1,37 @@
 package Center;
 
-import java.awt.BorderLayout; 
-import java.awt.Component; 
-import java.awt.Dimension; 
-import java.awt.Window; 
-import java.util.logging.Logger; 
- 
-import javax.swing.BorderFactory; 
-import javax.swing.Icon; 
-import javax.swing.JButton; 
-import javax.swing.JComponent; 
-import javax.swing.JFrame; 
-import javax.swing.JPanel; 
-import javax.swing.JScrollPane; 
-import javax.swing.SwingUtilities; 
- 
-import org.jdesktop.application.Action; 
-import org.jdesktop.swingx.JXPanel; 
-import org.jdesktop.swingx.JXTree; 
-import org.jdesktop.swingx.decorator.AbstractHighlighter; 
-import org.jdesktop.swingx.decorator.ComponentAdapter; 
-import org.jdesktop.swingx.decorator.HighlightPredicate; 
-import org.jdesktop.swingx.decorator.Highlighter; 
-import org.jdesktop.swingx.demos.tree.TreeDemoIconValues.FilteredIconValue; 
-import org.jdesktop.swingx.demos.tree.TreeDemoIconValues.LazyLoadingIconValue; 
-import org.jdesktop.swingx.renderer.DefaultTreeRenderer; 
-import org.jdesktop.swingx.renderer.IconValue; 
-import org.jdesktop.swingx.renderer.StringValue; 
-import org.jdesktop.swingx.renderer.StringValues; 
-import org.jdesktop.swingx.renderer.WrappingIconPanel; 
-import org.jdesktop.swingx.treetable.TreeTableModel; 
-import org.jdesktop.swingxset.util.ComponentModels; 
-import org.jdesktop.swingxset.util.DemoUtils; 
- 
-import com.sun.swingset3.DemoProperties; 
+import java.sql.ResultSet;
+
+import DataAccessLayer.MySQLConnectUnit;
 
 public class test {
 	public static void main(String[] arg) throws Exception{
-
+//		String[] s={"UserID","UserName","tttt"};
+//		String[] t={"table1 as t1","t2","t3"};
+//		
+////		String q=con.Select(s, null, null);
+//		
+//		System.out.println(Select(s, t, null));
+		MySQLConnectUnit con=new MySQLConnectUnit();
+		con=DataAccessLayer.DataAccess.getDAL();
+		ResultSet rs=con.SelectFromStore("spUser_SelectUserRight");
+		while(rs.next()){
+			System.out.println(rs.getString("GroupRight"));
+		}
 	}
+	public static String Select(String[] fieldName, String[] tableName,
+			String[] condition) {
+		StringBuilder query = new StringBuilder("select ");
+		for (int i = 0; i < fieldName.length; i++) {
+			query.append(fieldName[i] + ", ");
+		}
+		query.delete(query.length() - 2, query.length() + 100);
+		query.append(" from " + tableName[0]);
+		for(int i=1;i<tableName.length;i++){
+			query.append("inner join "+tableName[i-1]+" on ");
+		}
+		query.append(";");
+		return query.toString();
+	}
+	 
 }

@@ -297,4 +297,8 @@ public class UserBLL {
 		}
 		return RowCount;
 	}
+	public ArrayList<Integer> getUserRight(){
+		
+		return null;
+	}
 }

@@ -2,6 +2,8 @@ package DataAccessLayer;
 
 import java.sql.*;
 
+import javax.swing.JOptionPane;
+
 public class ConnectMySQL {
 	String strHost;
 	String strUserName;
@@ -10,6 +12,7 @@ public class ConnectMySQL {
 
 	Connection connect = null;
 	Statement statement = null;
+	CallableStatement cs = null;
 	ResultSet resultset = null;
 
 	public ConnectMySQL() {
@@ -23,19 +26,24 @@ public class ConnectMySQL {
 		this.strDataBase = database;
 	}
 
-	/*
+	/**
 	 * Kiá»ƒm tra Class Name Náº¿u khÃ´ng tá»“n táº¡i thÃ¬ mÃ©m lá»—i ra ngoÃ i.
 	 */
 	protected void driverTest() throws Exception {
 		try {
 			Class.forName("org.gjt.mm.mysql.Driver");
 		} catch (java.lang.ClassNotFoundException e) {
-			throw new Exception("Không tìm thấy trình điều khiển ... ");
+			throw new Exception(e.getMessage() + "\n"
+					+ " Không tìm thấy trình điều khiển ... ");
 		}
 	}
 
-	/*
-	 * tao ket noi
+	/**
+	 * Tạo kết nối thông qua url, nếu không thành công thì ném lỗi ra ngoài
+	 * 
+	 * @return Trả về kết nối
+	 * @throws Exception
+	 *             Không thể kết nối đến máy chủ CSDL:
 	 */
 	protected Connection getConnect() throws Exception {
 		if (this.connect == null) {
@@ -50,8 +58,7 @@ public class ConnectMySQL {
 			// Nếu không thành công thì ném lỗi ra ngoài
 			catch (java.sql.SQLException e) {
 				throw new Exception(e.getMessage() + "\n"
-						+ "[getConnect] Không thể kết nối đến máy chủ CSDL: "
-						+ url);
+						+ " Không thể kết nối đến máy chủ CSDL: " + url);
 			}
 		}
 		// Trả về kết nối
@@ -65,6 +72,21 @@ public class ConnectMySQL {
 		}
 		// Trả về statement.
 		return this.statement;
+	}
+
+	public ResultSet prepareCall(String storeName, int PhanHeID)
+			throws Exception {
+		try {
+			if (this.cs == null ? true : this.cs.isClosed()) {
+				this.cs = this.getConnect().prepareCall(
+						"{call " + storeName + "(?)}");
+				this.cs.setInt(1, PhanHeID);
+				this.resultset = cs.executeQuery();
+			}
+		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException e) {
+			throw new Exception(e.getMessage() + "\n");
+		}
+		return resultset;
 	}
 
 	/**
@@ -94,7 +116,8 @@ public class ConnectMySQL {
 	 * @param Query
 	 *            lệnh truy vấn
 	 * @return số lượng mẩu tin được Update, Insert hoặc Delete
-	 * @throws Exception
+	 * @throws new
+	 *             Exception
 	 */
 	public int executeUpdate(String Query) throws Exception {
 		int res = Integer.MIN_VALUE;
@@ -118,6 +141,10 @@ public class ConnectMySQL {
 		if (this.statement != null && !this.statement.isClosed()) {
 			this.statement.close();
 			this.statement = null;
+		}
+		if (this.cs != null && !this.cs.isClosed()) {
+			this.cs.close();
+			this.cs = null;
 		}
 		// Náº¿u connection chÆ°a Ä‘Ã³ng. Ä�Ã³ng connection.
 		if (this.connect != null && !this.connect.isClosed()) {
