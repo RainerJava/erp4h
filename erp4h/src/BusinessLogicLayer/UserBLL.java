@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import Utilities.StringUtil;
+
 import DataAccessLayer.MySQLConnectUnit;
 import DataTranferObject.UserDTO;
 
@@ -297,8 +299,16 @@ public class UserBLL {
 		}
 		return RowCount;
 	}
-	public ArrayList<Integer> getUserRight(){
+	
+	//Tham so truyen vao cho PhanHeID, UserID
+	public ArrayList<Integer> getUserRight(ArrayList<Object> parameter) throws Exception{
+		ResultSet rs=connect.prepareCall("spUser_SelectUserRight", parameter);
+		ArrayList<Integer> arr=new ArrayList<Integer>();
 		
+		while(rs.next()){
+			ArrayList<Integer> s=new StringUtil().getIntArray(rs.getString("GroupRight"));
+			
+		}
 		return null;
 	}
 }

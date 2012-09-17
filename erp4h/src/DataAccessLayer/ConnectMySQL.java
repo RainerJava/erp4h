@@ -1,8 +1,7 @@
 package DataAccessLayer;
 
 import java.sql.*;
-
-import javax.swing.JOptionPane;
+import java.util.ArrayList;
 
 public class ConnectMySQL {
 	String strHost;
@@ -74,20 +73,76 @@ public class ConnectMySQL {
 		return this.statement;
 	}
 
-	public ResultSet prepareCall(String storeName, int PhanHeID)
-			throws Exception {
-		try {
-			if (this.cs == null ? true : this.cs.isClosed()) {
-				this.cs = this.getConnect().prepareCall(
-						"{call " + storeName + "(?)}");
-				this.cs.setInt(1, PhanHeID);
-				this.resultset = cs.executeQuery();
+	public ResultSet executeStore(String spName, ArrayList<Object> parameter)
+			throws SQLException, Exception {
+		StringBuilder strQuery = new StringBuilder("{call " + spName + "(");
+		for (int i = 0; i < parameter.size(); i++) {
+			strQuery.append("?, ");
+			if (i == parameter.size() - 1) {
+				strQuery.delete(strQuery.length() - 2, strQuery.length());
+				strQuery.append(")}");
+				System.out.println(strQuery);
 			}
-		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException e) {
-			throw new Exception(e.getMessage() + "\n");
 		}
-		return resultset;
+		if (this.cs == null ? true : this.cs.isClosed()) {
+			this.cs = this.getConnect().prepareCall(strQuery.toString());
+			for (int i = 0; i < parameter.size(); i++) {
+				switch (parameter.get(i).getClass().getSimpleName()) {
+				case "Byte":
+					cs.setByte(i + 1, (byte) parameter.get(i));
+					break;
+				case "Short":
+					cs.setShort(i + 1, (short) parameter.get(i));
+					break;
+				case "Integer":
+					cs.setInt(i + 1, (int) parameter.get(i));
+					break;
+				case "Long":
+					cs.setLong(i + 1, (long) parameter.get(i));
+					break;
+				case "Float":
+					cs.setFloat(i + 1, (float) parameter.get(i));
+					break;
+				case "Double":
+					cs.setDouble(i + 1, (double) parameter.get(i));
+					break;
+				case "Boolean":
+					cs.setBoolean(i + 1, (boolean) parameter.get(i));
+					break;
+				case "String":
+					cs.setString(i+1, (String) parameter.get(i));
+					break;
+				case "Date":
+					cs.setDate(i+1, (Date) parameter.get(i));
+					break;
+				}
+			}
+		}
+		return this.resultset = cs.executeQuery();
 	}
+
+	// this.cs = this.getConnect().prepareCall(strQuery);
+	// this.resultset = cs.executeQuery();
+	// return resultset;
+	// }
+
+	// public ResultSet prepareCall(String storeName, ArrayList<Object>
+	// parameter){
+	// StringBuilder strQuery=new StringBuilder("{call "+ storeName+"(");
+	// for(int i=0;i<parameter.size();i++){
+	// strQuery.append("?, ");
+	// if(i==parameter.size()){
+	// strQuery.delete(strQuery.length()-2, strQuery.length());
+	// strQuery.append(")}");
+	// }
+	// }
+
+	// if (this.cs == null ? true : this.cs.isClosed()) {
+	// this.cs = this.getConnect().prepareCall(
+	// "{call " + storeName + "(?)}");
+	// this.cs.setInt(1, PhanHeID);
+	// this.resultset = cs.executeQuery();
+	// }
 
 	/**
 	 * Thực thi truy vấn nếu không thành công ném lỗi và câu lệnh truy vấn ra
@@ -153,3 +208,46 @@ public class ConnectMySQL {
 		}
 	}
 }
+/*
+ * java.util.Date today = new java.util.Date(); java.sql.Date sqlToday = new
+ * java.sql.Date(today.getTime());
+ * 
+ * For Timestamp, it's the same idea
+ * 
+ * java.util.Date today = new java.util.Date(); java.sql.Timestamp now = new
+ * java.sql.Timestamp(today.getTime());
+ * 
+ * To use a Date, Time or Timestamp in a query, you can use JDBC escape codes.
+ * 
+ * Date {d 'yyyy-mm-dd'} Time {t {'hh:mm:ss'} Timestamp {ts `yyyy-mm-dd
+ * hh:mm:ss.f . . .'} note: the .f .... is optional
+ * 
+ * For example, a Statement with a Date will look like this
+ * 
+ * java.util.Date today = new java.util.Date(); java.sql.Date sqlToday = new
+ * java.sql.Date(today.getTime());
+ * 
+ * String query = "select * from cust where purchase_date < { d '" +
+ * sqlDate.toString() + "' }");
+ * 
+ * With a PreparedStatement, you don't need JDBC escape codes, the JDBC driver
+ * will do the job for you.
+ * 
+ * java.util.Date today = new java.util.Date(); java.sql.Date sqlToday = new
+ * java.sql.Date(today.getTime());
+ * 
+ * PreparedStatement p = theConn.prepareStatement
+ * ("select * from cust where purchase_date < ?"); p.setDate(1, sqlToday);
+ * ResultSet rs = p.executeQuery();
+ * 
+ * To INSERT
+ * 
+ * PreparedStatement p = theConn.prepareStatement
+ * ("insert into TableWithADateColumn values(?)"); p.setDate(1, sqlToday);
+ * p.executeUpdate();
+ * 
+ * or
+ * 
+ * p.executeUpdate
+ * ("insert into TableWithADateColumn values( { d '1999-12-31' } )");
+ */

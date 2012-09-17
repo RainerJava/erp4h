@@ -3,6 +3,7 @@ package DataAccessLayer;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.mysql.jdbc.CallableStatement;
@@ -85,7 +86,6 @@ public class MySQLConnectUnit {
 		String[] list = new String[ColumnCount];
 		for (int i = 0; i < ColumnCount; i++) {
 			list[i] = rsMetaData.getColumnName(i + 1);
-			// System.out.println(list[i] + "  \t");
 		}
 		return list;
 	}
@@ -115,7 +115,10 @@ public class MySQLConnectUnit {
 		query.append(";");
 		return query.toString();
 	}
-	public ResultSet SelectFromStore(String spName) throws Exception{
-		return this.connect.prepareCall(spName,1);
+
+	//
+	public ResultSet prepareCall(String spName, ArrayList<Object> parameter) throws Exception{
+		
+		return this.connect.executeStore(spName,parameter);
 	}
 }
