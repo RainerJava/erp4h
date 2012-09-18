@@ -6,8 +6,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.mysql.jdbc.CallableStatement;
-
 public class MySQLConnectUnit {
 	private ConnectMySQL connect;
 
