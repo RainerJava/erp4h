@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<System>
+	<M_GPSP001>
+		SELECT
+			mg.LCLS_CODE,
+			ml.LCLS_NAME,
+			mg.MCLS_CODE,
+			mm.MCLS_NAME,
+			mg.PDMETER,
+			mnPdMetter.NAME_NAME AS PDMETER_NAME,
+			mg.OAN_TYPE,
+			mnOan.NAME_NAME AS OANTYPE_NAME,
+			mg.BENDER,
+			mnBender.NAME_NAME AS BENDER_NAME,
+			mg.STD_CODE,
+			ms.STD_NAME,
+			mg.GRIP_QTY,
+			mg.CGRIP_QTY,
+			mg.SPRS_QTY,
+			mg.USE_FLG,
+			mg.ADD_USER,
+			mg.ADD_PC,
+			mg.ADD_DATE,
+			mg.ADD_TIME,
+			mg.LASTUP_USER,
+			mg.LASTUP_PC,
+			mg.LASTUP_DATE,
+			mg.LASTUP_TIME
+		FROM
+			M_GPSP mg LEFT JOIN 
+			M_LCLS ml ON mg.LCLS_CODE = ml.LCLS_CODE LEFT JOIN
+            M_MCLS mm ON mg.MCLS_CODE = mm.MCLS_CODE AND mg.LCLS_CODE = mm.LCLS_CODE LEFT JOIN
+			M_NAME mnPdMetter ON mg.PDMETER = mnPdMetter.NAME_CODE AND mnPdMetter.NAMECLS_CODE = 'PDMETER' LEFT JOIN
+			M_NAME mnOan ON mg.OAN_TYPE = mnOan.NAME_CODE AND mnOan.NAMECLS_CODE = 'OAN' LEFT JOIN
+			M_NAME mnBender ON mg.BENDER = mnBender.NAME_CODE AND mnBender.NAMECLS_CODE = 'BENDERR' LEFT JOIN
+			M_STD ms ON mg.STD_CODE = ms.STD_CODE
+	</M_GPSP001>
+	
+	<M_GPSP002>
+		SELECT COUNT(*)
+		FROM M_GPSP ms
+	</M_GPSP002>
+	
+	<M_GPSP003>
+		SELECT
+			mg.LCLS_CODE,
+			mg.MCLS_CODE,
+			mg.PDMETER,
+			mg.OAN_TYPE,
+			mg.BENDER,
+			mg.[STD_CODE],
+			mg.GRIP_QTY,
+			mg.CGRIP_QTY,
+			mg.SPRS_QTY,
+			mg.USE_FLG,
+			mg.ADD_USER,
+			mg.ADD_PC,
+			mg.ADD_DATE,
+			mg.ADD_TIME,
+			mg.LASTUP_USER,
+			mg.LASTUP_PC,
+			mg.LASTUP_DATE,
+			mg.LASTUP_TIME
+		FROM
+			M_GPSP mg
+		WHERE
+			mg.LCLS_CODE = ? AND
+			mg.MCLS_CODE = ? AND
+			mg.PDMETER = ? AND
+			mg.OAN_TYPE = ? AND
+			mg.BENDER = ? AND
+			mg.[STD_CODE] = ?	
+	</M_GPSP003>
+	
+	<M_GPSP004>
+		INSERT INTO M_GPSP
+		(
+			LCLS_CODE,
+			MCLS_CODE,
+			PDMETER,
+			OAN_TYPE,
+			BENDER,
+			[STD_CODE],
+			GRIP_QTY,
+			CGRIP_QTY,
+			SPRS_QTY,
+			USE_FLG,
+			ADD_USER,
+			ADD_PC,
+			ADD_DATE,
+			ADD_TIME,
+			LASTUP_USER,
+			LASTUP_PC,
+			LASTUP_DATE,
+			LASTUP_TIME
+		)
+		VALUES
+		(
+			?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+		)
+	</M_GPSP004>
+
+	<M_GPSP005>
+		UPDATE M_GPSP
+		SET	
+			GRIP_QTY = ?,
+			CGRIP_QTY = ?,
+			SPRS_QTY = ?,
+			USE_FLG = ?,
+			LASTUP_USER = ?,
+			LASTUP_PC = ?,
+			LASTUP_DATE = ?,
+			LASTUP_TIME = ?
+		WHERE
+			LCLS_CODE = ? AND
+			MCLS_CODE = ? AND
+			PDMETER = ? AND
+			OAN_TYPE = ? AND
+			BENDER = ? AND
+			STD_CODE = ?	
+	</M_GPSP005>
+	
+	<M_GPSP006>
+		SELECT
+			mg.LCLS_CODE AS '$LCLS_CODE',
+			ml.LCLS_NAME AS '$LCLS_CODE名',
+			mg.MCLS_CODE AS '$MCLS_CODE',
+			mm.MCLS_NAME AS '$MCLS_CODE名',			
+			mg.PDMETER AS '呼径',			
+			mg.OAN_TYPE AS '新旧区分',
+			mnOan.NAME_NAME AS '新旧区分名',
+			mg.BENDER AS 'ベンダーR',			
+			mg.[STD_CODE] AS '規格',
+			ms.STD_NAME AS '規格名',
+			mg.GRIP_QTY AS '掴み代',
+			mg.CGRIP_QTY AS '中間掴み代',
+			mg.SPRS_QTY AS '押え代',
+			mg.USE_FLG AS '使用可否フラグ',
+			(
+				SELECT NAME_NAME FROM M_NAME
+				WHERE NAMECLS_CODE = 'USEFLG'
+				AND NAME_CODE = mg.USE_FLG
+			)
+			AS '使用可否フラグ名',
+			ms.ADD_USER AS '登録ユーザー名',
+			ms.ADD_PC AS '登録ＰＣ名',
+			ms.ADD_DATE AS '登録日付',
+			ms.ADD_TIME AS '登録時刻',
+			ms.LASTUP_USER AS '最終更新ユーザー名',
+			ms.LASTUP_PC AS '最終更新ＰＣ名',
+			ms.LASTUP_DATE AS '最終更新日付',
+			ms.LASTUP_TIME AS '最終更新時刻'
+		FROM
+			M_GPSP mg LEFT JOIN 
+			M_LCLS ml ON mg.LCLS_CODE = ml.LCLS_CODE LEFT JOIN
+			M_MCLS mm ON mg.MCLS_CODE = mm.MCLS_CODE AND mg.LCLS_CODE = mm.LCLS_CODE  LEFT JOIN 
+			M_NAME mnPdMetter ON mg.PDMETER = mnPdMetter.NAME_CODE AND mnPdMetter.NAMECLS_CODE = 'PDMETER' LEFT JOIN
+			M_NAME mnOan ON mg.OAN_TYPE = mnOan.NAME_CODE AND mnOan.NAMECLS_CODE = 'OAN' LEFT JOIN
+			M_NAME mnBender ON mg.BENDER = mnBender.NAME_CODE AND mnBender.NAMECLS_CODE = 'BENDERR' LEFT JOIN
+			M_STD ms ON mg.STD_CODE = ms.STD_CODE
+			
+	</M_GPSP006>
+	
+	<M_GPSP007>			
+		DELETE FROM M_GPSP
+		WHERE
+			LCLS_CODE = ? AND
+			MCLS_CODE = ? AND
+			PDMETER = ? AND
+			OAN_TYPE = ? AND
+			BENDER = ? AND
+			STD_CODE = ?	
+	</M_GPSP007>
+	
+</System>

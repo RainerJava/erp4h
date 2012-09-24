@@ -1,0 +1,677 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<System>
+	<M_PROD001>
+		SELECT
+			mp.LCLS_CODE,
+			ml.LCLS_NAME,
+			mp.MCLS_CODE,
+			mm.MCLS_NAME,
+			mp.SCLS_CODE,		
+			ms.SCLS_NAME,	
+			mp.TYPE_CODE,
+			mt.[TYPE_NAME],
+			mp.MATER_CODE,
+			mm2.MATER_NAME,
+			mp.PDMETER,
+			mn.NAME_NAME AS PDMETER_NAME,
+			mp.STD_CODE,	
+			mp.CUST_CODE,
+			mc.CUSTR_NAME AS CUSTR_NAME,
+			mk.KIND_CODE AS KIND_CODE,
+			mk.KIND_NAME AS KIND_NAME,	
+			mp.FREQTY,												
+			mp.SIZE_QTY,			
+			mp.LEN_QTY,
+			mp.TCKN_QTY,
+			mp.HEIGHT_QTY,
+			mp.WIDTH_QTY,
+			mp.WTCAL_TYPE,	
+			mn1.NAME_NAME AS WTCAL_NAME,		
+			mp.WT_QTY,
+			mp.SUPP1_MNY,
+			mp.SUPP2_MNY,
+			mp.SUPP3_MNY,
+			mp.SUPP4_MNY,
+			mp.SUPP5_MNY,
+			mp.SUPP6_MNY,
+			mp.SUPP7_MNY,
+			mp.SUPP8_MNY,
+			mp.SUPP9_MNY,
+			mp.SUPP10_MNY,
+			mp.CUST1_MNY,
+			mp.CUST2_MNY,
+			mp.CUST3_MNY,
+			mp.CUST4_MNY,
+			mp.CUST5_MNY,
+			mp.CMPR_TYPE,
+			mn_cmpr.NAME_NAME AS CMPR_NAME,
+			mp.CLPF_QTY,
+			mp.OLD_CODE,			
+			mp.USE_FLG,
+			mp.ADD_USER,
+			mp.ADD_PC,
+			mp.ADD_DATE,
+			mp.ADD_TIME,
+			mp.LASTUP_USER,
+			mp.LASTUP_PC,
+			mp.LASTUP_DATE,
+			mp.LASTUP_TIME
+		FROM
+			M_PROD mp 
+			LEFT JOIN M_LCLS ml ON mp.LCLS_CODE = ml.LCLS_CODE 
+			LEFT JOIN M_MCLS mm ON mp.MCLS_CODE = mm.MCLS_CODE AND mm.LCLS_CODE = mp.LCLS_CODE			
+			LEFT JOIN M_SCLS ms ON mp.SCLS_CODE = ms.SCLS_CODE
+			LEFT JOIN M_TYPE mt ON mp.TYPE_CODE = mt.TYPE_CODE 
+			LEFT JOIN M_MATER mm2 ON mp.MATER_CODE = mm2.MATER_CODE 
+			LEFT JOIN M_NAME mn ON mp.PDMETER = mn.NAME_CODE AND mn.NAMECLS_CODE = 'PDMETER' 
+			LEFT JOIN M_STD ms2 ON mp.STD_CODE = ms2.STD_CODE
+			LEFT JOIN M_NAME mn1 ON mp.WTCAL_TYPE = mn1.NAME_CODE AND mn1.NAMECLS_CODE = 'WTCAL'
+			LEFT JOIN M_NAME mn_cmpr ON mp.CMPR_TYPE = mn_cmpr.NAME_CODE AND mn_cmpr.NAMECLS_CODE = 'CMPR'
+			LEFT JOIN M_CUST mc ON mp.CUST_CODE = mc.CUST_CODE
+			LEFT JOIN M_KIND mk ON mp.KIND_CODE = mk.KIND_CODE
+			
+			
+	</M_PROD001>
+	
+	<M_PROD002>
+		SELECT COUNT(*)
+		FROM M_PROD ms
+	</M_PROD002>
+	
+	<M_PROD003>
+		SELECT
+			mp.LCLS_CODE,
+			mp.MCLS_CODE,
+			mp.SCLS_CODE,
+			mp.TYPE_CODE,
+			mp.PDMETER,
+			mp.MATER_CODE,
+			mp.STD_CODE,
+			mp.CUST_CODE,	
+			mp.KIND_CODE,		
+			mp.FREQTY,
+			mp.SIZE_QTY,
+			mp.LEN_QTY,
+			mp.TCKN_QTY,
+			mp.HEIGHT_QTY,
+			mp.WIDTH_QTY,
+			mp.CLPF_QTY,
+			mp.WTCAL_TYPE,
+			mp.WT_QTY,
+			mp.SUPP1_MNY,
+			mp.SUPP2_MNY,
+			mp.SUPP3_MNY,
+			mp.SUPP4_MNY,
+			mp.SUPP5_MNY,
+			mp.SUPP6_MNY,
+			mp.SUPP7_MNY,
+			mp.SUPP8_MNY,
+			mp.SUPP9_MNY,
+			mp.SUPP10_MNY,
+			mp.CUST1_MNY,
+			mp.CUST2_MNY,
+			mp.CUST3_MNY,
+			mp.CUST4_MNY,
+			mp.CUST5_MNY,
+			mp.CMPR_TYPE,
+			mp.OLD_CODE,
+			mp.USE_FLG,
+			mp.ADD_USER,
+			mp.ADD_PC,
+			mp.ADD_DATE,
+			mp.ADD_TIME,
+			mp.LASTUP_USER,
+			mp.LASTUP_PC,
+			mp.LASTUP_DATE,
+			mp.LASTUP_TIME
+		FROM
+			M_PROD mp
+		WHERE
+			mp.LCLS_CODE = ? AND
+			mp.MCLS_CODE = ? AND
+			mp.TYPE_CODE = ? AND 
+			mp.MATER_CODE = ? AND
+			mp.PDMETER = ? AND
+			mp.STD_CODE = ?	AND
+			mp.CUST_CODE = ? AND 
+			mp.KIND_CODE = ? AND
+			mp.FREQTY = ?
+			
+	</M_PROD003>
+	
+	<M_PROD011>
+		SELECT
+			mp.LCLS_CODE,
+			mp.MCLS_CODE,
+			mp.SCLS_CODE,
+			mp.TYPE_CODE,
+			mp.PDMETER,
+			mp.MATER_CODE,
+			mp.STD_CODE,
+			mp.CUST_CODE,	
+			mp.KIND_CODE,		
+			mp.SIZE_QTY,
+			mp.LEN_QTY,
+			mp.TCKN_QTY,
+			mp.HEIGHT_QTY,
+			mp.WIDTH_QTY,
+			mp.CLPF_QTY,
+			mp.WTCAL_TYPE,
+			mp.WT_QTY,
+			mp.SUPP1_MNY,
+			mp.SUPP2_MNY,
+			mp.SUPP3_MNY,
+			mp.SUPP4_MNY,
+			mp.SUPP5_MNY,
+			mp.SUPP6_MNY,
+			mp.SUPP7_MNY,
+			mp.SUPP8_MNY,
+			mp.SUPP9_MNY,
+			mp.SUPP10_MNY,
+			mp.CUST1_MNY,
+			mp.CUST2_MNY,
+			mp.CUST3_MNY,
+			mp.CUST4_MNY,
+			mp.CUST5_MNY,
+			mp.CMPR_TYPE,
+			mp.OLD_CODE,
+			mp.USE_FLG,
+			mp.ADD_USER,
+			mp.ADD_PC,
+			mp.ADD_DATE,
+			mp.ADD_TIME,
+			mp.LASTUP_USER,
+			mp.LASTUP_PC,
+			mp.LASTUP_DATE,
+			mp.LASTUP_TIME
+		FROM
+			M_PROD mp
+		WHERE
+			mp.LCLS_CODE = ? AND
+			mp.MCLS_CODE = ? AND
+			mp.TYPE_CODE = ? AND 
+			mp.MATER_CODE = ? AND
+			mp.PDMETER = ? AND
+			mp.STD_CODE = ?	AND
+			mp.CUST_CODE = ? 			
+	</M_PROD011>
+	
+	<M_PROD004>
+		INSERT INTO M_PROD
+		(
+			LCLS_CODE,
+			MCLS_CODE,
+			SCLS_CODE,
+			TYPE_CODE,
+			PDMETER,
+			MATER_CODE,
+			STD_CODE,
+			CUST_CODE,
+			KIND_CODE,
+			FREQTY,
+			SIZE_QTY,
+			LEN_QTY,
+			TCKN_QTY,
+			HEIGHT_QTY,
+			WIDTH_QTY,
+			CLPF_QTY,
+			WTCAL_TYPE,
+			WT_QTY,
+			SUPP1_MNY,
+			SUPP2_MNY,
+			SUPP3_MNY,
+			SUPP4_MNY,
+			SUPP5_MNY,
+			SUPP6_MNY,
+			SUPP7_MNY,
+			SUPP8_MNY,
+			SUPP9_MNY,
+			SUPP10_MNY,
+			CUST1_MNY,
+			CUST2_MNY,
+			CUST3_MNY,
+			CUST4_MNY,
+			CUST5_MNY,
+			OLD_CODE,
+			USE_FLG,
+			ADD_USER,
+			ADD_PC,
+			ADD_DATE,
+			ADD_TIME,
+			LASTUP_USER,
+			LASTUP_PC,
+			LASTUP_DATE,
+			LASTUP_TIME,
+			CMPR_TYPE
+		)
+		VALUES
+		(
+			?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+		)
+	</M_PROD004>
+	
+	<M_PROD005>
+		UPDATE M_PROD
+		SET				
+			WT_QTY = ?,
+			SUPP1_MNY = ?,
+			SUPP2_MNY = ?,
+			SUPP3_MNY = ?,
+			SUPP4_MNY = ?,
+			SUPP5_MNY = ?,
+			SUPP6_MNY = ?,
+			SUPP7_MNY = ?,
+			SUPP8_MNY = ?,
+			SUPP9_MNY = ?,
+			SUPP10_MNY = ?,
+			CUST1_MNY = ?,
+			CUST2_MNY = ?,
+			CUST3_MNY = ?,
+			CUST4_MNY = ?,
+			CUST5_MNY = ?,				
+			LASTUP_USER = ?,
+			LASTUP_PC = ?,
+			LASTUP_DATE = ?,
+			LASTUP_TIME = ?			
+		WHERE
+			LCLS_CODE = ? AND
+			MCLS_CODE = ? AND
+			TYPE_CODE = ? AND 
+			MATER_CODE = ? AND
+			PDMETER = ? AND
+			STD_CODE = ? AND
+			CUST_CODE = ? AND
+			KIND_CODE = ? AND
+			FREQTY = ?					
+		
+	</M_PROD005>
+	
+	<M_PROD006>
+		DELETE FROM M_PROD
+		WHERE
+			LCLS_CODE = ? AND
+			MCLS_CODE = ? AND
+			TYPE_CODE = ? AND 
+			MATER_CODE = ? AND
+			PDMETER = ? AND
+			STD_CODE = ? AND
+			CUST_CODE = ? AND
+			KIND_CODE = ? AND
+			FREQTY = ?					
+		
+	</M_PROD006>
+	
+	<M_PROD007>
+	   [SELECT]
+			mp.LCLS_CODE AS '$LCLS_CODE',
+			ml.LCLS_NAME AS '$LCLS_CODE名',
+			mp.MCLS_CODE AS '$MCLS_CODE',
+			mm.MCLS_NAME AS '$MCLS_CODE名',			
+			mp.TYPE_CODE AS 'タイプコード',
+			mt.[TYPE_NAME] AS 'タイプ名',
+			mp.MATER_CODE AS '材質コード',
+			mm2.MATER_NAME AS '材質名',
+			mp.PDMETER AS '呼径',			
+			mp.STD_CODE AS '規格コード',
+			ms2.STD_NAME AS '規格名',			
+			mp.CUST_CODE AS '得意先コード',
+			mc.CUST1_NAME AS '得意先名',
+			mk.KIND_CODE AS '種類コード',
+			mk.KIND_NAME AS '種類名',	
+			mp.FREQTY AS '角度',
+			mp.SIZE_QTY AS 'サイズ',			
+			mp.LEN_QTY AS '長さ',
+			mp.TCKN_QTY AS '厚み',
+			mp.HEIGHT_QTY AS '縦',
+			mp.WIDTH_QTY AS '横',
+			mp.WTCAL_TYPE AS '重量計算区分',	
+			mn1.NAME_NAME AS '重量計算区分名',
+			mp.WT_QTY AS '重量',
+			mp.SUPP1_MNY AS '$SUPP1_MNY',
+			mp.SUPP2_MNY AS '$SUPP2_MNY',
+			mp.SUPP3_MNY AS '$SUPP3_MNY',
+			mp.SUPP4_MNY AS '$SUPP4_MNY',
+			mp.SUPP5_MNY AS '$SUPP5_MNY',
+			mp.SUPP6_MNY AS '$SUPP6_MNY',
+			mp.SUPP7_MNY AS '$SUPP7_MNY',
+			mp.SUPP8_MNY AS '$SUPP8_MNY',
+			mp.SUPP9_MNY AS '$SUPP9_MNY',
+			mp.SUPP10_MNY AS '$SUPP10_MNY',			
+			mp.CUST1_MNY AS '$CUST1_MNY',
+			mp.CUST2_MNY AS '$CUST2_MNY',
+			mp.CUST3_MNY AS '$CUST3_MNY',
+			mp.CUST4_MNY AS '$CUST4_MNY',
+			mp.CUST5_MNY AS '$CUST5_MNY',
+			mp.CMPR_TYPE AS '単価処理区分',
+			mn_cmpr.NAME_NAME AS '単価処理区分名',
+			mp.CLPF_QTY AS '継手引代',
+			mp.OLD_CODE AS '旧システムコード',			
+			mp.USE_FLG AS '使用可否フラグ',
+			(
+				SELECT NAME_NAME FROM M_NAME
+				WHERE NAMECLS_CODE = 'USEFLG'
+				AND NAME_CODE = mp.USE_FLG
+			)
+			AS [使用可否フラグ名],
+			mp.ADD_USER AS '登録ユーザー名',
+			mp.ADD_PC AS '登録ＰＣ名',
+			mp.ADD_DATE AS '登録日付',
+			mp.ADD_TIME AS '登録時刻',
+			mp.LASTUP_USER AS '最終更新ユーザー名',
+			mp.LASTUP_PC AS '最終更新ＰＣ名',
+			mp.LASTUP_DATE AS '最終更新日付',
+			mp.LASTUP_TIME AS '最終更新時刻'
+		FROM
+			M_PROD mp 
+			LEFT JOIN M_LCLS ml ON mp.LCLS_CODE = ml.LCLS_CODE 
+			LEFT JOIN M_MCLS mm ON mp.MCLS_CODE = mm.MCLS_CODE AND mm.LCLS_CODE = mp.LCLS_CODE			
+			LEFT JOIN M_SCLS ms ON mp.SCLS_CODE = ms.SCLS_CODE
+			LEFT JOIN M_TYPE mt ON mp.TYPE_CODE = mt.TYPE_CODE 
+			LEFT JOIN M_MATER mm2 ON mp.MATER_CODE = mm2.MATER_CODE 
+			LEFT JOIN M_NAME mn ON mp.PDMETER = mn.NAME_CODE AND mn.NAMECLS_CODE = 'PDMETER' 
+			LEFT JOIN M_STD ms2 ON mp.STD_CODE = ms2.STD_CODE
+			LEFT JOIN M_NAME mn1 ON mp.WTCAL_TYPE = mn1.NAME_CODE AND mn1.NAMECLS_CODE = 'WTCAL'			
+			LEFT JOIN M_NAME mn_cmpr ON mp.CMPR_TYPE = mn_cmpr.NAME_CODE AND mn_cmpr.NAMECLS_CODE = 'CMPR'	
+			LEFT JOIN M_CUST mc ON mp.CUST_CODE = mc.CUST_CODE		
+			LEFT JOIN M_KIND mk ON mp.KIND_CODE = mk.KIND_CODE
+	</M_PROD007>
+	
+	<M_PROD008>
+		[SELECT]
+			mp.LCLS_CODE AS LCLS_CODE,
+			ml.LCLS_NAME,
+			mp.MCLS_CODE AS MCLS_CODE,
+			mm.MCLS_NAME,
+			mp.SCLS_CODE,		
+			ms.SCLS_NAME,	
+			mp.TYPE_CODE AS TYPE_CODE,
+			mt.[TYPE_NAME],
+			mp.MATER_CODE AS MATER_CODE,
+			mm2.MATER_TNAME AS MATER_NAME,
+			mp.PDMETER AS PDMETER,
+			mn.NAME_NAME AS PDMETER_NAME,
+			mp.STD_CODE AS STD_CODE,
+			ms2.STD_NAME,
+			mp.CUST_CODE,
+			mc.CUSTR_NAME AS CUSTR_NAME,
+			mk.KIND_CODE AS KIND_CODE,
+			mk.KIND_NAME AS KIND_NAME,		
+			mp.FREQTY,			
+			mp.SIZE_QTY,
+			mp.LEN_QTY,
+			mp.TCKN_QTY,
+			mp.HEIGHT_QTY,
+			mp.WIDTH_QTY,
+			mp.WTCAL_TYPE,	
+			mn1.NAME_NAME AS WTCAL_NAME,		
+			mp.WT_QTY,
+			mp.SUPP1_MNY,
+			mp.SUPP2_MNY,
+			mp.SUPP3_MNY,
+			mp.SUPP4_MNY,
+			mp.SUPP5_MNY,
+			mp.SUPP6_MNY,
+			mp.SUPP7_MNY,
+			mp.SUPP8_MNY,
+			mp.SUPP9_MNY,
+			mp.SUPP10_MNY,
+			mp.CUST1_MNY,
+			mp.CUST2_MNY,
+			mp.CUST3_MNY,
+			mp.CUST4_MNY,
+			mp.CUST5_MNY,
+			mp.CMPR_TYPE,
+			mn_cmpr.NAME_NAME AS CMPR_NAME,
+			mp.CLPF_QTY,
+			mp.OLD_CODE,			
+			mp.USE_FLG,
+			mp.ADD_USER,
+			mp.ADD_PC,
+			mp.ADD_DATE,
+			mp.ADD_TIME,
+			mp.LASTUP_USER,
+			mp.LASTUP_PC,
+			mp.LASTUP_DATE,
+			mp.LASTUP_TIME
+		FROM
+			M_PROD mp 
+			LEFT JOIN M_LCLS ml ON mp.LCLS_CODE = ml.LCLS_CODE 
+			LEFT JOIN M_MCLS mm ON mp.MCLS_CODE = mm.MCLS_CODE AND mm.LCLS_CODE = mp.LCLS_CODE			
+			LEFT JOIN M_SCLS ms ON mp.SCLS_CODE = ms.SCLS_CODE
+			LEFT JOIN M_TYPE mt ON mp.TYPE_CODE = mt.TYPE_CODE 
+			LEFT JOIN M_MATER mm2 ON mp.MATER_CODE = mm2.MATER_CODE 
+			LEFT JOIN M_NAME mn ON mp.PDMETER = mn.NAME_CODE AND mn.NAMECLS_CODE = 'PDMETER' 
+			LEFT JOIN M_STD ms2 ON mp.STD_CODE = ms2.STD_CODE
+			LEFT JOIN M_NAME mn1 ON mp.WTCAL_TYPE = mn1.NAME_CODE AND mn1.NAMECLS_CODE = 'WTCAL'
+			LEFT JOIN M_NAME mn_cmpr ON mp.CMPR_TYPE = mn_cmpr.NAME_CODE AND mn_cmpr.NAMECLS_CODE = 'CMPR'	
+			LEFT JOIN M_CUST mc ON mp.CUST_CODE = mc.CUST_CODE	
+			LEFT JOIN M_KIND mk ON mp.KIND_CODE = mk.KIND_CODE
+	</M_PROD008>	
+	<M_PROD012>
+		SELECT
+			LEN_QTY,
+			CLPF_QTY
+		FROM
+			M_PROD mp
+		WHERE
+			mp.LCLS_CODE = ? AND
+			mp.MCLS_CODE = ? AND
+			mp.TYPE_CODE = ? AND 
+			mp.MATER_CODE = ? AND
+			mp.PDMETER = ? AND
+			mp.STD_CODE = ?  			
+	</M_PROD012>	
+	
+	<M_PROD013>
+		UPDATE M_PROD
+		SET	
+			
+			SIZE_QTY = ?,
+			LEN_QTY = ?,
+			TCKN_QTY = ?,
+			HEIGHT_QTY = ?,
+			WIDTH_QTY = ?,
+			CLPF_QTY = ?,
+			WTCAL_TYPE = ?,
+			WT_QTY = ?,
+			SUPP1_MNY = ?,
+			SUPP2_MNY = ?,
+			SUPP3_MNY = ?,
+			SUPP4_MNY = ?,
+			SUPP5_MNY = ?,
+			SUPP6_MNY = ?,
+			SUPP7_MNY = ?,
+			SUPP8_MNY = ?,
+			SUPP9_MNY = ?,
+			SUPP10_MNY = ?,
+			CUST1_MNY = ?,
+			CUST2_MNY = ?,
+			CUST3_MNY = ?,
+			CUST4_MNY = ?,
+			CUST5_MNY = ?,
+			OLD_CODE = ?,
+			USE_FLG = ?,			
+			LASTUP_USER = ?,
+			LASTUP_PC = ?,
+			LASTUP_DATE = ?,
+			LASTUP_TIME = ?,
+			CMPR_TYPE = ?
+		WHERE
+			LCLS_CODE = ? AND
+			MCLS_CODE = ? AND
+			TYPE_CODE = ? AND 
+			MATER_CODE = ? AND
+			PDMETER = ? AND
+			STD_CODE = ? AND
+			CUST_CODE = ? AND
+			KIND_CODE = ? AND
+			FREQTY = ?					
+		
+	</M_PROD013>	
+	
+	<M_PROD014>		
+		SELECT
+			mp.LCLS_CODE,
+			mp.MCLS_CODE,
+			mp.SCLS_CODE,
+			mp.TYPE_CODE,
+			mp.PDMETER,
+			mp.MATER_CODE,
+			mp.STD_CODE,
+			mp.CUST_CODE,	
+			mp.KIND_CODE,		
+			mp.FREQTY,
+			mp.SIZE_QTY,
+			mp.LEN_QTY,
+			mp.TCKN_QTY,
+			mp.HEIGHT_QTY,
+			mp.WIDTH_QTY,
+			mp.CLPF_QTY,
+			mp.WTCAL_TYPE,
+			mp.WT_QTY,
+			mp.SUPP1_MNY,
+			mp.SUPP2_MNY,
+			mp.SUPP3_MNY,
+			mp.SUPP4_MNY,
+			mp.SUPP5_MNY,
+			mp.SUPP6_MNY,
+			mp.SUPP7_MNY,
+			mp.SUPP8_MNY,
+			mp.SUPP9_MNY,
+			mp.SUPP10_MNY,
+			mp.CUST1_MNY,
+			mp.CUST2_MNY,
+			mp.CUST3_MNY,
+			mp.CUST4_MNY,
+			mp.CUST5_MNY,
+			mp.CMPR_TYPE,
+			mp.OLD_CODE,
+			mp.USE_FLG,
+			mp.ADD_USER,
+			mp.ADD_PC,
+			mp.ADD_DATE,
+			mp.ADD_TIME,
+			mp.LASTUP_USER,
+			mp.LASTUP_PC,
+			mp.LASTUP_DATE,
+			mp.LASTUP_TIME
+		FROM
+			M_PROD mp
+		WHERE
+			mp.LCLS_CODE = ? AND
+			mp.MCLS_CODE = ? AND
+			mp.TYPE_CODE = ? AND 
+			mp.MATER_CODE = ? AND
+			mp.PDMETER = ? AND
+			mp.STD_CODE = ?	AND
+			mp.CUST_CODE = ? AND 
+			mp.KIND_CODE = ? AND
+			mp.FREQTY = ? AND 
+			mp.HEIGHT_QTY = ? AND
+			mp.WIDTH_QTY = ?	
+				
+	</M_PROD014>
+	
+	<M_PROD015>
+		UPDATE M_PROD
+		SET				
+			SIZE_QTY = ?,
+			LEN_QTY = ?,
+			TCKN_QTY = ?,		
+			CLPF_QTY = ?,
+			WTCAL_TYPE = ?,
+			WT_QTY = ?,
+			SUPP1_MNY = ?,
+			SUPP2_MNY = ?,
+			SUPP3_MNY = ?,
+			SUPP4_MNY = ?,
+			SUPP5_MNY = ?,
+			SUPP6_MNY = ?,
+			SUPP7_MNY = ?,
+			SUPP8_MNY = ?,
+			SUPP9_MNY = ?,
+			SUPP10_MNY = ?,
+			CUST1_MNY = ?,
+			CUST2_MNY = ?,
+			CUST3_MNY = ?,
+			CUST4_MNY = ?,
+			CUST5_MNY = ?,
+			OLD_CODE = ?,
+			USE_FLG = ?,			
+			LASTUP_USER = ?,
+			LASTUP_PC = ?,
+			LASTUP_DATE = ?,
+			LASTUP_TIME = ?,
+			CMPR_TYPE = ?
+		WHERE
+			LCLS_CODE = ? AND
+			MCLS_CODE = ? AND
+			TYPE_CODE = ? AND 
+			MATER_CODE = ? AND
+			PDMETER = ? AND
+			STD_CODE = ? AND
+			CUST_CODE = ? AND
+			KIND_CODE = ? AND
+			FREQTY = ?	AND 	
+			HEIGHT_QTY = ? AND
+			WIDTH_QTY = ? 			
+		
+	</M_PROD015>
+	
+	<M_PROD016>
+		DELETE FROM M_PROD
+		WHERE
+			LCLS_CODE = ? AND
+			MCLS_CODE = ? AND
+			TYPE_CODE = ? AND 
+			MATER_CODE = ? AND
+			PDMETER = ? AND
+			STD_CODE = ? AND
+			CUST_CODE = ? AND
+			KIND_CODE = ? AND
+			FREQTY = ?	AND
+			HEIGHT_QTY = ? AND
+			WIDTH_QTY = ? 				
+		
+	</M_PROD016>
+	
+	<M_PROD017>
+		UPDATE M_PROD
+		SET	
+			WT_QTY = ?,
+			SUPP1_MNY = ?,
+			SUPP2_MNY = ?,
+			SUPP3_MNY = ?,
+			SUPP4_MNY = ?,
+			SUPP5_MNY = ?,
+			SUPP6_MNY = ?,
+			SUPP7_MNY = ?,
+			SUPP8_MNY = ?,
+			SUPP9_MNY = ?,
+			SUPP10_MNY = ?,
+			CUST1_MNY = ?,
+			CUST2_MNY = ?,
+			CUST3_MNY = ?,
+			CUST4_MNY = ?,
+			CUST5_MNY = ?,				
+			LASTUP_USER = ?,
+			LASTUP_PC = ?,
+			LASTUP_DATE = ?,
+			LASTUP_TIME = ?			
+		WHERE
+			LCLS_CODE = ? AND
+			MCLS_CODE = ? AND
+			TYPE_CODE = ? AND 
+			MATER_CODE = ? AND
+			PDMETER = ? AND
+			STD_CODE = ? AND
+			CUST_CODE = ? AND
+			KIND_CODE = ? AND
+			FREQTY = ?	AND 	
+			HEIGHT_QTY = ? AND
+			WIDTH_QTY = ? 			
+		
+	</M_PROD017>
+	
+	
+</System>

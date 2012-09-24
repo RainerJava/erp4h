@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<System>
+	<!-- begin: getAll -->
+	<M_CTL001>
+	  SELECT COALESCE(M.USERID, '') AS USERID
+		   , COALESCE(M.C_KEY, '') AS C_KEY
+		   , COALESCE(M.C_NAME, '') AS C_NAME
+		   , COALESCE(M.C_DATA, '') AS C_DATA
+		   , COALESCE(M.C_HELP, '') AS C_HELP
+		   , COALESCE(M.C_BM, '') AS C_BM
+		   , COALESCE(M.C_DECBM, '') AS C_DECBM
+		   , COALESCE(M.C_ATTR, '') AS C_ATTR
+		   , COALESCE(M.MTN_FLG, '') AS MTN_FLG
+		   , COALESCE(M.CNT_FLG, '') AS CNT_FLG
+		   , COALESCE(M.UPD_FLG, '') AS UPD_FLG
+		   , COALESCE(M.ADD_USER, '') AS ADD_USER
+		   , COALESCE(M.ADD_PC, '') AS ADD_PC
+		   , COALESCE(M.ADD_DATE, 0) AS ADD_DATE
+		   , COALESCE(M.ADD_TIME, 0) AS ADD_TIME
+		   , COALESCE(M.LASTUP_USER, '') AS LASTUP_USER
+		   , COALESCE(M.LASTUP_PC, '') AS LASTUP_PC
+		   , COALESCE(M.LASTUP_DATE, 0) AS LASTUP_DATE
+		   , COALESCE(M.LASTUP_TIME, 0) AS LASTUP_TIME
+		   , COALESCE(E_ADD_USER.EMP_NAME,'') AS ADD_USER_VIEW
+		   , COALESCE(E_LASTUP_USER.EMP_NAME,'') AS LASTUP_USER_VIEW
+		FROM M_CTL M 
+   LEFT JOIN M_EMP E_ADD_USER ON M.ADD_USER = E_ADD_USER.EMP_USER
+   LEFT JOIN M_EMP E_LASTUP_USER ON M.LASTUP_USER = E_LASTUP_USER .EMP_USER
+	</M_CTL001>
+	<!-- end: getAll -->
+
+	<!-- begin: getByKey -->
+	<M_CTL002>
+	  SELECT COALESCE(M.USERID, '') AS USERID
+		   , COALESCE(M.C_KEY, '') AS C_KEY
+		   , COALESCE(M.C_NAME, '') AS C_NAME
+		   , COALESCE(M.C_DATA, '') AS C_DATA
+		   , COALESCE(M.C_HELP, '') AS C_HELP
+		   , COALESCE(M.C_BM, '') AS C_BM
+		   , COALESCE(M.C_DECBM, '') AS C_DECBM
+		   , COALESCE(M.C_ATTR, '') AS C_ATTR
+		   , COALESCE(M.MTN_FLG, '') AS MTN_FLG
+		   , COALESCE(M.CNT_FLG, '') AS CNT_FLG
+		   , COALESCE(M.UPD_FLG, '') AS UPD_FLG
+		   , COALESCE(M.ADD_USER, '') AS ADD_USER
+		   , COALESCE(M.ADD_PC, '') AS ADD_PC
+		   , COALESCE(M.ADD_DATE, 0) AS ADD_DATE
+		   , COALESCE(M.ADD_TIME, 0) AS ADD_TIME
+		   , COALESCE(M.LASTUP_USER, '') AS LASTUP_USER
+		   , COALESCE(M.LASTUP_PC, '') AS LASTUP_PC
+		   , COALESCE(M.LASTUP_DATE, 0) AS LASTUP_DATE
+		   , COALESCE(M.LASTUP_TIME, 0) AS LASTUP_TIME
+		   , COALESCE(E_ADD_USER.EMP_NAME,'') AS ADD_USER_VIEW
+		   , COALESCE(E_LASTUP_USER.EMP_NAME,'') AS LASTUP_USER_VIEW
+		FROM M_CTL M 
+   LEFT JOIN M_EMP E_ADD_USER ON M.ADD_USER = E_ADD_USER.EMP_USER
+   LEFT JOIN M_EMP E_LASTUP_USER ON M.LASTUP_USER = E_LASTUP_USER .EMP_USER
+	   WHERE M.USERID = ?
+	     AND M.C_KEY = ?
+	</M_CTL002>
+	<!-- end: getByKey -->
+
+	<!-- begin: insertVo -->
+	<M_CTL003>
+ INSERT INTO M_CTL (
+			 USERID
+		   , C_KEY
+		   , C_NAME
+		   , C_DATA
+		   , C_HELP
+		   , C_BM
+		   , C_DECBM
+		   , C_ATTR
+		   , MTN_FLG
+		   , CNT_FLG
+		   , UPD_FLG
+		   , ADD_USER
+		   , ADD_PC
+		   , ADD_DATE
+		   , ADD_TIME
+		   , LASTUP_USER
+		   , LASTUP_PC
+		   , LASTUP_DATE
+		   , LASTUP_TIME
+		   )
+	  VALUES (
+			 ?
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		   )
+	</M_CTL003>
+	<!-- end: insertVo -->
+
+	<!-- begin: updateVo -->
+	<M_CTL004>
+	  UPDATE M_CTL 
+		 SET USERID = ?
+		   , C_KEY = ?
+		   , C_NAME = ?
+		   , C_DATA = ?
+		   , C_HELP = ?
+		   , C_BM = ?
+		   , C_DECBM = ?
+		   , C_ATTR = ?
+		   , MTN_FLG = ?
+		   , CNT_FLG = ?
+		   , UPD_FLG = ?
+		   , LASTUP_USER = ?
+		   , LASTUP_PC = ?
+		   , LASTUP_DATE = ?
+		   , LASTUP_TIME = ?
+	   WHERE USERID = ?
+	     AND C_KEY = ?
+	</M_CTL004>
+	<!-- end: updateVo -->
+	
+	<!-- begin: deleteVo -->
+	<M_CTL005>
+	  DELETE FROM M_CTL 
+	   WHERE USERID = ?
+	     AND C_KEY = ?
+	</M_CTL005>
+	<!-- end: deleteVo -->
+
+	<!-- begin: getVoCount -->
+	<M_CTL006>
+	  SELECT COUNT(*) 
+	    FROM M_CTL M 
+	</M_CTL006>
+	<!-- end: getVoCount -->
+
+	<!-- begin: getLastCode -->
+	<M_CTL007>		
+	    SELECT MAX(USERID + '-' + C_KEY) AS MAX_CODE
+	      FROM M_CTL M
+	</M_CTL007>
+	<!-- end: getLastCode -->
+	
+	<!-- begin: usingForSearch -->
+	<M_CTL008>
+	  SELECT COALESCE(M.USERID, '') AS USERID
+		   , COALESCE(M.C_KEY, '') AS C_KEY
+		   , COALESCE(M.C_NAME, '') AS C_NAME
+		   , COALESCE(M.C_DATA, '') AS C_DATA
+		   , COALESCE(M.C_HELP, '') AS C_HELP
+		   , COALESCE(M.C_BM, '') AS C_BM
+		   , COALESCE(M.C_DECBM, '') AS C_DECBM
+		   , COALESCE(M.C_ATTR, '') AS C_ATTR
+		   , COALESCE(M.MTN_FLG, '') AS MTN_FLG
+		   , COALESCE(M.CNT_FLG, '') AS CNT_FLG
+		   , COALESCE(M.UPD_FLG, '') AS UPD_FLG
+		   , COALESCE(M.ADD_USER, '') AS ADD_USER
+		   , COALESCE(M.ADD_PC, '') AS ADD_PC
+		   , COALESCE(M.ADD_DATE, 0) AS ADD_DATE
+		   , COALESCE(M.ADD_TIME, 0) AS ADD_TIME
+		   , COALESCE(M.LASTUP_USER, '') AS LASTUP_USER
+		   , COALESCE(M.LASTUP_PC, '') AS LASTUP_PC
+		   , COALESCE(M.LASTUP_DATE, 0) AS LASTUP_DATE
+		   , COALESCE(M.LASTUP_TIME, 0) AS LASTUP_TIME
+		   , COALESCE(E_ADD_USER.EMP_NAME,'') AS ADD_USER_VIEW
+		   , COALESCE(E_LASTUP_USER.EMP_NAME,'') AS LASTUP_USER_VIEW
+		FROM M_CTL M 
+   LEFT JOIN M_EMP E_ADD_USER ON M.ADD_USER = E_ADD_USER.EMP_USER
+   LEFT JOIN M_EMP E_LASTUP_USER ON M.LASTUP_USER = E_LASTUP_USER .EMP_USER
+	</M_CTL008>
+	<!-- end: usingForSearch -->
+
+	<!-- begin: exportExcel -->
+	<M_CTL009>
+	  SELECT COALESCE(M.USERID, '') AS USERID
+		   , COALESCE(M.C_KEY, '') AS C_KEY
+		   , COALESCE(M.C_NAME, '') AS C_NAME
+		   , COALESCE(M.C_DATA, '') AS C_DATA
+		   , COALESCE(M.C_HELP, '') AS C_HELP
+		   , COALESCE(M.C_BM, '') AS C_BM
+		   , COALESCE(M.C_DECBM, '') AS C_DECBM
+		   , COALESCE(M.C_ATTR, '') AS C_ATTR
+		   , COALESCE(M.MTN_FLG, '') AS MTN_FLG
+		   , COALESCE(M.CNT_FLG, '') AS CNT_FLG
+		   , COALESCE(M.UPD_FLG, '') AS UPD_FLG
+		   , COALESCE(M.ADD_USER, '') AS ADD_USER
+		   , COALESCE(M.ADD_PC, '') AS ADD_PC
+		   , COALESCE(M.ADD_DATE, 0) AS ADD_DATE
+		   , COALESCE(M.ADD_TIME, 0) AS ADD_TIME
+		   , COALESCE(M.LASTUP_USER, '') AS LASTUP_USER
+		   , COALESCE(M.LASTUP_PC, '') AS LASTUP_PC
+		   , COALESCE(M.LASTUP_DATE, 0) AS LASTUP_DATE
+		   , COALESCE(M.LASTUP_TIME, 0) AS LASTUP_TIME
+		   , COALESCE(E_ADD_USER.EMP_NAME,'') AS ADD_USER_VIEW
+		   , COALESCE(E_LASTUP_USER.EMP_NAME,'') AS LASTUP_USER_VIEW
+		FROM M_CTL M 
+   LEFT JOIN M_EMP E_ADD_USER ON M.ADD_USER = E_ADD_USER.EMP_USER
+   LEFT JOIN M_EMP E_LASTUP_USER ON M.LASTUP_USER = E_LASTUP_USER .EMP_USER
+	</M_CTL009>
+	<!-- end: exportExcel -->
+
+	<!-- begin: exportExcelHaveDescription -->
+	<M_CTL010>
+	  SELECT COALESCE(M.USERID, '') AS USERID
+		   , COALESCE(M.C_KEY, '') AS KEY
+		   , COALESCE(M.C_NAME, '') AS NAME
+		   , COALESCE(M.C_DATA, '') AS DATA
+		   , COALESCE(M.C_HELP, '') AS HELP
+		   , COALESCE(M.C_BM, '') AS 入力桁数
+		   , COALESCE(M.C_DECBM, '') AS 入力桁数(小数桁)
+		   , COALESCE(M.C_ATTR, '') AS 入力属性地
+		   , COALESCE(M.MTN_FLG, '') AS メンテフラグ
+		   , COALESCE(M.CNT_FLG, '') AS コントロールフラグ
+		   , COALESCE(M.UPD_FLG, '') AS 変更可否フラグ
+		   , COALESCE(M.ADD_USER, '') AS 登録ユーザー名
+		   , COALESCE(M.ADD_PC, '') AS 登録ＰＣ名
+		   , COALESCE(M.ADD_DATE, 0) AS 登録日付
+		   , COALESCE(M.ADD_TIME, 0) AS 登録時刻
+		   , COALESCE(M.LASTUP_USER, '') AS 最終更新ユーザー名
+		   , COALESCE(M.LASTUP_PC, '') AS 最終更新ＰＣ名
+		   , COALESCE(M.LASTUP_DATE, 0) AS 最終更新日付
+		   , COALESCE(M.LASTUP_TIME, 0) AS 最終更新時刻
+		   , COALESCE(E_ADD_USER.EMP_NAME,'') AS ADD_USER_VIEW
+		   , COALESCE(E_LASTUP_USER.EMP_NAME,'') AS LASTUP_USER_VIEW
+		FROM M_CTL M 
+   LEFT JOIN M_EMP E_ADD_USER ON M.ADD_USER = E_ADD_USER.EMP_USER
+   LEFT JOIN M_EMP E_LASTUP_USER ON M.LASTUP_USER = E_LASTUP_USER .EMP_USER
+	</M_CTL010>
+	<!-- end: exportExcelHaveDescription -->
+
+	<!-- begin: fillDataFromUseridToUserid-->
+	<M_CTL011>
+ INSERT INTO M_CTL (
+			 USERID
+		   , C_KEY
+		   , C_NAME
+		   , C_DATA
+		   , C_HELP
+		   , C_BM
+		   , C_DECBM
+		   , C_ATTR
+		   , MTN_FLG
+		   , CNT_FLG
+		   , UPD_FLG
+		   , ADD_USER
+		   , ADD_PC
+		   , ADD_DATE
+		   , ADD_TIME
+		   , LASTUP_USER
+		   , LASTUP_PC
+		   , LASTUP_DATE
+		   , LASTUP_TIME
+		   )
+	  SELECT ?
+		   , C_KEY
+		   , C_NAME
+		   , C_DATA
+		   , C_HELP
+		   , C_BM
+		   , C_DECBM
+		   , C_ATTR
+		   , MTN_FLG
+		   , CNT_FLG
+		   , UPD_FLG
+		   , ADD_USER
+		   , ADD_PC
+		   , ADD_DATE
+		   , ADD_TIME
+		   , LASTUP_USER
+		   , LASTUP_PC
+		   , LASTUP_DATE
+		   , LASTUP_TIME
+		FROM M_CTL
+	   WHERE USERID = ?
+		 AND C_KEY NOT IN　(
+			　　　　　　SELECT C_KEY from M_CTL
+			　　　　　　　WHERE USERID = ?
+		　　)
+		　AND MTN_FLG = ?
+		　AND CNT_FLG = 1
+	</M_CTL011>
+	<!-- end: fillDataFromUseridToUserid -->
+	
+	<!-- begin: deleteDataByUserid-->
+	<M_CTL012>
+	  DELETE FROM M_CTL
+	   WHERE USERID = ?
+		 AND MTN_FLG = ?
+	</M_CTL012>
+	<!-- end: deleteDataByUserid -->
+</System>

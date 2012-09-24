@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">com.ibm.db2.jcc.DB2Driver</property>		
+		<property name="hibernate.connection.url">jdbc:db2://dragon:50000/FASDB</property>
+		<property name="hibernate.connection.username">db2admin</property>
+		<property name="hibernate.connection.password">db2admin</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.DB2Dialect</property>
+          <!-- Classes -->
+
+		<mapping class="dao.model.MMenugrp" />
+		<mapping class="dao.model.MEmp" />
+		<mapping class="dao.model.MName"/>
+		<mapping class="dao.model.MNamecls"/>
+		<mapping class="dao.model.MNameId"/>
+		
+
+	</session-factory>
+</hibernate-configuration>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="shift_jis"?>
+<System>
+  <!-- ﾃﾞｰﾀﾍﾞｰｽ接続情報 -->
+  <DbConnect>
+    <!-- AS/400 or SQLServer or ODBC -->
+    <DbSelect>SQLServer</DbSelect>
+    <ConnectString>Workstation Id=X3550-2\SQLServer2005;Data Source=X3550-2\SQLServer2005;Initial Catalog=HY_DB;User Id=sa;Password=sol;packet size=4096;persist security info=True;Connect Timeout=120</ConnectString>
+
+	<!-- JAVA用ﾃﾞｰﾀﾍﾞｰｽ接続 -->
+	<JavaConnectURL>jdbc:sqlserver://192.168.100.65;instanceName=SQLSERVER2005;database=HY_DB</JavaConnectURL>
+
+	<!-- 帳票機能テスト用 -->
+    <DbSelectTest>AS/400</DbSelectTest>
+    <ConnectStringTest>UserID=TP; Password=TP; DataSource=AS400; DefaultCollection=TPD</ConnectStringTest>
+	<!-- 帳票機能テスト用 -->
+
+<!-- 	<SQLConnection>workstation id=X3550-2\SQLServer2005;packet size=4096;user id=sa;data source=X3550-2\SQLServer2005;persist security info=True;initial catalog=CUSTOMER;password=sol;Connect Timeout=120</SQLConnection> -->
+<!--    <Server>X3550-2\SQLServer2005</Server>		-->
+<!--  Data Source=localhost; -->
+
+    <!-- ワークステーションID -->
+    <Server>X3550-2\SQLServer2005</Server>
+    <!-- 端末名 -->
+    <DataSource>X3550-2\SQLServer2005</DataSource>
+    <!-- データベース名 -->
+    <Database>HY_DB</Database>
+    <!-- ユーザー -->
+    <User>sa</User>
+    <!-- パスワード -->
+    <Pass>sol</Pass>
+
+    <!-- SQLコマンドタイムアウト 単位:秒 (デフォルト=120) -->
+    <TimeOut>120</TimeOut>
+    <SecurityInfo>True</SecurityInfo>
+    <Integrated>SSPI</Integrated>
+
+  </DbConnect>
+  <!-- Delphi/400サインオン情報 -->
+  <DelphiSignOn>
+    <Alias>AS400</Alias>
+    <User>TP</User>
+    <Pass>TP</Pass>
+  </DelphiSignOn>
+  <!-- パス情報 -->
+  <Path>
+    <ErrLog>C:\HY\error.log</ErrLog>
+    <ErrReportLog>C:\HY\errorReport.log</ErrReportLog>
+	<OutExcel>C:\HY\Excel出力\</OutExcel>
+    <HelpFile>..\HELP\HaisyaMNHelp.chm</HelpFile>
+  </Path>
+  <!-- メッセージ情報 -->
+  <Message>
+    <C0001>データベース接続時にエラーが発生しました。</C0001>
+    <C0002>データベース切断時にエラーが発生しました。</C0002>
+    <C0003>データベース更新時にエラーが発生しました。</C0003>
+    <C0004>データベース読込時にエラーが発生しました。</C0004>
+    <C0005>他の端末で処理中です。</C0005>
+  </Message>
+  <!-- 帳票パス設定 -->
+  <PrtOut>
+    <PATH_PRT>C:\HY\実行環境\レイアウト\</PATH_PRT>
+    <PATH_PRTWK>C:\HY\WkSpl\</PATH_PRTWK>
+    <PATH_PRTCOPY>C:\HY\実行環境\レイアウト\</PATH_PRTCOPY>
+  </PrtOut>
+  <!-- HT端末情報 -->
+  <HT>
+    <LogFilePath>H:\DATAR</LogFilePath>
+    <DriveId>3</DriveId>
+  </HT>
+</System>

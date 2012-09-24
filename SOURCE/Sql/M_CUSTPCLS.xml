@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<System>
+	<!-- select custpcls by custcode, pclsmncode -->
+	<M_CUSTPCLS001>
+		SELECT
+			mc.CUST_CODE,
+			mc.PCLSNM_CODE,
+			mc.PROC_TYPE,
+			n_proc.NAME_NAME AS PROC_NAME,
+			mc.ADD_USER,
+			mc.ADD_PC,
+			mc.ADD_DATE,
+			mc.ADD_TIME,
+			mc.LASTUP_USER,
+			mc.LASTUP_PC,
+			mc.LASTUP_DATE,
+			mc.LASTUP_TIME
+		FROM
+			M_CUSTPCLS mc INNER JOIN
+			M_NAME n_proc ON mc.PROC_TYPE = n_proc.NAME_CODE AND n_proc.NAMECLS_CODE = 'PROC'			
+		WHERE 
+			mc.CUST_CODE = ? AND
+			mc.PCLSNM_CODE = ?		
+	</M_CUSTPCLS001>
+	
+	<!-- insert vo -->
+	<M_CUSTPCLS002>
+		INSERT INTO M_CUSTPCLS
+		(
+			CUST_CODE,
+			PCLSNM_CODE,
+			PROC_TYPE,
+			ADD_USER,
+			ADD_PC,
+			ADD_DATE,
+			ADD_TIME,
+			LASTUP_USER,
+			LASTUP_PC,
+			LASTUP_DATE,
+			LASTUP_TIME
+		)
+		VALUES
+		(
+			?,?,?,?,?,?,?,?,?,?,?
+		)  
+	</M_CUSTPCLS002>
+	
+	<!-- delete vo -->
+	<M_CUSTPCLS003>
+		DELETE FROM M_CUSTPCLS
+		WHERE
+			CUST_CODE = ? AND
+			PCLSNM_CODE = ? AND
+			PROC_TYPE = ?
+	</M_CUSTPCLS003>
+
+	<!-- delete by M_CUSTPCLSNM -->
+	<M_CUSTPCLS004>
+		DELETE FROM M_CUSTPCLS
+		WHERE
+			CUST_CODE = ? AND
+			PCLSNM_CODE = ? 
+	</M_CUSTPCLS004>
+	
+</System>

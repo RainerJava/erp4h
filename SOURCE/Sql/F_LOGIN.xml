@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<System>
+	<!-- P_Menu[配車管理メニュー] -->
+	<F_LOGIN001>
+		SELECT
+			F.USERID,
+			F.PWD,
+			F.LOGIN_DATE,
+			F.LOGIN_TIME
+		FROM
+			F_LOGIN F
+		WHERE
+			F.PCID = ?
+	</F_LOGIN001>
+	
+	<!-- P_Menu[配車管理メニュー] -->
+	<F_LOGIN002>
+		INSERT INTO F_LOGIN
+		(
+			PCID,
+			USERID,
+			PWD,
+			LOGIN_DATE,
+			LOGIN_TIME,
+			LOGINL_DATE,
+			LOGINL_TIME
+		)
+		VALUES
+		(?,?,?,?,?,?,?)
+	</F_LOGIN002>
+	<!-- P_Menu[配車管理メニュー] -->
+	<F_LOGIN003>
+		UPDATE
+			F_LOGIN
+		SET
+			USERID = ?,
+			PWD = ?,
+			LOGIN_DATE = ?,
+			LOGIN_TIME = ?,
+			LOGINL_DATE = ?,
+			LOGINL_TIME = ?
+		WHERE
+			PCID = ?
+	</F_LOGIN003>
+</System>

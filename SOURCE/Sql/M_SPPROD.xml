@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<System>
+	<!-- select list -->
+	<M_SPPROD001>
+		SELECT
+			mm.LCLS_CODE,
+			ml.LCLS_NAME,
+			mm.MCLS_CODE,
+			mm.MCLS_NAME,
+			ms.SCLS_CODE,
+			ms.SUPP1_CODE,
+			ms2.SUPPR_NAME AS SUPP1_NAME,
+			ms.SUPP2_CODE,
+			ms3.SUPPR_NAME AS SUPP2_NAME,
+			ms.SUPP3_CODE,
+			ms4.SUPPR_NAME AS SUPP3_NAME,
+			ms.SUPP4_CODE,
+			ms5.SUPPR_NAME AS SUPP4_NAME,
+			ms.SUPP5_CODE,
+			ms6.SUPPR_NAME AS SUPP5_NAME,
+			ms.USE_FLG,
+			ms.ADD_USER,
+			ms.ADD_PC,
+			ms.ADD_DATE,
+			ms.ADD_TIME,
+			ms.LASTUP_USER,
+			ms.LASTUP_PC,
+			ms.LASTUP_DATE,
+			ms.LASTUP_TIME
+		FROM
+			M_MCLS mm LEFT JOIN
+			M_LCLS ml ON mm.LCLS_CODE = ml.LCLS_CODE LEFT JOIN
+			M_SPPROD ms ON mm.MCLS_CODE = ms.MCLS_CODE AND mm.LCLS_CODE = ms.LCLS_CODE LEFT JOIN
+			M_SUPP ms2 ON ms.SUPP1_CODE = ms2.SUPP_CODE LEFT JOIN
+			M_SUPP ms3 ON ms.SUPP2_CODE = ms3.SUPP_CODE LEFT JOIN
+			M_SUPP ms4 ON ms.SUPP3_CODE = ms4.SUPP_CODE LEFT JOIN
+			M_SUPP ms5 ON ms.SUPP4_CODE = ms5.SUPP_CODE LEFT JOIN
+			M_SUPP ms6 ON ms.SUPP5_CODE = ms6.SUPP_CODE
+		ORDER BY
+			ml.LCLS_CODE,mm.MCLS_CODE
+	</M_SPPROD001>
+	
+	<!-- delete all table -->
+	<M_SPPROD002>
+		DELETE FROM M_SPPROD
+	</M_SPPROD002>
+	
+	<!-- insert spprod -->
+	<M_SPPROD003>
+		INSERT INTO M_SPPROD
+		(
+			LCLS_CODE,
+			MCLS_CODE,
+			SCLS_CODE,
+			SUPP1_CODE,
+			SUPP2_CODE,
+			SUPP3_CODE,
+			SUPP4_CODE,
+			SUPP5_CODE,
+			USE_FLG,
+			ADD_USER,
+			ADD_PC,
+			ADD_DATE,
+			ADD_TIME,
+			LASTUP_USER,
+			LASTUP_PC,
+			LASTUP_DATE,
+			LASTUP_TIME
+		)
+		VALUES
+		(
+			?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+		)
+	</M_SPPROD003>
+	
+	<!-- export excel -->
+	<M_SPPROD004>
+		SELECT
+			ms.LCLS_CODE AS '$LCLS_CODEコード',
+			ml.LCLS_NAME AS '$LCLS_CODE名',
+			ms.MCLS_CODE AS '$MCLS_CODEコード',
+			mm.MCLS_NAME AS '$MCLS_CODE名',
+			ms.SCLS_CODE AS '小分類コード',
+			ms.SUPP1_CODE AS '仕入先１コード',
+			ms2.SUPPR_NAME AS '仕入先１名',
+			ms.SUPP2_CODE  AS '仕入先２コード',
+			ms3.SUPPR_NAME AS '仕入先２名',
+			ms.SUPP3_CODE AS '仕入先３コード',
+			ms4.SUPPR_NAME AS '仕入先３名',
+			ms.SUPP4_CODE AS '仕入先４コード',
+			ms5.SUPPR_NAME AS '仕入先４名',
+			ms.SUPP5_CODE AS '仕入先５コード',
+			ms6.SUPPR_NAME AS '仕入先５名',
+			ms.USE_FLG AS '使用可否フラグ',
+			(
+				SELECT NAME_NAME FROM M_NAME
+				WHERE NAMECLS_CODE = 'USEFLG'
+				AND NAME_CODE = ms.USE_FLG
+			)
+		 	AS '使用可否フラグ名',
+			ms.ADD_USER AS '登録ユーザー名',
+			ms.ADD_PC AS '登録ＰＣ名',
+			ms.ADD_DATE AS '登録日付',
+			ms.ADD_TIME AS '登録時刻',
+			ms.LASTUP_USER AS '最終更新ユーザー名',
+			ms.LASTUP_PC AS '最終更新ＰＣ名',
+			ms.LASTUP_DATE AS '最終更新日付',
+			ms.LASTUP_TIME AS '最終更新時刻' 
+		FROM
+			M_SPPROD ms LEFT JOIN
+			M_LCLS ml ON ms.LCLS_CODE = ml.LCLS_CODE LEFT JOIN
+			M_MCLS mm ON ms.MCLS_CODE = mm.MCLS_CODE AND ms.LCLS_CODE = mm.LCLS_CODE LEFT JOIN
+			M_SUPP ms2 ON ms.SUPP1_CODE = ms2.SUPP_CODE LEFT JOIN
+			M_SUPP ms3 ON ms.SUPP2_CODE = ms3.SUPP_CODE LEFT JOIN
+			M_SUPP ms4 ON ms.SUPP3_CODE = ms4.SUPP_CODE LEFT JOIN
+			M_SUPP ms5 ON ms.SUPP4_CODE = ms5.SUPP_CODE LEFT JOIN
+			M_SUPP ms6 ON ms.SUPP5_CODE = ms6.SUPP_CODE
+		ORDER BY
+			ms.LCLS_CODE, ms.MCLS_CODE		
+	</M_SPPROD004>
+</System>

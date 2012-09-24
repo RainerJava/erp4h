@@ -1,0 +1,419 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<System>
+	<!-- P_frmMasterCustr[取引先ﾏｽﾀ] -->
+	<M_CUSTR001>
+		SELECT
+			M.CUSTR_CODE,
+			RTRIM(M.CUST1_NAME) || ' ' || RTRIM(M.CUST2_NAME) AS CUST_NAME,
+			M.CUST_FLG,
+			M.SHIP_FLG,
+			M.SUPP_FLG,
+			M.CUST1_NAME,
+			M.CUST2_NAME,
+			M.CUST_RNAME,
+			M.CUST_KANA,
+			M.CUST_TNAME,
+            M.MAILNO,
+			M.ADRESS1,
+			M.ADRESS2,
+			M.ADRESS3,
+			M.TELNO,
+			M.FAXNO,
+			M.MAILADR,
+			M.URLADRS,
+			M.CUSTC_NAME,
+            M.USE_FLG,
+			M.OLD_CODE,
+			M.ADD_USER,
+			M.ADD_DATE,
+			M.LASTUP_USER,
+			M.LASTUP_DATE
+		FROM
+			M_CUSTR AS M
+		$WHERE
+	</M_CUSTR001>
+	<!-- P_frmMasterCustr[取引先ﾏｽﾀ] -->
+	<M_CUSTR002>
+		SELECT
+			M.CUSTR_CODE,
+			M.CUST1_NAME,
+			M.USE_FLG
+		FROM
+			M_CUSTR AS M
+		$WHERE
+	</M_CUSTR002>
+	<!-- P_frmMasterCustr[取引先ﾏｽﾀ] -->
+	<M_CUSTR003>
+		INSERT INTO M_CUSTR(
+			CUSTR_CODE,
+			CUST_KANA,
+			CUST1_NAME,
+			CUST2_NAME,
+			CUST_RNAME,
+			CUST_TNAME,
+			MAILNO,
+			ADRESS1,
+			ADRESS2,
+			ADRESS3,
+			TELNO,
+			FAXNO,
+			MAILADR,
+			URLADRS,
+			CUSTC_NAME,
+			OLD_CODE,
+			SEARCHIDX,
+			USE_FLG,
+			ADD_USER,
+			ADD_PC,
+			ADD_DATE,
+			ADD_TIME,
+			LASTUP_USER,
+			LASTUP_PC,
+			LASTUP_DATE,
+			LASTUP_TIME
+			)
+			VALUES
+			 (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+	</M_CUSTR003>
+	<!-- P_frmMasterCustr[取引先ﾏｽﾀ] -->
+	<M_CUSTR004>
+		UPDATE
+		    M_CUSTR
+		SET
+		    CUST1_NAME = ?,
+		    CUST2_NAME = ?,
+			CUST_RNAME = ?,
+		    CUST_KANA = ?,
+			CUST_TNAME = ?,
+			MAILNO = ?,
+			ADRESS1 = ?,
+			ADRESS2 = ?,
+			ADRESS3 = ?,
+			TELNO = ?,
+			FAXNO = ?,
+			MAILADR = ?,
+			URLADRS = ?,
+			CUSTC_NAME = ?,
+			OLD_CODE = ?,
+			SEARCHIDX = ?,
+		    USE_FLG = ?,
+		    LASTUP_USER = ?,
+			LASTUP_PC = ?,
+		    LASTUP_DATE = ?,
+		    LASTUP_TIME = ?
+		WHERE
+		    CUSTR_CODE = ?
+	</M_CUSTR004>
+	<!-- P_frmMasterCustr[取引先ﾏｽﾀ] -->
+	<M_CUSTR005>
+		DELETE FROM
+		    M_CUSTR
+		WHERE
+		    CUSTR_CODE = ?
+	</M_CUSTR005>
+	<!-- P_frmMasterCustr[取引先ﾏｽﾀ] -->
+	<M_CUSTR006>
+		SELECT
+		    M.CUSTR_CODE
+		FROM
+		    M_CUSTR AS M
+		ORDER BY M.CUSTR_CODE DESC
+		FETCH FIRST 1 ROWS ONLY
+	</M_CUSTR006>
+	<!-- 検索画面用 -->
+	<M_CUSTR007>
+		SELECT
+    		M.CUSTR_CODE,
+    		M.CUST_RNAME,
+    		M.USE_FLG ,
+    		M.CUST_KANA
+		FROM
+    		M_CUSTR AS M
+		$WHERE
+	</M_CUSTR007>
+	<!-- 007に移動したので使用してません -->
+	<M_CUSTR008>
+		SELECT
+    		M.CUSTR_CODE,
+    		M.CUST_RNAME,
+    		M.USE_FLG ,
+    		M.CUST_KANA
+		FROM
+    		M_CUSTR AS M
+		$WHERE
+	</M_CUSTR008>
+	<M_CUSTR009>
+		SELECT
+		    COALESCE(RTRIM(M_CUSTR.CUST1_NAME),'') || ' ' || COALESCE(RTRIM(M_CUSTR.CUST2_NAME),'')
+		FROM
+		    M_CUST AS M
+		LEFT JOIN M_CUSTR ON M.CUST_CODE = M_CUSTR.CUSTR_CODE
+		$WHERE
+	</M_CUSTR009>
+
+	<M_CUSTR010>
+		SELECT
+		    M.CUSTR_CODE
+		FROM
+		    M_CUSTR M
+		$WHERE
+	</M_CUSTR010>
+	<!-- frmSearchPaymentCareerCondition.vb [支払履歴照会] -->
+    <M_CUSTR011>
+		SELECT
+			RTRIM(M.CUSTR_CODE) AS CUSTR_CODE,
+			COALESCE(RTRIM(M.CUST1_NAME),'') || ' ' || COALESCE(RTRIM(M.CUST2_NAME),'') AS CUSTR_NAME,
+			RTRIM(M.CUST_KANA) AS CUST_KANA,
+			RTRIM(M.CUST_RNAME) AS CUST_RNAME
+		FROM
+			M_CUSTR AS M
+		$WHERE
+	</M_CUSTR011>
+	<M_CUSTR012>
+      	SELECT
+	   		ISNULL(M_CUSTR.CUST1_NAME,'')
+       	FROM M_CUSTR
+		$WHERE
+	</M_CUSTR012>
+	
+	
+	<M_CUSTR500>
+		SELECT
+			M.CUSTR_CODE,
+			RTRIM(M.CUST1_NAME) + ' ' + RTRIM(M.CUST2_NAME) AS CUST_NAME,
+			M.CUST_FLG,
+			M.SHIP_FLG,
+			M.SUPP_FLG,
+			M.CUST1_NAME,
+			M.CUST2_NAME,
+			M.CUST_RNAME,
+			M.CUST_KANA,
+			M.CUST_TNAME,
+            M.MAILNO,
+			M.ADRESS1,
+			M.ADRESS2,
+			M.ADRESS3,
+			M.TELNO,
+			M.FAXNO,
+			M.MAILADR,
+			M.URLADRS,
+			M.CUSTC_NAME,
+            M.USE_FLG,
+			M.OLD_CODE,
+			M.ADD_USER,
+			M.ADD_DATE,
+			M.LASTUP_USER,
+			M.LASTUP_DATE
+		FROM
+			M_CUSTR AS M
+		WHERE
+			M.CUSTR_CODE = ?
+	</M_CUSTR500>
+	
+	<!-- 取引先登録画面 -->
+	<M_CUSTR501>
+		SELECT
+			M.CUSTR_CODE,
+			RTRIM(M.CUST1_NAME) + ' ' + RTRIM(M.CUST2_NAME) AS CUST_NAME,
+			M.CUST_FLG,
+			M.SHIP_FLG,
+			M.SUPP_FLG,
+			M.CUST1_NAME,
+			M.CUST2_NAME,
+			M.CUST_RNAME,
+			M.CUST_KANA,
+			M.CUST_TNAME,
+            M.MAILNO,
+			M.ADRESS1,
+			M.ADRESS2,
+			M.ADRESS3,
+			M.TELNO,
+			M.FAXNO,
+			M.MAILADR,
+			M.URLADRS,
+			M.CUSTC_NAME,
+            M.USE_FLG,
+			M.OLD_CODE,
+			M.ADD_USER,
+			M.ADD_PC,
+			M.ADD_DATE,
+			M.ADD_TIME,
+			M.LASTUP_USER,
+			M.LASTUP_PC,
+			M.LASTUP_DATE,
+			M.LASTUP_TIME,
+			M.SEARCHIDX
+		FROM
+			M_CUSTR AS M
+	</M_CUSTR501>
+	
+	<!-- 取引先登録画面 -->
+	<M_CUSTR502>
+		SELECT
+			M.CUSTR_CODE,
+			RTRIM(M.CUST1_NAME) + ' ' + RTRIM(M.CUST2_NAME) AS CUST_NAME,
+			M.CUST_FLG,
+			M.SHIP_FLG,
+			M.SUPP_FLG,
+			M.CUST1_NAME,
+			M.CUST2_NAME,
+			M.CUST_RNAME,
+			M.CUST_KANA,
+			M.CUST_TNAME,
+            M.MAILNO,
+			M.ADRESS1,
+			M.ADRESS2,
+			M.ADRESS3,
+			M.TELNO,
+			M.FAXNO,
+			M.MAILADR,
+			M.URLADRS,
+			M.CUSTC_NAME,
+            M.USE_FLG,
+			M.OLD_CODE,
+			M.ADD_USER,
+			M.ADD_PC,
+			M.ADD_DATE,
+			M.ADD_TIME,
+			M.LASTUP_USER,
+			M.LASTUP_PC,
+			M.LASTUP_DATE,
+			M.LASTUP_TIME,
+			M.SEARCHIDX
+		FROM
+			M_CUSTR AS M
+		ORDER BY CAST(CUSTR_CODE AS INT) DESC
+	</M_CUSTR502>
+	
+	<!-- 取引先登録画面 -->
+	<M_CUSTR503>
+		SELECT
+			COUNT(M.CUSTR_CODE)
+			
+		FROM
+			M_CUSTR AS M
+	</M_CUSTR503>
+	
+	<!-- 取引先登録画面 -->
+	<M_CUSTR504>
+		SELECT
+			M.CUSTR_CODE,
+			RTRIM(M.CUST1_NAME) + ' ' + RTRIM(M.CUST2_NAME) AS CUST_NAME,
+			M.CUST_FLG,
+			M.SHIP_FLG,
+			M.SUPP_FLG,
+			M.CUST1_NAME,
+			M.CUST2_NAME,
+			M.CUST_RNAME,
+			M.CUST_KANA,
+			M.CUST_TNAME,
+            M.MAILNO,
+			M.ADRESS1,
+			M.ADRESS2,
+			M.ADRESS3,
+			M.TELNO,
+			M.FAXNO,
+			M.MAILADR,
+			M.URLADRS,
+			M.CUSTC_NAME,
+            M.USE_FLG,
+			M.OLD_CODE,
+			M.ADD_USER,
+			M.ADD_PC,
+			M.ADD_DATE,
+			M.ADD_TIME,
+			M.LASTUP_USER,
+			M.LASTUP_PC,
+			M.LASTUP_DATE,
+			M.LASTUP_TIME,
+			M.SEARCHIDX
+		FROM
+			M_CUSTR AS M
+		WHERE
+		M.CUSTR_CODE = ?
+		    
+	</M_CUSTR504>
+	
+	<!-- 取引先登録画面 -->
+	<M_CUSTR505>
+	INSERT INTO M_CUSTR(
+			CUSTR_CODE,
+			CUST_FLG,
+			SHIP_FLG,
+			SUPP_FLG,
+			CUST1_NAME,
+			CUST2_NAME,
+			CUST_RNAME,
+			CUST_KANA,
+			CUST_TNAME,
+            MAILNO,
+			ADRESS1,
+			ADRESS2,
+			ADRESS3,
+			TELNO,
+			FAXNO,
+			MAILADR,
+			URLADRS,
+			CUSTC_NAME,
+            USE_FLG,
+			OLD_CODE,
+			ADD_USER,
+			ADD_PC,
+			ADD_DATE,
+			ADD_TIME,
+			LASTUP_USER,
+			LASTUP_PC,
+			LASTUP_DATE,
+			LASTUP_TIME,
+			SEARCHIDX
+			)
+		VALUES
+			 (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+	</M_CUSTR505>
+	
+	<!-- 取引先登録画面 -->
+	<M_CUSTR506>
+		UPDATE
+			M_CUSTR
+		SET
+			CUST_FLG= ?,
+			SHIP_FLG= ?,
+			SUPP_FLG= ?,
+			CUST1_NAME= ?,
+			CUST2_NAME= ?,
+			CUST_RNAME= ?,
+			CUST_KANA= ?,
+			CUST_TNAME= ?,
+            MAILNO= ?,
+			ADRESS1= ?,
+			ADRESS2= ?,
+			ADRESS3= ?,
+			TELNO= ?,
+			FAXNO= ?,
+			MAILADR= ?,
+			URLADRS= ?,
+			CUSTC_NAME= ?,
+            USE_FLG= ?,
+			OLD_CODE= ?,
+			ADD_USER= ?,
+			ADD_PC= ?,
+			ADD_DATE= ?,
+			ADD_TIME= ?,
+			LASTUP_USER= ?,
+			LASTUP_PC= ?,
+			LASTUP_DATE= ?,
+			LASTUP_TIME = ?,
+			SEARCHIDX = ?
+		WHERE
+			CUSTR_CODE= ?
+	</M_CUSTR506>
+	
+	<!-- 取引先登録画面 -->
+	<M_CUSTR507>
+		DELETE FROM
+			M_CUSTR
+		WHERE
+			CUSTR_CODE= ?
+	</M_CUSTR507>
+
+</System>

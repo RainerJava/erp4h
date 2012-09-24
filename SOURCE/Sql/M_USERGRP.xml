@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<System>
+	<!-- P_Menu[配車管理メニュー] -->
+	<!-- P_frmMasterUserPrvl[ﾕｰｻﾞｰ権限登録] -->
+	<M_USERGRP001>
+		SELECT
+			RTRIM(US.USERGID) AS USERGID,
+			RTRIM(US.PWD) AS PWD,
+			RTRIM(US.USERTXT) AS USERTXT,
+			RTRIM(US.LOGVIEW_FLG) AS LOGVIEW_FLG,
+			RTRIM(US.EXCELOUT) AS EXCELOUT,
+			RTRIM(US.PWD1) AS PWD1,
+			RTRIM(US.PWD2) AS PWD2,
+			RTRIM(US.PWD3) AS PWD3
+		FROM
+			M_USERGRP AS US
+		WHERE
+			US.USERGID = ? AND US.PWD = ?
+	</M_USERGRP001>
+	<!-- P_frmMasterUserPrvl[ﾕｰｻﾞｰ権限登録] -->
+	<M_USERGRP002>
+		SELECT
+			RTRIM(US.USERGID) AS USERGID,
+			RTRIM(US.PWD) AS PWD,
+			RTRIM(US.USERTXT) AS USERTXT,
+			RTRIM(US.LOGVIEW_FLG) AS LOGVIEW_FLG,
+			RTRIM(US.EXCELOUT) AS EXCELOUT,
+			US.PWD_DATE AS PWD_DATE
+		FROM
+			M_USERGRP AS US
+		WHERE
+			US.USERGID = ? 
+	</M_USERGRP002>
+	<!-- ﾕｰｻﾞｰｸﾞﾙｰﾌﾟｺﾝﾎﾞﾎﾞｯｸｽ -->
+	<M_USERGRP003>
+		SELECT
+			RTRIM(M.USERGID) AS USERGID,
+			RTRIM(M.USERTXT) AS USERTXT
+		FROM
+			M_USERGRP AS M
+		$WHERE
+	</M_USERGRP003>
+	<!-- P_frmMasterUserPrvl[ﾕｰｻﾞｰ権限登録] -->
+	<M_USERGRP004>
+		INSERT INTO M_USERGRP(
+			USERGID,
+			PWD,
+			USERTXT,
+			LOGVIEW_FLG,
+			EXCELOUT,
+			PWD_DATE,
+			ADD_USER,
+			ADD_PC,
+			ADD_DATE,
+			ADD_TIME,
+			LASTUP_USER,
+			LASTUP_PC,
+			LASTUP_DATE,
+			LASTUP_TIME
+			)
+		VALUES
+			 (?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+	</M_USERGRP004>
+	<M_USERGRP005>
+		UPDATE
+		    M_USERGRP
+		SET
+		    PWD = ?,
+		    USERTXT = ?,
+			LOGVIEW_FLG = ?,
+			EXCELOUT = ?,
+			PWD_DATE = ?,
+			PWD1 = ?,
+		    PWD2 = ?,
+			PWD3 = ?,
+		    LASTUP_USER = ?,
+			LASTUP_PC = ?,
+		    LASTUP_DATE = ?,
+		    LASTUP_TIME = ?
+		WHERE
+		    USERGID = ?
+	</M_USERGRP005>
+	<M_USERGRP006>
+		DELETE FROM
+			M_USERGRP
+		WHERE
+			USERGID = ?
+	</M_USERGRP006>
+    <M_USERGRP007>
+		SELECT
+			count(*)
+		FROM
+			M_EMP AS M
+		WHERE
+			M.USER_USER = ?
+	</M_USERGRP007>
+	<!-- frmChgPassWord[パスワード変更] -->
+	<M_USERGRP008>
+		SELECT
+			M.PWD,
+			M.PWD1,
+			M.PWD2
+		FROM
+			M_USERGRP AS M
+		WHERE
+			M.USERGID = ?
+	</M_USERGRP008>
+	<!-- frmChgPassWord[パスワード変更] -->
+	<M_USERGRP009>
+		UPDATE
+			M_USERGRP
+		SET
+			PWD = ?,
+			PWD_DATE = ?,
+			PWD1 = ?,
+			PWD2 = ?,
+			PWD3 = ?,
+		    LASTUP_USER = ?,
+			LASTUP_PC = ?,
+		    LASTUP_DATE = ?,
+		    LASTUP_TIME = ?
+		WHERE
+			USERGID = ?
+	</M_USERGRP009>
+	<!-- frmIndividualSetUp2[個人設定2] -->
+	<M_USERGRP010>
+		UPDATE
+			M_USERGRP
+		SET
+		    LASTUP_USER = ?,
+			LASTUP_PC = ?,
+		    LASTUP_DATE = ?,
+		    LASTUP_TIME = ?
+		WHERE
+			USERGID = ?
+	</M_USERGRP010>
+</System>

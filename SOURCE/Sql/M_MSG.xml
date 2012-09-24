@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<System>
+	<M_MSG001>
+    SELECT
+      MSG_CD AS MSG_CD,
+      MSG1 AS MSG_TEXT1,
+      MSG2 AS MSG_TEXT2,
+      MSG3 AS MSG_TEXT3,
+      MSG4 AS MSG_TEXT4,
+      BUTTON_TYPE AS MSG_BTN
+    FROM
+      M_MSG
+    ORDER BY
+      MSG_CD
+  </M_MSG001>
+  
+  	<M_MSG500>
+		SELECT
+		  MSG_CD AS MSG_CD,
+		  MSG1 AS MSG_TEXT1,
+		  MSG2 AS MSG_TEXT2,
+		  MSG3 AS MSG_TEXT3,
+		  MSG4 AS MSG_TEXT4,
+		  BUTTON_TYPE AS MSG_BTN
+		FROM
+		  M_MSG
+		ORDER BY
+		  MSG_CD
+	</M_MSG500>
+</System>

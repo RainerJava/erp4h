@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<System>
+	<!-- get list by prod_code -->
+	<M_PRME001>
+		SELECT
+			TOP 8
+			M.PROD_CODE,
+			M.MEDI_CODE,
+			(SELECT MEDI_NAME FROM M_MEDI WHERE MEDI_CODE = M.MEDI_CODE) AS MEDI_NAME,
+			M.RT_QTY,
+			M.DSP_NO,
+			M.ADD_USER,
+			M.ADD_PC,
+			M.ADD_DATE,
+			M.ADD_TIME,
+			M.LASTUP_USER,
+			M.LASTUP_PC,
+			M.LASTUP_DATE,
+			M.LASTUP_TIME
+		FROM
+			M_PRME AS M 
+		WHERE
+			M.PROD_CODE = ?
+		ORDER BY M.DSP_NO
+	</M_PRME001>
+	
+	<!-- select -->
+	<M_PRME002>
+		SELECT
+			M.PROD_CODE,
+			M.MEDI_CODE,
+			(SELECT MEDI_NAME FROM M_MEDI mm WHERE mm.MEDI_CODE = M.MEDI_CODE) AS MEDI_NAME,
+			M.RT_QTY,
+			M.DSP_NO,
+			M.ADD_USER,
+			M.ADD_PC,
+			M.ADD_DATE,
+			M.ADD_TIME,
+			M.LASTUP_USER,
+			M.LASTUP_PC,
+			M.LASTUP_DATE,
+			M.LASTUP_TIME
+		FROM
+			M_PRME AS M
+		WHERE 
+			M.PROD_CODE = ? AND
+			M.MEDI_CODE = ?
+	</M_PRME002>
+	
+	<!-- Delete by prod_code -->
+	<M_PRME003>
+		DELETE FROM M_PRME WHERE PROD_CODE = ?
+	</M_PRME003>
+	
+	<!-- insert -->
+	<M_PRME004>	
+		INSERT INTO M_PRME
+		(
+			PROD_CODE,
+			MEDI_CODE,
+			RT_QTY,
+			DSP_NO,
+			ADD_USER,
+			ADD_PC,
+			ADD_DATE,
+			ADD_TIME,
+			LASTUP_USER,
+			LASTUP_PC,
+			LASTUP_DATE,
+			LASTUP_TIME
+		)
+		VALUES
+		(
+			?,?,?,?,?,?,?,?,?,?,?,?
+		)
+	</M_PRME004>
+</System>

@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<System>
+	<!-- P_Menu[出力先設定] -->
+	<M_OUTCTL001>
+		SELECT
+			RTRIM(M.USERID) AS USERID,
+			COALESCE(RTRIM(M.OUT1_PATH),'') AS OUT1_PATH,
+			COALESCE(RTRIM(M.OUT2_PATH),'') AS OUT2_PATH,
+			COALESCE(RTRIM(M.OUT3_PATH),'') AS OUT3_PATH,
+			COALESCE(RTRIM(M.OUT4_PATH),'') AS OUT4_PATH,
+			COALESCE(RTRIM(M.OUT5_PATH),'') AS OUT5_PATH,
+			M.ADD_USER,
+			M.ADD_PC,
+			M.ADD_DATE,
+			M.ADD_TIME,
+			M.LASTUP_USER,
+			M.LASTUP_PC,
+			M.LASTUP_DATE,
+			M.LASTUP_TIME
+		FROM
+			M_OUTCTL AS M
+	</M_OUTCTL001>
+	<!-- P_Menu[出力先設定] -->
+	<M_OUTCTL002>
+		INSERT INTO M_OUTCTL(
+			USERID,
+			OUT_PATH,
+			ADD_USER,
+			ADD_PC,
+			ADD_DATE,
+			ADD_TIME,
+			LASTUP_USER,
+			LASTUP_PC,
+			LASTUP_DATE,
+			LASTUP_TIME
+		  )
+		VALUES
+		(?,?,?,?,?,?,?,?,?,?)
+        </M_OUTCTL002>
+	<!-- P_Menu[出力先設定] -->
+	<M_OUTCTL003>
+		UPDATE
+		    M_OUTCTL
+		SET
+		    OUT_PATH = ?,
+			LASTUP_USER = ?,
+		    LASTUP_PC = ?,
+			LASTUP_DATE = ?,
+		    LASTUP_TIME = ?
+		WHERE
+		    USERID = ?
+	</M_OUTCTL003>
+	
+	<M_OUTCTL500>
+		SELECT
+			RTRIM(M.USERID) AS USERID,
+			COALESCE(RTRIM(M.OUT_PATH),'') AS OUT_PATH,
+			M.ADD_USER AS ADD_USER,
+			M.ADD_PC AS ADD_PC,
+			M.ADD_DATE AS ADD_DATE,
+			M.ADD_TIME AS ADD_TIME,
+			M.LASTUP_USER AS LASTUP_USER,
+			M.LASTUP_PC AS LASTUP_PC,
+			M.LASTUP_DATE AS LASTUP_DATE,
+			M.LASTUP_TIME AS LASTUP_TIME
+		FROM
+			M_OUTCTL AS M
+	</M_OUTCTL500>
+	
+	<!-- begin longtv -->
+	<!-- select by userid -->
+	<M_OUTCTL004>
+		SELECT
+			M.USERID,
+			M.OUT1_PATH,
+			M.OUT2_PATH,
+			M.OUT3_PATH,
+			M.OUT4_PATH,
+			M.OUT5_PATH,
+			M.ADD_USER,
+			M.ADD_PC,
+			M.ADD_DATE,
+			M.ADD_TIME,
+			M.LASTUP_USER,
+			M.LASTUP_PC,
+			M.LASTUP_DATE,
+			M.LASTUP_TIME
+		FROM
+			M_OUTCTL M
+		WHERE
+			M.USERID = ?
+	</M_OUTCTL004>
+	
+	<!-- update outctl -->
+	<M_OUTCTL005>
+		UPDATE M_OUTCTL
+		SET
+			OUT1_PATH = ?,
+			OUT2_PATH = ?,
+			OUT3_PATH = ?,
+			OUT4_PATH = ?,
+			OUT5_PATH = ?,			
+			LASTUP_USER = ?,
+			LASTUP_PC = ?,
+			LASTUP_DATE = ?,
+			LASTUP_TIME = ?
+		WHERE
+			USERID = ?	
+	</M_OUTCTL005>   
+	
+	<!-- insert outctl -->
+	<M_OUTCTL006>
+		INSERT INTO M_OUTCTL
+		(
+			USERID,
+			OUT1_PATH,
+			OUT2_PATH,
+			OUT3_PATH,
+			OUT4_PATH,
+			OUT5_PATH,
+			ADD_USER,
+			ADD_PC,
+			ADD_DATE,
+			ADD_TIME,
+			LASTUP_USER,
+			LASTUP_PC,
+			LASTUP_DATE,
+			LASTUP_TIME
+		)
+		VALUES
+		(
+			?,?,?,?,?,?,?,?,?,?,?,?,?,?
+		)
+	</M_OUTCTL006>
+
+	  
+	<!-- end longtv -->
+</System>

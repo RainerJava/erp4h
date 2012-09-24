@@ -1,0 +1,223 @@
+﻿<System>
+    <!--Add by phuongnt 2010.09.13 -->
+	<!--Get List Vo-->
+	<M_RPPF101>
+		SELECT
+		    [LCLS_CODE],
+		    (SELECT
+		        LCLS_NAME
+		    FROM
+		        M_LCLS
+		    WHERE
+		        M_LCLS.LCLS_CODE = M.LCLS_CODE
+		    ) AS LCLS_NAME,
+		    [MCLS_CODE],
+		    (SELECT
+		        MCLS_NAME
+		    FROM
+		        M_MCLS
+		    WHERE
+		        M_MCLS.MCLS_CODE = M.MCLS_CODE AND
+		        M.LCLS_CODE = M_MCLS.LCLS_CODE
+		    ) AS MCLS_NAME,
+		    [PF_QTY],
+		    [PDMETER_FR],
+		    [PDMETER_TO],
+		    [ADD_USER],
+		    [ADD_PC],
+		    [ADD_DATE],
+		    [ADD_TIME],
+		    [LASTUP_USER],
+		    [LASTUP_PC],
+		    [LASTUP_DATE],
+		    [LASTUP_TIME]
+		FROM
+		    M_RPPF AS M
+		ORDER BY
+		    LCLS_NAME,
+		    MCLS_NAME		
+	</M_RPPF101>
+	
+	<M_RPPF102>	
+	SELECT COUNT(*)
+	FROM M_RPPF	
+	</M_RPPF102>
+	
+	
+	<M_RPPF103>
+	DELETE FROM M_RPPF
+	WHERE
+			
+			LCLS_CODE = ? AND
+			MCLS_CODE = ? AND			
+			PDMETER_FR = ? AND
+			PDMETER_TO = ? 			
+	</M_RPPF103>	
+		
+	<M_RPPF104>
+	SELECT
+		    [LCLS_CODE],
+		    (SELECT
+		        LCLS_NAME
+		    FROM
+		        M_LCLS
+		    WHERE
+		        M_LCLS.LCLS_CODE = M.LCLS_CODE
+		    ) AS LCLS_NAME,
+		    [MCLS_CODE],
+		    (SELECT
+		        MCLS_NAME
+		    FROM
+		        M_MCLS
+		    WHERE
+		        M_MCLS.MCLS_CODE = M.MCLS_CODE AND
+		        M.LCLS_CODE = M_MCLS.LCLS_CODE
+		    ) AS MCLS_NAME,
+		    [PDMETER_FR],
+		    [PDMETER_TO],
+		    [PF_QTY],
+		    [ADD_USER],
+		    [ADD_PC],
+		    [ADD_DATE],
+		    [ADD_TIME],
+		    [LASTUP_USER],
+		    [LASTUP_PC],
+		    [LASTUP_DATE],
+		    [LASTUP_TIME]
+		FROM
+		    M_RPPF AS M
+			
+		WHERE			
+			LCLS_CODE = ? AND
+			MCLS_CODE = ? AND			
+			PDMETER_FR = ? AND
+			PDMETER_TO = ? 				
+	</M_RPPF104>
+	
+	<M_RPPF105>
+	INSERT INTO M_RPPF
+           (           
+           	[LCLS_CODE],
+           	[MCLS_CODE],
+           	[SCLS_CODE],               	
+	      	[PDMETER_FR],
+	      	[PDMETER_TO],
+	      	[PF_QTY],           
+            [ADD_USER],
+            [ADD_PC],
+            [ADD_DATE],
+            [ADD_TIME],
+            [LASTUP_USER],
+            [LASTUP_PC],
+            [LASTUP_DATE],
+            [LASTUP_TIME]
+           )
+     VALUES
+     	(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)	
+	</M_RPPF105>
+		
+	<M_RPPF106>	
+	UPDATE M_RPPF
+	SET
+           [PF_QTY] = ?,                      
+           [LASTUP_USER] = ?,
+           [LASTUP_PC] = ?,
+           [LASTUP_DATE] = ?,
+           [LASTUP_TIME] = ?
+     WHERE     		
+    	 	LCLS_CODE = ?
+			AND
+			MCLS_CODE = ?					
+			AND
+			PDMETER_FR = ?
+			AND
+			PDMETER_TO = ?
+	</M_RPPF106>	
+	
+	<M_RPPF107>	
+		SELECT           
+            [LCLS_CODE] AS [$LCLS_CODEコード],
+		    (SELECT
+		        LCLS_NAME
+		    FROM
+		        M_LCLS
+		    WHERE
+		        M_LCLS.LCLS_CODE = M.LCLS_CODE
+		    ) AS [$LCLS_CODE名],
+
+            [MCLS_CODE] AS [$MCLS_CODEコード],
+		    (SELECT
+		        MCLS_NAME
+		    FROM
+		        M_MCLS
+		    WHERE
+		        M_MCLS.MCLS_CODE = M.MCLS_CODE AND
+		        M.LCLS_CODE = M_MCLS.LCLS_CODE
+		    ) AS [$MCLS_CODE名],           
+		    [PDMETER_FR] AS [呼径コード(From)],
+		    [PDMETER_TO] AS [呼径コード(To)],
+		    [PF_QTY] AS [引代],
+		    
+            [ADD_USER] AS [登録ユーザー名], 
+            [ADD_PC] AS [登録ＰＣ名],
+            [ADD_DATE] AS [登録日付],
+            [ADD_TIME] AS [登録時刻],
+            [LASTUP_USER] AS [最終更新ユーザー名],
+            [LASTUP_PC] AS [最終更新ＰＣ名],
+            [LASTUP_DATE] AS [最終更新日付],
+            [LASTUP_TIME] AS [最終更新時刻] 
+		   
+		FROM
+		    M_RPPF AS M
+			
+	</M_RPPF107>		
+	<M_RPPF108>	
+		SELECT		    
+		    [PF_QTY]
+		FROM
+		    M_RPPF AS M			
+		WHERE			
+			LCLS_CODE = ? AND
+			MCLS_CODE = ? AND	
+		    CONVERT(int,REPLACE(?, 'A', '')) >= CONVERT(int, REPLACE(PDMETER_FR, 'A', '')) AND 
+			CONVERT(int,REPLACE(PDMETER_TO, 'A', '')) >= CONVERT(int,REPLACE(?, 'A', '')) 				
+	</M_RPPF108>	
+	
+	<M_RPPF109>
+		SELECT
+		    [LCLS_CODE],
+		    (SELECT
+		        LCLS_NAME
+		    FROM
+		        M_LCLS
+		    WHERE
+		        M_LCLS.LCLS_CODE = M.LCLS_CODE
+		    ) AS LCLS_NAME,
+		    [MCLS_CODE],
+		    (SELECT
+		        MCLS_NAME
+		    FROM
+		        M_MCLS
+		    WHERE
+		        M_MCLS.MCLS_CODE = M.MCLS_CODE AND
+		        M.LCLS_CODE = M_MCLS.LCLS_CODE
+		    ) AS MCLS_NAME,
+		    [PDMETER_FR],
+		    [PDMETER_TO],
+		    [PF_QTY],
+		    [ADD_USER],
+		    [ADD_PC],
+		    [ADD_DATE],
+		    [ADD_TIME],
+		    [LASTUP_USER],
+		    [LASTUP_PC],
+		    [LASTUP_DATE],
+		    [LASTUP_TIME]
+		FROM
+		    M_RPPF AS M
+			
+		WHERE			
+			LCLS_CODE = ? AND
+			MCLS_CODE = ?	
+	</M_RPPF109>	
+</System>

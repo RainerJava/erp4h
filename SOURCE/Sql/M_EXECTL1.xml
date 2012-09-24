@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<System>
+	<!-- P_frmUserPrvl[ﾕｰｻﾞｰ権限登録] -->
+	<M_EXECTL1001>
+		SELECT
+			USERID,
+			MENUGRP_CODE,
+			CONTROL_TYPE,
+			ADD_USER,
+			ADD_PC,
+			ADD_DATE,
+			ADD_TIME,
+			LASTUP_USER,
+			LASTUP_PC,
+			LASTUP_DATE,
+			LASTUP_TIME
+		FROM
+			M_EXECTL1 AS M
+  	</M_EXECTL1001>
+	<!-- P_frmUserPrvl[ﾕｰｻﾞｰ権限登録] -->
+	<M_EXECTL1002>
+		INSERT INTO M_EXECTL1(
+			USERID,
+			MENUGRP_CODE,
+			CONTROL_TYPE,
+			ADD_USER,
+			ADD_PC,
+			ADD_DATE,
+			ADD_TIME,
+			LASTUP_USER,
+			LASTUP_PC,
+			LASTUP_DATE,
+			LASTUP_TIME
+			)
+		VALUES
+			 (?,?,?,?,?,?,?,?,?,?,?)
+	</M_EXECTL1002>
+
+	<M_EXECTL1003>
+		UPDATE M_EXECTL1 SET
+			CONTROL_TYPE = ?,
+			LASTUP_USER = ?,
+			LASTUP_PC = ?,
+			LASTUP_DATE = ?,
+			LASTUP_TIME = ?
+		WHERE
+			USERID = ?
+			AND MENUGRP_CODE = ?
+	</M_EXECTL1003>
+
+	<M_EXECTL1004>
+		DELETE FROM M_EXECTL1
+		WHERE	USERID = ?
+	</M_EXECTL1004>
+
+</System>

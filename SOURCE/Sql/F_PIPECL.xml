@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<System>
+	<F_PIPECL001>
+		SELECT
+			fp.CUST_CODE,
+			fp.SHIP_NO,
+			fp.DRAW_TYPE,
+			fp.CL_DATE,
+			fp.LCLS_CODE,
+			LCLS.LCLS_NAME,
+			fp.MCLS_CODE,
+			MCLS.MCLS_NAME,
+			fp.SCLS_CODE,
+			fp.TYPE_CODE,
+			T.TYPE_NAME,
+			fp.MATER_CODE,
+			M.MATER_NAME,
+			fp.PDMETER,
+			fp.STD_CODE,
+			STD.STD_NAME,
+			fp.SIZE_NAME,			
+			fp.KIND_CODE,
+			fp.BCS_QTY,
+			fp.BLEN_QTY,
+			fp.MCS_QTY,
+			fp.MLEN_QTY,
+			fp.ORDR_QTY,
+			fp.SUPP_CODE,
+			fp.SUPP_MNY,
+			fp.SUM_QTY,
+			fp.CUST_MNY,
+			fp.CONV1_QTY,
+			fp.RATE1_QTY,
+			fp.FRC1_TYPE,
+			fp.DECID1_QTY,
+			fp.CONV2_QTY,
+			fp.RATE2_QTY,
+			fp.FRC2_TYPE,
+			fp.DECID2_QTY,
+			fp.DEC_QTY,
+			fp.PRT_FLG,
+			fp.ADD_USER,
+			fp.ADD_PC,
+			fp.ADD_DATE,
+			fp.ADD_TIME,
+			fp.LASTUP_USER,
+			fp.LASTUP_PC,
+			fp.LASTUP_DATE,
+			fp.LASTUP_TIME
+		FROM
+			F_PIPECL fp LEFT JOIN
+			M_LCLS LCLS ON fp.LCLS_CODE = LCLS.LCLS_CODE LEFT JOIN
+			M_MCLS MCLS ON fp.LCLS_CODE = MCLS.LCLS_CODE AND fp.MCLS_CODE = MCLS.MCLS_CODE LEFT JOIN
+			M_TYPE T ON fp.TYPE_CODE = T.TYPE_CODE LEFT JOIN
+			M_MATER M ON fp.MATER_CODE = M.MATER_CODE LEFT JOIN
+			M_STD STD ON fp.STD_CODE = STD.STD_CODE			
+		WHERE
+			fp.CUST_CODE = ?
+			AND fp.SHIP_NO = ?
+			AND fp.DRAW_TYPE = ?
+			AND FLOOR (fp.CL_DATE) = ?
+		ORDER BY 
+			fp.LCLS_CODE, fp.MCLS_CODE, fp.TYPE_CODE, fp.MATER_CODE, fp.PDMETER, fp.STD_CODE, fp.SIZE_NAME, fp.KIND_CODE, fp.SUPP_CODE    
+	</F_PIPECL001>
+	
+	<F_PIPECL002>
+		INSERT INTO F_PIPECL 
+		(CUST_CODE
+	      ,SHIP_NO
+	      ,DRAW_TYPE
+	      ,CL_DATE
+	      ,LCLS_CODE
+	      ,MCLS_CODE
+	      ,SCLS_CODE
+	      ,TYPE_CODE
+	      ,MATER_CODE
+	      ,PDMETER
+	      ,STD_CODE
+	      ,SIZE_NAME
+	      ,KIND_CODE
+	      ,BCS_QTY
+	      ,BLEN_QTY
+	      ,MCS_QTY
+	      ,MLEN_QTY
+	      ,ORDR_QTY
+	      ,SUPP_CODE
+	      ,SUPP_MNY
+	      ,SUM_QTY
+	      ,CUST_MNY
+	      ,CONV1_QTY
+	      ,RATE1_QTY
+	      ,FRC1_TYPE
+	      ,DECID1_QTY
+	      ,CONV2_QTY
+	      ,RATE2_QTY
+	      ,FRC2_TYPE
+	      ,DECID2_QTY
+	      ,DEC_QTY
+	      ,PRT_FLG
+	      ,ADD_USER
+	      ,ADD_PC
+	      ,ADD_DATE
+	      ,ADD_TIME
+	      ,LASTUP_USER
+	      ,LASTUP_PC
+	      ,LASTUP_DATE
+	      ,LASTUP_TIME
+		  ,MNFR_DATE
+		  ,MNTO_DATE
+		  ,DEC1_PLC
+		  ,DEC2_PLC
+		  ,WT_QTY
+	      )
+	      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+	</F_PIPECL002>
+	<F_PIPECL003>
+		UPDATE F_PIPECL 
+		SET 
+	      BCS_QTY = ?
+	      ,BLEN_QTY = ?
+	      ,MCS_QTY = ?
+	      ,MLEN_QTY = ?
+	      ,ORDR_QTY = ?	      
+	      ,SUPP_MNY = ?
+	      ,SUM_QTY = ?
+	      ,CUST_MNY = ?
+	      ,CONV1_QTY = ?
+	      ,RATE1_QTY = ?
+	      ,FRC1_TYPE = ?
+	      ,DECID1_QTY = ?
+	      ,CONV2_QTY = ?
+	      ,RATE2_QTY = ?
+	      ,FRC2_TYPE = ?
+	      ,DECID2_QTY = ?
+	      ,DEC_QTY = ?
+	      ,PRT_FLG = ?
+	      
+	      ,LASTUP_USER = ?
+	      ,LASTUP_PC = ?
+	      ,LASTUP_DATE = ?
+	      ,LASTUP_TIME = ?
+		WHERE
+		  CUST_CODE = ?
+		  AND SHIP_NO = ?
+		  AND DRAW_TYPE = ?
+		  AND CL_DATE = ?
+		  AND LCLS_CODE = ?
+		  AND MCLS_CODE = ?
+		  AND SCLS_CODE = ?
+		  AND TYPE_CODE = ?
+		  AND MATER_CODE = ?
+		  AND PDMETER = ?
+		  AND STD_CODE = ?
+		  AND SIZE_NAME  = ?
+		  AND KIND_CODE = ?
+		  AND SUPP_CODE = ?
+	</F_PIPECL003>
+	<F_PIPECL004>
+		DELETE
+		FROM
+			F_PIPECL
+		WHERE
+			CUST_CODE = ?
+			AND SHIP_NO = ?
+			AND DRAW_TYPE = ?
+			AND FLOOR (CL_DATE) = ? 
+	</F_PIPECL004>
+	
+	<F_PIPECL005>
+		DELETE F_PIPECL
+		WHERE
+			ADD_PC = ?
+	</F_PIPECL005>
+	
+</System>

@@ -1,0 +1,408 @@
+﻿<System>
+    <!--Add by phuongnt 2010.08.26 -->
+	<!--Get List Vo-->
+	<M_INCR101>
+		SELECT 
+			[ICRATE_TYPE],
+			(
+				SELECT NAME_NAME  FROM M_NAME 
+				WHERE M_NAME.NAMECLS_CODE = 'ICRATE' AND M.ICRATE_TYPE = M_NAME.NAME_CODE
+			) AS ICRATE_NAME,            				
+
+			[LCLS_CODE],
+			(
+				SELECT LCLS_NAME FROM M_LCLS
+				WHERE M_LCLS.LCLS_CODE = M.LCLS_CODE
+			) AS LCLS_NAME,	            			
+
+                 [MCLS_CODE],
+	      	(
+				SELECT MCLS_NAME FROM M_MCLS
+				WHERE M_MCLS.MCLS_CODE = M.MCLS_CODE AND M.LCLS_CODE = M_MCLS.LCLS_CODE
+			) AS MCLS_NAME,
+            
+			[MATER_CODE],
+	      	(
+				SELECT MATER_TNAME FROM M_MATER
+				WHERE M_MATER.MATER_CODE = M.MATER_CODE				
+			) AS MATER_NAME,
+	
+	      	[PDMETER_FR],
+	      	[PDMETER_TO],
+	      	[LENFR_QTY],
+	      	[LENTO_QTY],
+	      	[CONV_QTY],
+	      	[RATE_QTY],
+	      	[DEC_PLC],
+	      	(
+	      		SELECT NAME_NAME FROM M_NAME
+                         WHERE M_NAME.NAMECLS_CODE = 'DEC_PLC' AND M.DEC_PLC= M_NAME.NAME_CODE      	
+	      	
+	      	) AS DEC_PLC_NAME,
+	      	
+	      	[FRC_TYPE],
+                 (
+                SELECT NAME_NAME FROM M_NAME
+                WHERE M_NAME.NAMECLS_CODE = 'FRC' AND M.FRC_TYPE = M_NAME.NAME_CODE
+
+            ) AS FRC_NAME,
+
+
+	      	[USE_FLG],
+	      	
+	      	[ADD_USER],
+	      	[ADD_PC],
+	      	[ADD_DATE],
+	      	[ADD_TIME],
+	      	[LASTUP_USER],
+	      	[LASTUP_PC],
+	      	[LASTUP_DATE],
+	      	[LASTUP_TIME]
+
+		FROM	
+			M_INCR AS M  	
+		
+		ORDER BY ICRATE_NAME, LCLS_NAME, MCLS_NAME, MATER_NAME					
+	</M_INCR101>
+	
+	<!-- get list IcrateType ComboBox  -->
+	<M_INCR102>
+	SELECT NAME_NAME, NAME_CODE, DEFAULT_TYPE
+	FROM M_NAME
+	WHERE M_NAME.NAMECLS_CODE = 'ICRATE'
+	ORDER BY DSPORDER_NO, NAME_CODE
+	</M_INCR102>
+	
+	<M_INCR103>
+	
+	SELECT NAME_NAME, NAME_CODE, DEFAULT_TYPE
+	FROM M_NAME
+	WHERE M_NAME.NAMECLS_CODE = 'FRC'
+	ORDER BY DSPORDER_NO, NAME_CODE
+	
+	
+	</M_INCR103>
+	
+	<M_INCR104>
+	
+	SELECT COUNT(*)
+	FROM M_INCR
+	
+	</M_INCR104>
+	
+	<M_INCR105>
+	DELETE FROM M_INCR
+	WHERE
+			ICRATE_TYPE = ? AND
+			LCLS_CODE = ? AND
+			MCLS_CODE = ? AND
+			MATER_CODE = ? AND 
+			PDMETER_FR = ? AND
+			PDMETER_TO = ? AND
+			LENFR_QTY = ? AND
+			LENTO_QTY = ? 	
+	</M_INCR105>	
+	
+	
+	
+	<M_INCR106>
+	SELECT 
+			[ICRATE_TYPE],
+			(
+				SELECT NAME_NAME  FROM M_NAME 
+				WHERE M_NAME.NAMECLS_CODE = 'ICRATE' AND M.ICRATE_TYPE = M_NAME.NAME_CODE
+			) AS ICRATE_NAME,            				
+
+			[LCLS_CODE],
+			(
+				SELECT LCLS_NAME FROM M_LCLS
+				WHERE M_LCLS.LCLS_CODE = M.LCLS_CODE
+			) AS LCLS_NAME,	            			
+
+            [MCLS_CODE],
+	      	(
+				SELECT MCLS_NAME FROM M_MCLS
+				WHERE M_MCLS.MCLS_CODE = M.MCLS_CODE AND M.LCLS_CODE = M_MCLS.LCLS_CODE
+			) AS MCLS_NAME,
+            
+			[MATER_CODE],
+	      	(
+				SELECT MATER_NAME FROM M_MATER
+				WHERE M_MATER.MATER_CODE = M.MATER_CODE				
+			) AS MATER_NAME,
+	
+	      	[PDMETER_FR],
+	      	[PDMETER_TO],
+	      	[LENFR_QTY],
+	      	[LENTO_QTY],
+	      	[CONV_QTY],
+	      	[RATE_QTY],	      	
+	      	[DEC_PLC],
+	      	(
+	      		SELECT NAME_NAME FROM M_NAME
+                         WHERE M_NAME.NAMECLS_CODE = 'DEC_PLC' AND M.DEC_PLC= M_NAME.NAME_CODE      	
+	      	
+	      	) AS DEC_PLC_NAME,
+	      	[FRC_TYPE],
+            (
+                SELECT NAME_NAME FROM M_NAME
+                WHERE M_NAME.NAMECLS_CODE = 'FRC' AND M.FRC_TYPE = M_NAME.NAME_CODE
+
+            ) AS FRC_NAME,
+
+
+	      	[USE_FLG],
+	      	
+	      	[ADD_USER],
+	      	[ADD_PC],
+	      	[ADD_DATE],
+	      	[ADD_TIME],
+	      	[LASTUP_USER],
+	      	[LASTUP_PC],
+	      	[LASTUP_DATE],
+	      	[LASTUP_TIME]
+
+		FROM	
+			M_INCR AS M  
+			
+		WHERE
+			ICRATE_TYPE = ? AND
+			LCLS_CODE = ? AND
+			MCLS_CODE = ? AND
+			MATER_CODE = ? AND 
+			PDMETER_FR = ? AND
+			PDMETER_TO = ? AND
+			LENFR_QTY = ? AND
+			LENTO_QTY = ? 		
+					
+	</M_INCR106>
+	
+	<M_INCR107>
+	INSERT INTO M_INCR
+           (
+            [ICRATE_TYPE],
+           	[LCLS_CODE],
+           	[MCLS_CODE],
+           	[MATER_CODE],	      	
+	      	[PDMETER_FR],
+	      	[PDMETER_TO],
+	      	[LENFR_QTY],
+	      	[LENTO_QTY],
+	      	[CONV_QTY],
+	      	[RATE_QTY],
+	      	[DEC_PLC], 
+	      	[FRC_TYPE],
+	      	[USE_FLG],
+           
+           [ADD_USER],
+           [ADD_PC],
+           [ADD_DATE],
+           [ADD_TIME],
+           [LASTUP_USER],
+           [LASTUP_PC],
+           [LASTUP_DATE],
+           [LASTUP_TIME]
+           )
+     VALUES
+     	(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+	
+	
+	</M_INCR107>
+	
+	<M_INCR108>
+	
+	UPDATE M_INCR
+	SET
+           [CONV_QTY] = ?,
+	       [RATE_QTY] = ?,
+	       [DEC_PLC] = ?,
+	       [FRC_TYPE] = ?,
+	       [USE_FLG] = ?,
+                      
+           [LASTUP_USER] = ?,
+           [LASTUP_PC] = ?,
+           [LASTUP_DATE] = ?,
+           [LASTUP_TIME] = ?
+     WHERE
+     		ICRATE_TYPE = ?
+     		AND
+    	 	LCLS_CODE = ?
+			AND
+			MCLS_CODE = ?
+			AND 
+			MATER_CODE = ?			
+			AND
+			PDMETER_FR = ?
+			AND
+			PDMETER_TO = ?
+			AND
+			LENFR_QTY = ?
+			AND
+			LENTO_QTY = ?
+	
+	</M_INCR108>	
+	
+	<M_INCR109>	
+		SELECT
+            [ICRATE_TYPE] AS [増加率区分タイプ],
+		    (SELECT
+		        NAME_NAME
+		    FROM
+		        M_NAME
+		    WHERE
+		        M_NAME.NAMECLS_CODE = 'ICRATE' AND
+		        M.ICRATE_TYPE = M_NAME.NAME_CODE
+		    ) AS [増加率区分],
+
+            [LCLS_CODE] AS [$LCLS_CODEコード],
+		    (SELECT
+		        LCLS_NAME
+		    FROM
+		        M_LCLS
+		    WHERE
+		        M_LCLS.LCLS_CODE = M.LCLS_CODE
+		    ) AS [$LCLS_CODE名],
+
+            [MCLS_CODE] AS [$MCLS_CODEコード],
+		    (SELECT
+		        MCLS_NAME
+		    FROM
+		        M_MCLS
+		    WHERE
+		        M_MCLS.MCLS_CODE = M.MCLS_CODE AND
+		        M.LCLS_CODE = M_MCLS.LCLS_CODE
+		    ) AS [$MCLS_CODE名],
+            [MATER_CODE] AS [材質コード],
+		    (SELECT
+		        MATER_NAME
+		    FROM
+		        M_MATER
+		    WHERE
+		        M_MATER.MATER_CODE = M.MATER_CODE
+		    ) AS [材質名],
+		    [PDMETER_FR] AS [呼径コード(From)],
+		    [PDMETER_TO] AS [呼径コード(To)],
+		    [LENFR_QTY] AS [長さ(From)],
+		    [LENTO_QTY] AS [長さ(To)],
+		    [CONV_QTY] AS [換算本数],
+		    [RATE_QTY] AS [増加率],
+		    [DEC_PLC] AS [小数処理桁コード],
+	      	(
+	      		SELECT NAME_NAME FROM M_NAME
+                         WHERE M_NAME.NAMECLS_CODE = 'DEC_PLC' AND M.DEC_PLC= M_NAME.NAME_CODE      	
+	      	
+	      	) AS [[小数処理桁名],	    
+            [FRC_TYPE] AS [端数処理区分],
+            [USE_FLG] AS [使用可否フラグ],
+            [ADD_USER] AS [登録ユーザー名], 
+            [ADD_PC] AS [登録ＰＣ名],
+            [ADD_DATE] AS [登録日付],
+            [ADD_TIME] AS [登録時刻],
+            [LASTUP_USER] AS [最終更新ユーザー名],
+            [LASTUP_PC] AS [最終更新ＰＣ名],
+            [LASTUP_DATE] AS [最終更新日付],
+            [LASTUP_TIME] AS [最終更新時刻], 
+		    (SELECT
+		        NAME_NAME
+		    FROM
+		        M_NAME
+		    WHERE
+		        M_NAME.NAMECLS_CODE = 'FRC' AND
+		        M.FRC_TYPE = M_NAME.NAME_CODE
+		    ) AS [端数処理区分] ,
+		    [USE_FLG] AS [使用可否フラグコード],
+		    (SELECT
+		        NAME_NAME
+		    FROM
+		        M_NAME
+		    WHERE
+		        NAMECLS_CODE = 'USEFLG' AND
+		        NAME_CODE = [USE_FLG]
+		    ) 	         AS [使用可否フラグ名],
+		    [ADD_USER] AS [登録ユーザー名],
+		    [ADD_PC] AS [登録PC名],
+		    [ADD_DATE] AS [登録日付],
+		    [ADD_TIME] AS [登録時刻],
+		    [LASTUP_USER] AS [最終更新ユーザー名],
+		    [LASTUP_PC] AS [最終更新PC名],
+		    [LASTUP_DATE] AS [最終更新日付],
+		    [LASTUP_TIME] AS [最終更新時刻]
+		FROM
+		    M_INCR AS M
+			
+	</M_INCR109>
+	
+	
+	<!-- check range -->
+	<M_INCR110>
+	SELECT 
+			[ICRATE_TYPE],
+			(
+				SELECT NAME_NAME  FROM M_NAME 
+				WHERE M_NAME.NAMECLS_CODE = 'ICRATE' AND M.ICRATE_TYPE = M_NAME.NAME_CODE
+			) AS ICRATE_NAME,            				
+
+			[LCLS_CODE],
+			(
+				SELECT LCLS_NAME FROM M_LCLS
+				WHERE M_LCLS.LCLS_CODE = M.LCLS_CODE
+			) AS LCLS_NAME,	            			
+
+            [MCLS_CODE],
+	      	(
+				SELECT MCLS_NAME FROM M_MCLS
+				WHERE M_MCLS.MCLS_CODE = M.MCLS_CODE AND M.LCLS_CODE = M_MCLS.LCLS_CODE
+			) AS MCLS_NAME,
+            
+			[MATER_CODE],
+	      	(
+				SELECT MATER_NAME FROM M_MATER
+				WHERE M_MATER.MATER_CODE = M.MATER_CODE				
+			) AS MATER_NAME,
+	
+	      	[PDMETER_FR],
+	      	[PDMETER_TO],
+	      	[LENFR_QTY],
+	      	[LENTO_QTY],
+	      	[CONV_QTY],
+	      	[RATE_QTY],
+	      	[DEC_PLC],
+	      	(
+	      		SELECT NAME_NAME FROM M_NAME
+                         WHERE M_NAME.NAMECLS_CODE = 'DEC_PLC' AND M.DEC_PLC= M_NAME.NAME_CODE      	
+	      	
+	      	) AS DEC_PLC_NAME,
+	      	
+	      	[FRC_TYPE],
+            (
+                SELECT NAME_NAME FROM M_NAME
+                WHERE M_NAME.NAMECLS_CODE = 'FRC' AND M.FRC_TYPE = M_NAME.NAME_CODE
+
+            ) AS FRC_NAME,
+
+
+	      	[USE_FLG],
+	      	
+	      	[ADD_USER],
+	      	[ADD_PC],
+	      	[ADD_DATE],
+	      	[ADD_TIME],
+	      	[LASTUP_USER],
+	      	[LASTUP_PC],
+	      	[LASTUP_DATE],
+	      	[LASTUP_TIME]
+
+		FROM	
+			M_INCR AS M  
+			
+		WHERE
+			ICRATE_TYPE = ? AND
+			LCLS_CODE = ? AND
+			MCLS_CODE = ? AND
+			MATER_CODE = ? AND 
+			PDMETER_FR = ? AND
+			PDMETER_TO = ?	
+					
+	</M_INCR110>
+	
+</System>

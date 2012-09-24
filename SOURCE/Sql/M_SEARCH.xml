@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<System>
+	<!-- Form Search MEmp -->
+	<M_EMP001>
+	SELECT M.EMP_CODE
+		 , M.EMP_NAME
+		 , M.EMP_KANA
+		 , M.EMP_TNAME
+		 , M.SEARCHIDX
+		 , M.EMP_USER
+		 , M.USE_FLG
+		 , M.SECT_CODE
+		 , M.SECT1_CODE
+		 , M.SECT2_CODE
+		 , M.SECT3_CODE
+		 , M.SECT4_CODE
+	  FROM M_EMP AS M
+	</M_EMP001>
+
+   	<!-- Form Search MCust -->
+	<M_CUST001>
+    SELECT M.CUST_CODE
+		 , RTRIM(COALESCE(M.CUSTR_NAME,'')) AS CUST_RNAME
+		 , (RTRIM(COALESCE(M.CUST1_NAME,'')) + ' ' + RTRIM(COALESCE(M.CUST2_NAME,''))) AS CUST_NAME
+		 , M.USE_FLG
+		 , RTRIM(COALESCE(M.CUST_KANA,'')) AS CUST_KANA
+		 , RTRIM(COALESCE(M.CUSTT_NAME,'')) AS CUST_TNAME
+	  FROM M_CUST AS M
+	</M_CUST001>
+
+	<!-- Form Search MPost -->
+	<M_POST001>
+	SELECT M.F1
+		 , M.F2,
+		 , M.F3
+		 , M.F4
+		 , M.F5
+		 , M.F6
+		 , M.F7
+		 , M.F8
+		 , M.F9
+		 , M.F10
+		 , M.F11
+		 , M.F12
+		 , M.F13
+		 , M.F14
+		 , M.F15
+	  FROM M_POST M
+	</M_POST001>
+	
+	<!-- Form Search MUsergrp -->
+	<M_USERGRP001>
+	SELECT USERGID
+      	 , PWD
+      	 , USERTXT
+      	 , LOGVIEW_FLG
+      	 , EXCELOUT
+      	 , PWD_DATE
+      	 , PWD1
+      	 , PWD2
+      	 , PWD3
+      	 , ADD_USER
+      	 , ADD_PC
+      	 , ADD_DATE
+      	 , ADD_TIME
+      	 , LASTUP_USER
+      	 , LASTUP_PC
+      	 , LASTUP_DATE
+      	 , LASTUP_TIME
+  FROM M_USERGRP AS M
+	</M_USERGRP001>
+	
+	<!-- Form Search PE01 -->
+	<PE01001>
+	SELECT M.E0101
+		 , M.E0102
+		 , M.E0103
+		 , M.E0104
+		 , M.E0105
+		 , M.E0106
+		 , M.E0107
+		 , M.E0108
+		 , M.E0108 * 0.05 AS TaxIncluded
+		 , M.E0109
+		 , M.E0110
+		 , M.E0111
+		 , M.E0112
+		 , M.E0113
+		 , M.E0114
+		 , M.E0115
+		 , M.E0116
+		 , M.E01DM      	 
+	  FROM PE01 AS M
+	</PE01001>
+	
+	<!-- Form Search PE03 -->
+	<PE03001>
+	SELECT M.E0301
+		 , M.E0302
+		 , M.E0303
+		 , M.E0304
+		 , M.E0305
+		 , M.E0306
+		 , M.E0307
+		 , M.E0308
+		 , M.E0309
+		 , M.E0310
+		 , M.E0311
+		 , M.E0312
+		 , M.E0313
+		 , M.E0314
+		 , M.E0315
+		 , M.E0316
+		 , M.E0317
+		 , M.E0318
+		 , M.E0319
+		 , M.E0320
+		 , M.E0321
+		 , M.E0322
+		 , M.E0323
+		 , M.E0324
+		 , M.E0325
+		 , M.E0326
+		 , M.E0327
+		 , M.E0328
+		 , M.E0329
+		 , M.E0330
+		 , M.E0331
+		 , M.E0332
+		 , M.E0333
+		 , M.E0334
+		 , M.E0335
+		 , M.E0336
+		 , M.E0337
+		 , M.E0338
+		 , M.E0339
+		 , M.E0340
+		 , M.E0341
+		 , M.E0342
+		 , M.E0343
+		 , M.E0344
+		 , M.E0345
+		 , M.E0346
+		 , M.E0347
+		 , M.E0348
+		 , M.E0349
+		 , M.E0350
+		 , M.E0351
+		 , M.E0352
+		 , M.E0353
+		 , M.E0354
+		 , M.E0355
+		 , M.E0356
+		 , M.E0357
+		 , M.E03DM
+		 , G.G0103
+	  FROM PE03 AS M
+ LEFT JOIN PG01 AS G ON M.E0357 = G.G0101
+	</PE03001>
+		
+	<!-- Form Search PG01 -->
+	<PG01001>
+	SELECT M.G0101
+		 , M.G0102
+		 , M.G0103		
+		 , M.G01DM      	 
+	  FROM PG01 AS M
+	</PG01001>
+	
+	<!-- Form Search PG02 -->
+	<PG02001>
+	SELECT M.G0201
+		 , M.G0202
+		 , M.G0203
+		 , M.G0204
+		 , M.G0205
+		 , M.G0206
+		 , M.G0207
+		 , M.G0208
+		 , M.G0209		
+		 , M.G02DM      	 
+	  FROM PG02 AS M
+	</PG02001>
+	
+	<!-- Form Search PC01 -->
+	<PC01001>
+	   SELECT M.C0101
+			, M.C0102
+			, M.C0103
+			, M.C0104
+			, M.C0105
+			, M.C0106
+			, M.C0107
+			, M.C0108
+			, M.C0109			
+			, M.C0110
+			, M.C0111
+			, M.C0112
+			, M.C0113
+			, M.C0114
+			, M.C0115
+			, M.C0116
+			, M.C0117
+			, M.C0118
+			, M.C0119
+			, M.C0120
+			, M.C0121
+			, M.C0122
+			, M.C0123
+			, M.C0124
+			, M.C0125
+			, M.C0126
+			, M.C0127
+			, M.C0128
+			, M.C0129
+			, M.C0130
+			, M.C0131
+			, M.C0132
+			, M.C0133
+			, M.C0134
+			, M.C0135
+			, M.C0136
+			, M.C0137
+			, M.C0138
+			, M.C0139
+			, M.C0140
+			, M.C0141
+			, M.C0142
+			, M.C0143
+			, M.C0144
+			, M.C0145
+			, M.C0146
+			, M.C0147
+			, M.C0148
+			, M.C0149
+			, M.C0150
+			, M.C0151
+			, M.C0152
+			, M.C0153
+			, M.C0154
+			, M.C0155
+			, M.C0156
+			, M.C0157
+			, M.C0158
+			, M.C0159
+			, M.C0160
+			, M.C0161
+			, M.C0162
+			, M.C0163
+			, M.C0164
+			, M.C0165
+			, M.C0166
+			, M.C0167
+			, M.C0168
+			, M.C0169
+			, M.C0170
+			, M.C0171
+			, M.C0172
+			, M.C0173
+			, M.C0174
+			, M.C0175
+			, M.C0176
+			, M.C0177
+			, M.C0178
+			, M.C0179
+			, M.C0180
+			, M.C0181
+			, M.C0182
+			, M.C0183
+			, M.C0184
+			, M.C0185
+			, M.C0186
+			, M.C0187
+			, M.C0188
+			, M.C0189
+			, M.C0190
+			, M.C0191
+			, M.C01DM 
+			, G.G0103     	 
+	     FROM PC01 AS M
+	LEFT JOIN PG01 AS G ON M.C0104 = G.G0101
+	</PC01001>	
+</System>

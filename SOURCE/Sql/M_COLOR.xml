@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<System>
+	<!-- begin: longtv -->
+
+	<!--Select by ColorclsCode-->
+	<M_COLOR500>
+	SELECT 
+	  COLORCLS_CODE
+      ,COLOR_CODE
+      ,COLOR_NAME
+      ,COLOR_RNAME
+      ,DEFAULT_TYPE
+      ,DSP_FLG
+      ,DSPORDER_NO
+      ,COLORTYPE
+      ,BCLR_RED
+      ,BCLR_GREEN
+      ,BCLR_BLUE
+      ,FCLR_RED
+      ,FCLR_GREEN
+      ,FCLR_BLUE
+      ,ADD_USER
+      ,ADD_PC
+      ,ADD_DATE
+      ,ADD_TIME
+      ,LASTUP_USER
+      ,LASTUP_PC
+      ,LASTUP_DATE
+      ,LASTUP_TIME
+  	FROM M_COLOR
+	WHERE COLORCLS_CODE = ?
+	ORDER BY DSPORDER_NO
+	</M_COLOR500>
+	
+	<!--Get count-->
+	<M_COLOR501>
+		SELECT	
+			COUNT(*)
+		FROM 
+			M_COLOR AS M
+		WHERE COLORCLS_CODE = ?
+	</M_COLOR501>
+	
+	<!--Get max code-->
+	<M_COLOR502>
+		SELECT
+			M.COLOR_CODE
+		FROM 
+			M_COLOR AS M
+		WHERE COLORCLS_CODE = ?
+		ORDER BY
+			M.COLOR_CODE DESC
+		FETCH FIRST 1 ROWS ONLY
+	</M_COLOR502>
+	
+	<!--Insert-->
+	<M_COLOR503>
+    	INSERT INTO M_COLOR
+           (
+           COLORCLS_CODE
+           ,COLOR_CODE
+           ,COLOR_NAME
+           ,COLOR_RNAME
+           ,DEFAULT_TYPE
+           ,DSP_FLG
+           ,DSPORDER_NO
+           ,COLORTYPE
+           ,BCLR_RED
+           ,BCLR_GREEN
+           
+           ,BCLR_BLUE
+           ,FCLR_RED
+           ,FCLR_GREEN
+           ,FCLR_BLUE
+           
+           ,ADD_USER
+           ,ADD_PC
+           ,ADD_DATE
+           ,ADD_TIME
+           ,LASTUP_USER
+           ,LASTUP_PC
+           ,LASTUP_DATE
+           ,LASTUP_TIME)
+        VALUES
+         	(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+	</M_COLOR503>
+	
+	<!--Update-->
+	<M_COLOR504>
+		UPDATE M_COLOR
+        SET           
+           COLOR_NAME = ?
+           ,COLOR_RNAME = ?           
+           ,DSP_FLG = ?
+           ,DSPORDER_NO = ?
+           
+           ,BCLR_RED = ?
+           ,BCLR_GREEN = ?           
+           ,BCLR_BLUE = ?
+           ,FCLR_RED = ?
+           ,FCLR_GREEN = ?
+           ,FCLR_BLUE = ?
+           
+           ,LASTUP_USER = ?
+           ,LASTUP_PC = ?
+           ,LASTUP_DATE = ?
+           ,LASTUP_TIME = ?
+        WHERE
+        	COLORCLS_CODE = ?
+           	AND COLOR_CODE = ?
+	</M_COLOR504>
+	
+	<!--Delete-->
+	<M_COLOR505>
+    	DELETE FROM
+        	M_COLOR
+      	WHERE
+			COLORCLS_CODE = ?
+           	AND COLOR_CODE = ?
+	</M_COLOR505>
+	
+	<!--Export Excel-->
+	<M_COLOR506>
+		SELECT 
+		  C.COLORCLS_CODE AS '種別'
+		  ,CL.COLORCLS_NAME
+		  ,C.COLOR_CODE AS 'コード'
+		  ,C.COLOR_NAME AS '名称'
+		  ,C.COLOR_RNAME AS '略称'
+		  ,C.DEFAULT_TYPE AS 'DEFAULT_TYPE'
+		  ,C.DSP_FLG AS '表示区分'
+		  ,C.DSPORDER_NO AS '表示順'
+		  ,C.COLORTYPE AS 'COLORTYPE'
+		  ,C.BCLR_RED AS '背景色用の赤'
+		  ,C.BCLR_GREEN AS '背景色用の緑'
+		  ,C.BCLR_BLUE AS '背景色用の青'
+		  ,C.FCLR_RED AS '文字色用の赤'
+		  ,C.FCLR_GREEN AS '文字色用の緑'
+		  ,C.FCLR_BLUE AS '文字色用の青'
+		  
+		  ,C.ADD_USER AS '登録ユーザー名'
+		  ,C.ADD_PC AS '登録ＰＣ名'
+		  ,C.ADD_DATE AS '登録日付'
+		  ,C.ADD_TIME AS '登録時刻'
+		  ,C.LASTUP_USER AS '最終更新ユーザー名'
+		  ,C.LASTUP_PC AS '最終更新ＰＣ名'
+		  ,C.LASTUP_DATE AS '最終更新日付'
+		  ,C.LASTUP_TIME AS '最終更新時刻'
+		FROM 
+			M_COLOR AS C INNER JOIN
+			M_COLORCLS CL ON C.COLORCLS_CODE = CL.COLORCLS_CODE
+	</M_COLOR506>
+	
+	<!-- get color vo -->
+	<M_COLOR507>
+		SELECT
+			M.COLORCLS_CODE,
+			M.COLOR_CODE,
+			M.COLOR_NAME,
+			M.COLOR_RNAME,
+			M.DEFAULT_TYPE,
+			M.DSP_FLG,
+			M.DSPORDER_NO,
+			M.COLORTYPE,
+			M.BCLR_RED,
+			M.BCLR_GREEN,
+			M.BCLR_BLUE,
+			M.FCLR_RED,
+			M.FCLR_GREEN,
+			M.FCLR_BLUE,
+			M.ADD_USER,
+			M.ADD_PC,
+			M.ADD_DATE,
+			M.ADD_TIME,
+			M.LASTUP_USER,
+			M.LASTUP_PC,
+			M.LASTUP_DATE,
+			M.LASTUP_TIME
+		FROM
+			M_COLOR M
+		WHERE 
+			M.COLORCLS_CODE = ? 
+			AND M.COLOR_CODE = ?
+			
+	</M_COLOR507>
+
+	<!-- delete color -->
+	<M_COLOR508>
+		DELETE FROM M_COLOR
+		WHERE 
+			COLORCLS_CODE = ? AND 
+			COLOR_CODE = ?
+	</M_COLOR508>
+	
+	<!-- check color inused -->
+	<M_COLOR509>
+	</M_COLOR509>
+	
+	<!-- count all color -->
+	<M_COLOR510>
+		SELECT COUNT(*) FROM M_COLOR mc
+	</M_COLOR510>
+
+	
+	<!-- end: longtv -->
+	
+</System>

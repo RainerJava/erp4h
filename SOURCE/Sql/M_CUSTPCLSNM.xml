@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<System>
+	<!-- select list -->
+	<M_CUSTPCLSNM001>
+		SELECT
+			CUST_CODE,
+			PCLSNM_CODE,
+			PCLSNM_NAME,
+			PCLSNM_TNAME,
+			USE_FLG,
+			ADD_USER,
+			ADD_PC,
+			ADD_DATE,
+			ADD_TIME,
+			LASTUP_USER,
+			LASTUP_PC,
+			LASTUP_DATE,
+			LASTUP_TIME
+		FROM
+			M_CUSTPCLSNM
+	</M_CUSTPCLSNM001>
+	
+	<!-- select vo -->
+	<M_CUSTPCLSNM002>
+		SELECT
+			CUST_CODE,
+			PCLSNM_CODE,
+			PCLSNM_NAME,
+			PCLSNM_TNAME,
+			USE_FLG,
+			ADD_USER,
+			ADD_PC,
+			ADD_DATE,
+			ADD_TIME,
+			LASTUP_USER,
+			LASTUP_PC,
+			LASTUP_DATE,
+			LASTUP_TIME
+		FROM
+			M_CUSTPCLSNM
+		WHERE
+			CUST_CODE = ? AND
+			PCLSNM_CODE = ?
+	</M_CUSTPCLSNM002>
+		  
+	<!-- update vo -->
+	<M_CUSTPCLSNM003>
+		UPDATE M_CUSTPCLSNM
+		SET	
+			PCLSNM_NAME = ?,
+			PCLSNM_TNAME = ?,
+			USE_FLG = ?,
+			LASTUP_USER = ?,
+			LASTUP_PC = ?,
+			LASTUP_DATE = ?,
+			LASTUP_TIME = ?
+		WHERE
+			CUST_CODE = ? AND
+			PCLSNM_CODE = ? 
+	</M_CUSTPCLSNM003>
+
+	<!-- insert vo -->
+	<M_CUSTPCLSNM004>
+		INSERT INTO M_CUSTPCLSNM
+		(
+			CUST_CODE,
+			PCLSNM_CODE,
+			PCLSNM_NAME,
+			PCLSNM_TNAME,
+			USE_FLG,
+			ADD_USER,
+			ADD_PC,
+			ADD_DATE,
+			ADD_TIME,
+			LASTUP_USER,
+			LASTUP_PC,
+			LASTUP_DATE,
+			LASTUP_TIME
+		)
+		VALUES
+		(
+			?,?,?,?,?,?,?,?,?,?,?,?,?
+		)
+	</M_CUSTPCLSNM004>
+	
+	<!-- delete vo -->
+	<M_CUSTPCLSNM005>
+		DELETE FROM M_CUSTPCLSNM
+		WHERE
+			CUST_CODE = ? AND
+			PCLSNM_CODE = ?
+	</M_CUSTPCLSNM005>
+	
+	<!-- export -->
+	<M_CUSTPCLSNM006>
+		SELECT
+			mc.CUST_CODE AS '得意先コード',
+			mcust.CUST1_NAME AS '得意先名',
+			mc.PCLSNM_CODE AS '処理分類コード',
+			mc.PCLSNM_NAME AS '処理分類名',
+			mc.PCLSNM_TNAME AS '処理分類名(短縮)',
+			pcls.PROC_TYPE,
+			mname.NAME_NAME AS 'PROC_NAME',
+			mc.USE_FLG AS '使用可否フラグ',
+			(
+				SELECT NAME_NAME FROM M_NAME
+				WHERE NAMECLS_CODE = 'USEFLG'
+				AND NAME_CODE = mc.USE_FLG
+			)
+			AS [使用可否フラグ名],
+			mc.ADD_USER AS '登録ユーザー名',
+			mc.ADD_PC AS '登録ＰＣ名',
+			mc.ADD_DATE AS '登録日付',
+			mc.ADD_TIME AS '登録時刻',
+			mc.LASTUP_USER AS '最終更新ユーザー名',
+			mc.LASTUP_PC AS '最終更新ＰＣ名',
+			mc.LASTUP_DATE AS '最終更新日付',
+			mc.LASTUP_TIME AS '最終更新時刻'
+		FROM
+			M_CUSTPCLSNM mc LEFT JOIN
+			M_CUST mcust ON mc.CUST_CODE = mcust.CUST_CODE LEFT JOIN
+			M_CUSTPCLS pcls ON mc.CUST_CODE = pcls.CUST_CODE AND mc.PCLSNM_CODE = pcls.PCLSNM_CODE LEFT JOIN
+			M_NAME mname ON pcls.PROC_TYPE = mname.NAME_CODE AND mname.NAMECLS_CODE = 'PROC'
+	</M_CUSTPCLSNM006>
+	
+	
+</System>
