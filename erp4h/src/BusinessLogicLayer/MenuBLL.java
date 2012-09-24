@@ -34,7 +34,7 @@ public class MenuBLL {
 			dtoMenu.setMnemonic(rs.getString("Mnemonic"));
 			dtoMenu.setPhanHeID(rs.getInt("PhanHeID"));
 			dtoMenu.setCreatedDate(rs.getTimestamp("CreatedDate"));
-			dtoMenu.setUserID(rs.getString("UserID"));
+			dtoMenu.setOwner(rs.getString("UserID"));
 			hsMenu.add(dtoMenu);
 		}
 		return hsMenu;

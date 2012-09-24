@@ -1,27 +1,17 @@
-package Center;
+package org.h115.erp4h.testcase;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
-import org.h115.erp4h.common.SystemParameters;
+public class abc extends JFrame {
 
-import BusinessLogicLayer.SystemMenu;
-import BusinessLogicLayer.absUser;
-
-public class abb extends JFrame {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-
 
 	/**
 	 * Launch the application.
@@ -30,7 +20,7 @@ public class abb extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					abb frame = new abb();
+					abc frame = new abc();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,23 +31,18 @@ public class abb extends JFrame {
 
 	/**
 	 * Create the frame.
-	 * @throws Exception 
 	 */
-	public abb() throws Exception {
-		super("erp4h");
+	public abc() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		SystemParameters.PHAN_HE="PhanHeID=1";
 		
-		this.setJMenuBar(new SystemMenu(SystemParameters.PHAN_HE));
-		absUser tu=new absUser();
-		JTable table=new JTable(tu);
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		JScrollPane jsp = new JScrollPane(table);
-		contentPane.add(jsp, BorderLayout.CENTER);
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setIcon(new ImageIcon(abc.class.getResource("/Icon/Users/user.png")));
+		contentPane.add(lblNewLabel, BorderLayout.NORTH);
 	}
+
 }
