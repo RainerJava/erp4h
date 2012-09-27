@@ -1,8 +1,0 @@
-eclipse.preferences.version=1
-encoding//src/org/erp4h/com/bll/ConnectDatabase.java=UTF-8
-encoding//src/org/erp4h/com/bll/SystemLogin.java=UTF-8
-encoding//src/org/erp4h/com/bll/UserBLL.java=UTF-8
-encoding//src/org/erp4h/commom/utils/NumberUtils.java=UTF-8
-encoding//src/org/erp4h/commom/utils/StringUtil.java=UTF-8
-encoding//src/org/erp4h/dal/ConnectDB.java=UTF-8
-encoding//src/org/erp4h/dal/ConnectMySQL.java=UTF-8
