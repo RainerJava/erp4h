@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import org.erp4h.common.bll.DepartmentJTree;
@@ -43,7 +44,8 @@ public class t extends JFrame {
 		setContentPane(contentPane);
 		
 		DepartmentJTree tree = new DepartmentJTree();
-		contentPane.add(tree, BorderLayout.CENTER);
+		JScrollPane jsp=new JScrollPane(tree);
+		contentPane.add(jsp, BorderLayout.CENTER);
 	}
 
 }

@@ -18,6 +18,10 @@ import javax.swing.tree.TreePath;
 
 import org.erp4h.common.dto.KhoaPhongDTO;
 
+/**
+ * @author hieulv
+ *{@code}
+ */
 public class DepartmentJTree extends JTree implements ActionListener {
 	/**
 	 * 
@@ -30,13 +34,13 @@ public class DepartmentJTree extends JTree implements ActionListener {
 
 	public DepartmentJTree() throws Exception {
 
-		//
-		popup=makePopup();
-		//
-		TreeNode root = makeDepartmentTree();
+		// tao menu popup
+		popup = makePopup();
+		// tao tree
+		TreeNode root = makeDepartmentTree(1);
 		model = new DefaultTreeModel(root);
 		this.setModel(model);
-		//
+		// xu ly chi chon 1 nut tren tree
 		this.addTreeSelectionListener(new TreeSelectionListener() {
 			@Override
 			public void valueChanged(TreeSelectionEvent e) {
@@ -48,7 +52,7 @@ public class DepartmentJTree extends JTree implements ActionListener {
 				System.out.println(selectedNode.getUserObject());
 			}
 		});
-		//
+		// xu ly khi right click tren tree
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -65,6 +69,7 @@ public class DepartmentJTree extends JTree implements ActionListener {
 
 	}
 
+	// Tao menu popup
 	private JPopupMenu makePopup() {
 		popup = new JPopupMenu();
 		mi = new JMenuItem("Sap xep theo ten");
@@ -80,36 +85,55 @@ public class DepartmentJTree extends JTree implements ActionListener {
 		return popup;
 	}
 
-	private TreeNode makeDepartmentTree() throws Exception {
-		DefaultMutableTreeNode root = new DefaultMutableTreeNode();
-		ArrayList<KhoaPhongDTO> arrKhoaPhong = new DepartmentBLL()
-				.getArrKhoaPhong(null,"TenKhoaPhong");
-		for (int i = 0; i < arrKhoaPhong.size(); i++) {
-			DefaultMutableTreeNode kp = new DefaultMutableTreeNode(
-					arrKhoaPhong.get(i));
-			root.add(kp);
+	/**
+	 * Tao tree voi tham so dua vao de sap xep
+	 * @param order 1 sap xep theo ten, 2 sap xep theo ma
+	 * @return root
+	 * @throws Exception
+	 */
+	private TreeNode makeDepartmentTree(int order) throws Exception {
+		DefaultMutableTreeNode root = new DefaultMutableTreeNode("Khoa phong");
+		if (order == 1) {
+			ArrayList<KhoaPhongDTO> arrKhoaPhong = new DepartmentBLL()
+					.getArrKhoaPhong(null, "TenKhoaPhong");
+			for (int i = 0; i < arrKhoaPhong.size(); i++) {
+				DefaultMutableTreeNode kp = new DefaultMutableTreeNode(
+						arrKhoaPhong.get(i));
+				root.add(kp);
+			}
+		} else {
+			ArrayList<KhoaPhongDTO> arrKhoaPhong = new DepartmentBLL()
+					.getArrKhoaPhong(null, "KhoaPhongID");
+			for (int i = 0; i < arrKhoaPhong.size(); i++) {
+				DefaultMutableTreeNode kp = new DefaultMutableTreeNode(
+						arrKhoaPhong.get(i));
+				root.add(kp);
+			}
 		}
 		return root;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		DefaultMutableTreeNode dmtn, node;
-
-		TreePath path = this.getSelectionPath();
-		dmtn = (DefaultMutableTreeNode) path.getLastPathComponent();
 		if (e.getActionCommand().equals("orderByName")) {
-			node = new DefaultMutableTreeNode("children");
-			dmtn.add(node);
-			// thanks to Yong Zhang for the tip for refreshing the tree struct
-			((DefaultTreeModel) this.getModel())
-					.nodeStructureChanged(dmtn);
+			TreeNode root;
+			try {
+				root = makeDepartmentTree(1);
+				model = new DefaultTreeModel(root);
+				this.setModel(model);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
 		}
 		if (e.getActionCommand().equals("orderByID")) {
-			node = (DefaultMutableTreeNode) dmtn.getParent();
-			node.removeAllChildren();
-			((DefaultTreeModel) this.getModel())
-					.nodeStructureChanged(dmtn);
+			TreeNode root;
+			try {
+				root = makeDepartmentTree(2);
+				model = new DefaultTreeModel(root);
+				this.setModel(model);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 }

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50525
 File Encoding         : 65001
 
-Date: 2012-09-14 16:57:48
+Date: 2012-09-28 17:02:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -86,55 +86,62 @@ INSERT INTO `tblgroupuser` VALUES ('3', 'HieuLV', '2012-09-13 15:35:42', null, n
 -- ----------------------------
 DROP TABLE IF EXISTS `tblkhoaphong`;
 CREATE TABLE `tblkhoaphong` (
-  `KhoaPhongID` int(11) NOT NULL DEFAULT '0',
+  `KhoaPhongID` varchar(4) NOT NULL DEFAULT '0',
   `TenKhoaPhong` char(255) DEFAULT NULL,
+  `SoGiuongChiTieu` int(3) DEFAULT NULL,
+  `CreatedDate` timestamp NULL DEFAULT NULL,
+  `Owner` varchar(12) DEFAULT NULL,
+  `CreatedAtPC` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`KhoaPhongID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tblkhoaphong
 -- ----------------------------
-INSERT INTO `tblkhoaphong` VALUES ('1100', 'PHONG TO CHUC CAN BO');
-INSERT INTO `tblkhoaphong` VALUES ('1200', 'PHONG HANH CHANH QUAN TRI');
-INSERT INTO `tblkhoaphong` VALUES ('1220', 'PHONG THI DUA');
-INSERT INTO `tblkhoaphong` VALUES ('1300', 'BAN THANH TRA');
-INSERT INTO `tblkhoaphong` VALUES ('1301', 'PHONG NGHIEP VU');
-INSERT INTO `tblkhoaphong` VALUES ('1302', 'PHONG THONG KE KE HOACH');
-INSERT INTO `tblkhoaphong` VALUES ('1303', 'PHONG QUAN LY DUOC');
-INSERT INTO `tblkhoaphong` VALUES ('1304', 'PHONG KE TOAN TAI VU');
-INSERT INTO `tblkhoaphong` VALUES ('1305', 'HOI Y HOC');
-INSERT INTO `tblkhoaphong` VALUES ('1306', 'PHONG DIEN TOAN');
-INSERT INTO `tblkhoaphong` VALUES ('1307', 'BAN CAI TAO');
-INSERT INTO `tblkhoaphong` VALUES ('1308', 'CHUONG TRINH PAM');
-INSERT INTO `tblkhoaphong` VALUES ('1309', 'BAO VE MOI SINH');
-INSERT INTO `tblkhoaphong` VALUES ('1310', 'DANH SACH CHO GIAI QUYET');
-INSERT INTO `tblkhoaphong` VALUES ('1314', 'PHONG TO CHUC');
-INSERT INTO `tblkhoaphong` VALUES ('1315', 'PHONG HANH CHANH QUAN TRI');
-INSERT INTO `tblkhoaphong` VALUES ('1316', 'BAN GIAM DOC');
-INSERT INTO `tblkhoaphong` VALUES ('1317', 'PHONG TAI VU');
-INSERT INTO `tblkhoaphong` VALUES ('1318', 'PHONG GIAO VU');
-INSERT INTO `tblkhoaphong` VALUES ('1400', 'KHOA TIN HOC Y HOC');
-INSERT INTO `tblkhoaphong` VALUES ('1401', 'PHONG GIAO DUC CHINH TRI');
-INSERT INTO `tblkhoaphong` VALUES ('1403', 'BO MON DONG Y DUOC');
-INSERT INTO `tblkhoaphong` VALUES ('1501', 'BO MON NGOAI');
-INSERT INTO `tblkhoaphong` VALUES ('1502', 'BO MON Y HOC CO SO');
-INSERT INTO `tblkhoaphong` VALUES ('1503', 'BO MON THUC HANH B.VIEN');
-INSERT INTO `tblkhoaphong` VALUES ('1504', 'BO MON NOI NHI LAY');
-INSERT INTO `tblkhoaphong` VALUES ('1506', 'GIAI PHAU SINH LY');
-INSERT INTO `tblkhoaphong` VALUES ('1507', 'BO MON SAN');
-INSERT INTO `tblkhoaphong` VALUES ('1508', 'BO MON VI SINH');
-INSERT INTO `tblkhoaphong` VALUES ('1601', 'PHONG GIAO TAI');
-INSERT INTO `tblkhoaphong` VALUES ('1602', 'BO MON SINH NGU');
-INSERT INTO `tblkhoaphong` VALUES ('1603', 'BO MON VAT LY');
-INSERT INTO `tblkhoaphong` VALUES ('1604', 'BO MON VI KY SINH');
-INSERT INTO `tblkhoaphong` VALUES ('1605', 'BO MON RANG HAM MAT');
-INSERT INTO `tblkhoaphong` VALUES ('1606', 'BO MON D/LIEU - CT C/HINH');
-INSERT INTO `tblkhoaphong` VALUES ('1607', 'PHONG THU VIEN');
-INSERT INTO `tblkhoaphong` VALUES ('1608', 'BAN THU KY Y TE CO QUAN');
-INSERT INTO `tblkhoaphong` VALUES ('1610', 'BO MON TAI MUI HONG');
-INSERT INTO `tblkhoaphong` VALUES ('1612', 'BO MON PHOI');
-INSERT INTO `tblkhoaphong` VALUES ('1613', 'BO MON GIAI PHAU BENH');
-INSERT INTO `tblkhoaphong` VALUES ('1614', 'BO MON SINH LY');
+INSERT INTO `tblkhoaphong` VALUES ('1100', 'Phòng Tài Chính Kế Toán', null, null, '', null);
+INSERT INTO `tblkhoaphong` VALUES ('1200', 'Phòng Hành Chính Quản Trị', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1220', 'Phòng Tổ Chức Cán Bộ', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1300', 'Phòng Kế Hoạch Tổng Hợp', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1301', 'Khoa Hồi Sức Tích Cực - Chống Độc', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1302', 'Khoa Nội Nhiễm', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1303', 'Khoa Nội Thần Kinh', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1304', 'Khoa Tim Mạch Can Thiệp', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1305', 'Khoa Nội tiêu Hóa', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1306', 'Khoa Gây Mê Hồi Sức', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1307', 'Khoa Dinh Dưỡng', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1308', 'Khoa Tai Mũi Họng', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1309', 'Khoa Ngoại Tổng Hợp', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1310', 'Khoa Chẩn Đoán Hình Ảnh', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1314', 'Khoa Ngoại Thần Kinh', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1315', 'Phòng Vật Tư Thiết Bị Y Tế', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1316', 'Khoa Ung Bướu', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1317', 'Đơn vị Giải Phẫu Bệnh', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1318', 'Đơn vị Khám Yêu Cầu', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1400', 'Khoa Dược', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1401', 'Khoa Xét Nghiệm', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1402', 'Khoa Chẩn Đoán Chức Năng', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1403', 'Khoa Khám Bệnh', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1501', 'Khoa Cơ Xương Khớp', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1502', 'Phòng Điều Dưỡng', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1503', 'Khoa Nội Tiết', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1504', 'Khoa Vật Lý Trị Liệu', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1506', 'Khoa Thận Niệu', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1507', 'Khoa Cấp Cứu Tổng Hợp', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1508', 'Khoa Chống Nhễm Khuẩn', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1601', 'Khoa Tim Mạch Tổng Quát', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1602', 'Phòng Chỉ Đạo Tuyến', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1603', 'Khoa Ngoại Chấn Thương Chỉnh Hình', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1604', 'Khoa Phẫu Thuật Tim', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1605', 'Khoa Hồi Sức Tim Mạch', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1606', 'Khoa Tim Mạch Can Thiệp', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1607', 'Khoa Bệnh Lý Mạch Máu Não', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1608', 'Khoa Y Học Thể Dục Thể Thao', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1610', 'Khoa Răng Hàm Mặt', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1611', 'Khoa Mắt', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1612', 'Khoa Ngoại Lồng Ngực Mạch Máu', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1613', 'Khoa Thận Ngoại', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1614', 'Phòng Công Nghệ Thông Tin', null, null, null, null);
+INSERT INTO `tblkhoaphong` VALUES ('1615', 'Tổ Phân Tích Tài Chính', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `tblloaithietbi`
@@ -149,6 +156,53 @@ CREATE TABLE `tblloaithietbi` (
 -- ----------------------------
 -- Records of tblloaithietbi
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tblloaithunhap`
+-- ----------------------------
+DROP TABLE IF EXISTS `tblloaithunhap`;
+CREATE TABLE `tblloaithunhap` (
+  `ThuNhapID` int(3) NOT NULL AUTO_INCREMENT,
+  `TeniThuNhap` varchar(255) DEFAULT NULL,
+  `CreatedDate` timestamp NULL DEFAULT NULL,
+  `Owner` varchar(12) DEFAULT NULL,
+  `CreatedAtPC` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`ThuNhapID`)
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tblloaithunhap
+-- ----------------------------
+INSERT INTO `tblloaithunhap` VALUES ('1', 'Lương', null, null, null);
+INSERT INTO `tblloaithunhap` VALUES ('2', 'ABC', null, null, null);
+INSERT INTO `tblloaithunhap` VALUES ('3', 'Hỗ trợ đời sống', null, null, null);
+INSERT INTO `tblloaithunhap` VALUES ('4', 'Phẫu thuật', null, null, null);
+INSERT INTO `tblloaithunhap` VALUES ('5', 'Bồi dưỡng', null, null, null);
+INSERT INTO `tblloaithunhap` VALUES ('6', 'Trực', null, null, null);
+INSERT INTO `tblloaithunhap` VALUES ('7', 'Làm ngoài giờ', null, null, null);
+INSERT INTO `tblloaithunhap` VALUES ('8', 'Độc hại', null, null, null);
+INSERT INTO `tblloaithunhap` VALUES ('9', 'CT', null, null, null);
+INSERT INTO `tblloaithunhap` VALUES ('10', 'XQ', null, null, null);
+INSERT INTO `tblloaithunhap` VALUES ('11', 'MRI', null, null, null);
+INSERT INTO `tblloaithunhap` VALUES ('12', 'DSA', null, null, null);
+INSERT INTO `tblloaithunhap` VALUES ('13', 'Điện tim', null, null, null);
+INSERT INTO `tblloaithunhap` VALUES ('14', 'Điện cơ', null, null, null);
+INSERT INTO `tblloaithunhap` VALUES ('15', 'Điện não', null, null, null);
+INSERT INTO `tblloaithunhap` VALUES ('16', 'Siêu âm', null, null, null);
+INSERT INTO `tblloaithunhap` VALUES ('17', 'Hội chẩn', null, null, null);
+INSERT INTO `tblloaithunhap` VALUES ('18', 'Phòng DV', null, null, null);
+INSERT INTO `tblloaithunhap` VALUES ('19', 'Khám bệnh', null, null, null);
+INSERT INTO `tblloaithunhap` VALUES ('20', 'Phẫu thuật yêu cầu', null, null, null);
+INSERT INTO `tblloaithunhap` VALUES ('21', 'Phụ cấp trực', null, null, null);
+INSERT INTO `tblloaithunhap` VALUES ('22', 'Bảo hiểm', null, null, null);
+INSERT INTO `tblloaithunhap` VALUES ('52', 'Lễ 27/2', null, null, null);
+INSERT INTO `tblloaithunhap` VALUES ('53', 'Lễ 30/4, 1/5', null, null, null);
+INSERT INTO `tblloaithunhap` VALUES ('54', 'Lễ tổ Hùng Vương', null, null, null);
+INSERT INTO `tblloaithunhap` VALUES ('55', 'Lễ 2/9', null, null, null);
+INSERT INTO `tblloaithunhap` VALUES ('56', 'Lễ 8/3', null, null, null);
+INSERT INTO `tblloaithunhap` VALUES ('57', 'Lễ 22/12', null, null, null);
+INSERT INTO `tblloaithunhap` VALUES ('58', 'Tết âm lịch', null, null, null);
+INSERT INTO `tblloaithunhap` VALUES ('59', 'Tết dương lịch', null, null, null);
 
 -- ----------------------------
 -- Table structure for `tblmenu`
@@ -240,7 +294,7 @@ CREATE TABLE `tblnhanvien` (
   `SoCMND` varchar(10) DEFAULT NULL,
   `SoATM` varchar(15) DEFAULT NULL,
   `NgaySinh` varchar(10) DEFAULT NULL,
-  `GioiTinh` varchar(1) DEFAULT NULL,
+  `GioiTinh` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`NhanVienID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -1243,6 +1297,25 @@ INSERT INTO `tblphanhe` VALUES ('1', 'HIS');
 INSERT INTO `tblphanhe` VALUES ('2', 'Duoc');
 
 -- ----------------------------
+-- Table structure for `tblsystem`
+-- ----------------------------
+DROP TABLE IF EXISTS `tblsystem`;
+CREATE TABLE `tblsystem` (
+  `SystemID` smallint(3) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `Value` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`SystemID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tblsystem
+-- ----------------------------
+INSERT INTO `tblsystem` VALUES ('001', 'Quản lý người dùng');
+INSERT INTO `tblsystem` VALUES ('002', 'Hệ thống Menu');
+INSERT INTO `tblsystem` VALUES ('003', 'Hệ thống báo cáo');
+INSERT INTO `tblsystem` VALUES ('004', 'Hệ thống thông số chương trình');
+INSERT INTO `tblsystem` VALUES ('005', 'Cấu hình');
+
+-- ----------------------------
 -- Table structure for `tblthietbi`
 -- ----------------------------
 DROP TABLE IF EXISTS `tblthietbi`;
@@ -1283,6 +1356,42 @@ CREATE TABLE `tblthietbid` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for `tblthunhap`
+-- ----------------------------
+DROP TABLE IF EXISTS `tblthunhap`;
+CREATE TABLE `tblthunhap` (
+  `NhanVienID` varchar(12) NOT NULL,
+  `ThuNhapID` int(3) NOT NULL,
+  `SoTien` double DEFAULT NULL,
+  `GhiChu` varchar(255) DEFAULT NULL,
+  `Month` date DEFAULT NULL,
+  `Year` year(4) NOT NULL DEFAULT '0000',
+  `CreatedDate` timestamp NULL DEFAULT NULL,
+  `Owner` varchar(12) DEFAULT NULL,
+  `CreatedAtPC` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`NhanVienID`,`ThuNhapID`,`Year`),
+  KEY `ThuNhapID` (`ThuNhapID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+/*!50100 PARTITION BY RANGE (Year)
+(PARTITION p0 VALUES LESS THAN (2000) ENGINE = InnoDB,
+ PARTITION p1 VALUES LESS THAN (2001) ENGINE = InnoDB,
+ PARTITION p2 VALUES LESS THAN (2002) ENGINE = InnoDB,
+ PARTITION p3 VALUES LESS THAN (2003) ENGINE = InnoDB,
+ PARTITION p4 VALUES LESS THAN (2004) ENGINE = InnoDB,
+ PARTITION p5 VALUES LESS THAN (2005) ENGINE = InnoDB,
+ PARTITION p6 VALUES LESS THAN (2006) ENGINE = InnoDB,
+ PARTITION p7 VALUES LESS THAN (2007) ENGINE = InnoDB,
+ PARTITION p8 VALUES LESS THAN (2008) ENGINE = InnoDB,
+ PARTITION p9 VALUES LESS THAN (2009) ENGINE = InnoDB,
+ PARTITION p10 VALUES LESS THAN (2010) ENGINE = InnoDB,
+ PARTITION p11 VALUES LESS THAN (2011) ENGINE = InnoDB,
+ PARTITION p12 VALUES LESS THAN (2012) ENGINE = InnoDB) */;
+
+-- ----------------------------
+-- Records of tblthunhap
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `tbluser`
 -- ----------------------------
 DROP TABLE IF EXISTS `tbluser`;
@@ -1292,24 +1401,27 @@ CREATE TABLE `tbluser` (
   `PWDLevel2` varchar(12) DEFAULT NULL,
   `UserName` varchar(45) DEFAULT NULL,
   `Email` varchar(45) DEFAULT NULL,
+  `TelNo` varchar(20) DEFAULT NULL,
   `LockedUser` bit(1) DEFAULT NULL,
   `LockedDate` datetime DEFAULT NULL,
   `LockedReason` varchar(150) DEFAULT NULL,
-  `LastLogIn` timestamp NULL DEFAULT NULL,
+  `LastLogin` timestamp NULL DEFAULT NULL,
+  `LastLoginPC` varchar(45) DEFAULT NULL,
   `LastChangedPassword` timestamp NULL DEFAULT NULL,
   `DeadlineOfUsing` datetime DEFAULT NULL,
   `Delegate` bit(1) DEFAULT NULL,
   `NhanVienID` varchar(12) DEFAULT NULL,
   `CreatedDate` timestamp NULL DEFAULT NULL,
   `Owner` varchar(12) DEFAULT NULL,
+  `CreatedAtPC` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`UserID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbluser
 -- ----------------------------
-INSERT INTO `tbluser` VALUES ('hieulv', '352007', null, 'Le Van Hieu', 'hieulvh@gmail.com', null, null, null, null, null, null, null, null, '2012-07-01 00:00:00', null);
-INSERT INTO `tbluser` VALUES ('test', '123456', null, 'Test Man', null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `tbluser` VALUES ('hieulv', '352007', null, 'Le Van Hieu', 'hieulvh@gmail.com', null, null, null, null, null, null, null, null, null, null, '2012-07-01 00:00:00', null, null);
+INSERT INTO `tbluser` VALUES ('test', '123456', null, 'Test Man', null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `tbluserright`
@@ -1357,7 +1469,7 @@ DELIMITER ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `spUser_SelectUserRight`;
 DELIMITER ;;
-CREATE DEFINER=`erp4hUser`@`192.168.12.%` PROCEDURE `spUser_SelectUserRight`(IN `@PhanHeID` tinyint(3))
+CREATE DEFINER=`erp4hUser`@`192.168.12.%` PROCEDURE `spUser_SelectUserRight`(IN pPhanHeID tinyint(3), pUserID varchar(12))
 BEGIN
 	#Routine body goes here... 
 	SELECT * 
@@ -1366,7 +1478,7 @@ BEGIN
 		INNER JOIN tblgroup AS t3 ON t2.GroupID=t3.GroupID
 		INNER JOIN tblgroupright AS t4 ON t3.GroupID=t4.GroupID
 		INNER JOIN tbluserright AS t5 ON t1.UserID=t5.UserID
-	WHERE t4.PhanHeID=@PhanHeID;
+	WHERE t4.PhanHeID=pPhanHeID AND t1.UserID=pUserID;
 END
 ;;
 DELIMITER ;
