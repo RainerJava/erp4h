@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import org.erp4h.bll.SystemLogin;
+import org.erp4h.common.SystemParameters;
+import java.awt.Toolkit;
 
 public class a extends JFrame {
 
@@ -32,11 +34,15 @@ public class a extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws Exception 
 	 */
-	public a() {
+	public a() throws Exception {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(a.class.getResource("/Icon/Military_Services/british_army.png")));
+		setName("frmLogin");
+		setTitle(SystemParameters.APPLICATION_NAME+" - Dang nhap");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 260);
+		setBounds(100, 100, 500, 280);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));

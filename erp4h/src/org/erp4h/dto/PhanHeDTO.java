@@ -32,4 +32,8 @@ public class PhanHeDTO {
 	public void setTenPhanHe(String tenPhanHe) {
 		TenPhanHe = tenPhanHe;
 	}
+	@Override
+	public String toString(){
+		return this.TenPhanHe;
+	}
 }

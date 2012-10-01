@@ -6,16 +6,20 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+
+import org.jdesktop.swingx.JXComboBox;
 import org.jdesktop.swingx.JXDatePicker;
+import org.erp4h.common.utils.DatePicker;
+import javax.swing.DefaultComboBoxModel;
 
 public class dp extends JFrame {
-	private JTextField textField;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					dp frame = new dp();
@@ -36,14 +40,12 @@ public class dp extends JFrame {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(115, 49, 86, 20);
-		getContentPane().add(textField);
-		textField.setColumns(10);
-		
-		JXDatePicker datePicker = new JXDatePicker();
-		datePicker.setBounds(117, 97, 230, 22);
-		getContentPane().add(datePicker);
+		JXComboBox cb= new JXComboBox();
+		cb.setModel(new DefaultComboBoxModel(new String[] {"sdfsdfg", "ghfghjf", "ghfghj", "ghjkghjk"}));
+		cb.setEditable(true);
+		cb.setLocation(97, 72);
+		cb.setSize(241, 22);
+		getContentPane().add(cb);
 
 	}
 }

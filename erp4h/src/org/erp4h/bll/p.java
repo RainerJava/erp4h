@@ -1,11 +1,7 @@
 package org.erp4h.bll;
 
 import javax.swing.JPanel;
-import javax.swing.BoxLayout;
 import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
 import org.jdesktop.swingx.JXDatePicker;
 
 public class p extends JPanel {

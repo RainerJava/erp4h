@@ -8,6 +8,7 @@ import java.util.Locale;
 import org.erp4h.system.dto.UserDTO;
 
 public class SystemParameters {
+	public static String APPLICATION_NAME="erp4h";
 	public static String PHAN_HE;
 	public static UserDTO CURRENT_USER;
 	public static ArrayList<Integer> CURRENT_GROUP_RIGHT;
@@ -18,7 +19,7 @@ public class SystemParameters {
 	
 	public static Date CURENT_WORKING_DATE;
 
-	public static Locale loc = new Locale("vi", "VI");
+	public static Locale VN_LOCALE = new Locale("vi", "VN");
 
 	public static void main(String[] args) {
 		System.out.println(CURRENT_PC_TIME);
