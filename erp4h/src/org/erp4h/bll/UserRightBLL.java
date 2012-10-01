@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import org.erp4h.commom.utils.StringUtil;
+import org.erp4h.common.utils.StringUtil;
 import org.erp4h.dal.ConnectUtils;
 import org.erp4h.system.dto.UserRightDTO;
 

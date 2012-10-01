@@ -1,4 +1,4 @@
-package org.erp4h.commom.utils;
+package org.erp4h.common.utils;
 
 import java.text.NumberFormat;
 import java.util.Locale;

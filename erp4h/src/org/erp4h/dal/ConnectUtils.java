@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ConnectUtils {
-	private ConnectMySQL connect;
+	private ConnectDB connect;
 
 	public ConnectUtils() {
 		super();
@@ -16,7 +16,7 @@ public class ConnectUtils {
 	// Tao ket noi
 	public ConnectUtils(String Host, String UserName, String Password,
 			String Database) {
-		this.connect = new ConnectMySQL(Host, UserName, Password, Database);
+		this.connect = new ConnectDB(Host, UserName, Password, Database);
 	}
 
 	private void AddCondition(StringBuilder query, String Condition) {
@@ -76,6 +76,9 @@ public class ConnectUtils {
 		return this.connect.executeStore(spName,parameter);
 	}
 
+	public ResultSet SystemSelect(String query) throws Exception{
+		return connect.executeQuery(query);
+	}
 	public ResultSet Select(String TableName) throws Exception {
 		return this.Select(TableName, null);
 	}

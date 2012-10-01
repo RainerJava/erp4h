@@ -1,4 +1,4 @@
-package org.erp4h.commom.utils;
+package org.erp4h.common.utils;
 
 import java.util.ArrayList;
 
@@ -7,8 +7,8 @@ import java.util.ArrayList;
  */
 public class StringUtil {
 	/**
-	 * @return Hàm này trả về một mảng tương ứng với hệ thống menu mà người dùng
-	 *         được phân quyền sử dụng
+	 * @return Hàm này trả v�? một mảng tương ứng với hệ thống menu mà ngư�?i dùng
+	 *         được phân quy�?n sử dụng
 	 * @param String
 	 *            s: là chuỗi đầu vào được lấy từ field UserRight trong bảng
 	 *            tblPhanHeUser

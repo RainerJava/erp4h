@@ -1,4 +1,4 @@
-package org.erp4h.commom.utils;
+package org.erp4h.common.utils;
 
 import javax.swing.JTextField;
 import javax.swing.text.AttributeSet;
