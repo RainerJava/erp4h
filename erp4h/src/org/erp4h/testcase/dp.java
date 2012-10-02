@@ -11,6 +11,8 @@ import org.jdesktop.swingx.JXComboBox;
 import org.jdesktop.swingx.JXDatePicker;
 import org.erp4h.common.utils.DatePicker;
 import javax.swing.DefaultComboBoxModel;
+import org.jdesktop.swingx.JXTextField;
+import javax.swing.JComboBox;
 
 public class dp extends JFrame {
 
@@ -46,6 +48,10 @@ public class dp extends JFrame {
 		cb.setLocation(97, 72);
 		cb.setSize(241, 22);
 		getContentPane().add(cb);
-
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setAutoscrolls(true);
+		comboBox.setBounds(97, 39, 241, 22);
+		getContentPane().add(comboBox);
 	}
 }

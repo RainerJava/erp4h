@@ -1,18 +1,10 @@
 package org.erp4h.testcase;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.border.EmptyBorder;
-
-import org.erp4h.common.bll.DepartmentJTree;
+import org.erp4h.common.utils.XTextField;
 
 public class t extends JFrame {
-
-	private JPanel contentPane;
 
 	/**
 	 * Launch the application.
@@ -38,14 +30,10 @@ public class t extends JFrame {
 	public t() throws Exception {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 357);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
+		getContentPane().setLayout(null);
 		
-		DepartmentJTree tree = new DepartmentJTree();
-		JScrollPane jsp=new JScrollPane(tree);
-		contentPane.add(jsp, BorderLayout.CENTER);
+		XTextField textField = new XTextField();
+		textField.setBounds(114, 85, 211, 20);
+		getContentPane().add(textField);
 	}
-
 }
