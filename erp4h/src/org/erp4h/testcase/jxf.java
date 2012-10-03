@@ -8,6 +8,9 @@ import javax.swing.JPanel;
 import org.jdesktop.swingx.JXFrame;
 import org.jdesktop.swingx.JXTitledSeparator;
 import org.jdesktop.swingx.JXTaskPane;
+import org.erp4h.common.utils.XTextField;
+import javax.swing.JTextField;
+import java.awt.Color;
 
 public class jxf extends JXFrame {
 
@@ -36,18 +39,20 @@ public class jxf extends JXFrame {
 	public jxf() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+		getRootPaneExt().getContentPane().setLayout(null);
 		
-		JXTitledSeparator titledSeparator = new JXTitledSeparator();
-		getRootPaneExt().getContentPane().add(titledSeparator, BorderLayout.NORTH);
+		XTextField textField = new XTextField();
+		textField.setBackground(new Color(240, 255, 255));
+		textField.setBounds(110, 58, 243, 34);
+		getRootPaneExt().getContentPane().add(textField);
 		
-		JXTaskPane taskPane = new JXTaskPane();
-		taskPane.setTitle("Chon phan he");
-		getRootPaneExt().getContentPane().add(taskPane, BorderLayout.CENTER);
+		XTextField textField_1 = new XTextField();
+		textField_1.setBounds(110, 109, 243, 44);
+		getRootPaneExt().getContentPane().add(textField_1);
 
 //		contentPane = new JPanel();
 //		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 //		contentPane.setLayout(new BorderLayout(0, 0));
 //		setContentPane(contentPane);
 	}
-
 }

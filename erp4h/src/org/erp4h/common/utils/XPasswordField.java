@@ -7,26 +7,19 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.JTextField;
-import javax.swing.UIManager;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
-
-import java.awt.Dimension;
-import java.awt.Rectangle;
+import javax.swing.JPasswordField;
 
 /**
  * @author hieulv
  * 
  */
-public class XTextField extends JTextField {
+public class XPasswordField extends JPasswordField {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public XTextField() {
+	public XPasswordField() {
 		setBorder(BorderFactory.createLineBorder(Color.GRAY));
 		setBackground(Color.WHITE);
 		HandleClass handle = new HandleClass();
@@ -47,10 +40,11 @@ public class XTextField extends JTextField {
 
 		@Override
 		public void mouseExited(MouseEvent e) {
-			if(hasFocus()){
-				setBorder(BorderFactory.createLineBorder(new Color(100, 255, 255)));
+			if (hasFocus()) {
+				setBorder(BorderFactory.createLineBorder(new Color(100, 255,
+						255)));
 				setBackground(new Color(246, 255, 255));
-			}else{
+			} else {
 				setBorder(BorderFactory.createLineBorder(Color.GRAY));
 				setBackground(Color.WHITE);
 			}
@@ -76,4 +70,5 @@ public class XTextField extends JTextField {
 			setBackground(Color.WHITE);
 		}
 	}
+
 }

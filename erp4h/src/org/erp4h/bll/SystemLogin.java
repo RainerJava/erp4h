@@ -19,9 +19,9 @@ import org.erp4h.system.dto.UserDTO;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import org.erp4h.common.utils.DatePicker;
-import org.erp4h.common.utils.XTaskPane;
-import org.jdesktop.swingx.JXTaskPaneContainer;
+import org.erp4h.common.utils.XDatePicker;
+import org.erp4h.common.utils.XPasswordField;
+import org.erp4h.common.utils.XTextField;
 
 /**
  * 
@@ -34,7 +34,7 @@ public class SystemLogin extends JPanel {
 	 */
 	private static final long serialVersionUID = -6752779567034686972L;
 	// khai bao cac thanh phan
-	private JTextField tfTaiKhoan;
+	private XTextField tfTaiKhoan;
 	private JPasswordField tfMatKhau;
 	private JButton btnDangNhap;
 	private JButton btnThoat;
@@ -43,13 +43,13 @@ public class SystemLogin extends JPanel {
 	//
 	Border grayline;
 	private JLabel lblDate;
-	private DatePicker datePicker;
+	private XDatePicker datePicker;
 	public SystemLogin() throws Exception {
 		this.setBounds(0, 0, 500, 280);
 		grayline = BorderFactory.createLineBorder(Color.gray);
 
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 250, 110, 100 };
+		gridBagLayout.columnWidths = new int[] { 270, 110, 110,10 };
 		gridBagLayout.rowHeights = new int[] { 20, 25, 20, 25, 20, 25, 0, 90, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0 };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
@@ -65,11 +65,11 @@ public class SystemLogin extends JPanel {
 		gbc_lblTaiKhoan.gridy = 0;
 		add(lblTaiKhoan, gbc_lblTaiKhoan);
 
-		tfTaiKhoan = new JTextField();
+		tfTaiKhoan = new XTextField();
 		tfTaiKhoan.setBorder(grayline);
 		GridBagConstraints gbc_tfTaiKhoan = new GridBagConstraints();
 		gbc_tfTaiKhoan.fill = GridBagConstraints.BOTH;
-		gbc_tfTaiKhoan.insets = new Insets(0, 0, 5, 0);
+		gbc_tfTaiKhoan.insets = new Insets(0, 0, 5, 5);
 		gbc_tfTaiKhoan.gridwidth = 2;
 		gbc_tfTaiKhoan.gridx = 1;
 		gbc_tfTaiKhoan.gridy = 1;
@@ -85,11 +85,11 @@ public class SystemLogin extends JPanel {
 		gbc_lblMatKhau.gridy = 2;
 		add(lblMatKhau, gbc_lblMatKhau);
 
-		tfMatKhau = new JPasswordField();
+		tfMatKhau = new XPasswordField();
 		tfMatKhau.setBorder(grayline);
 		GridBagConstraints gbc_tfMatKhau = new GridBagConstraints();
 		gbc_tfMatKhau.fill = GridBagConstraints.BOTH;
-		gbc_tfMatKhau.insets = new Insets(0, 0, 5, 0);
+		gbc_tfMatKhau.insets = new Insets(0, 0, 5, 5);
 		gbc_tfMatKhau.gridwidth = 2;
 		gbc_tfMatKhau.gridx = 1;
 		gbc_tfMatKhau.gridy = 3;
@@ -104,12 +104,12 @@ public class SystemLogin extends JPanel {
 		gbc_lblDate.gridy = 4;
 		add(lblDate, gbc_lblDate);
 
-		datePicker = new DatePicker();
+		datePicker = new XDatePicker();
 		GridBagConstraints gbc_datePicker = new GridBagConstraints();
 		gbc_datePicker.fill = GridBagConstraints.HORIZONTAL;
 		gbc_datePicker.anchor = GridBagConstraints.NORTH;
 		gbc_datePicker.gridwidth = 2;
-		gbc_datePicker.insets = new Insets(0, 0, 5, 0);
+		gbc_datePicker.insets = new Insets(0, 0, 5, 5);
 		gbc_datePicker.gridx = 1;
 		gbc_datePicker.gridy = 5;
 		add(datePicker, gbc_datePicker);
