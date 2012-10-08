@@ -6,7 +6,7 @@ public class NhanVienDTO {
 	private int GioiTinh;
 	private String HoTen;
 	private String KhoaPhongID;
-	private Date NgaySinh;
+	private String NgaySinh;
 	private String NhanVienID;
 	private String SoATM;
 	private String SoBHXH;
@@ -22,7 +22,7 @@ public class NhanVienDTO {
 	public String getKhoaPhongID() {
 		return KhoaPhongID;
 	}
-	public Date getNgaySinh() {
+	public String getNgaySinh() {
 		return NgaySinh;
 	}
 	
@@ -50,7 +50,7 @@ public class NhanVienDTO {
 	public void setKhoaPhongID(String khoaPhongID) {
 		KhoaPhongID = khoaPhongID;
 	}
-	public void setNgaySinh(Date ngaySinh) {
+	public void setNgaySinh(String ngaySinh) {
 		NgaySinh = ngaySinh;
 	}
 	
@@ -66,5 +66,8 @@ public class NhanVienDTO {
 	}
 	public void setSoCMND(String soCMND) {
 		SoCMND = soCMND;
+	}
+	public String tosString(){
+		return getHoTen();
 	}
 }

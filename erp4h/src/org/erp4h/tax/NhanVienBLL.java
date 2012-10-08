@@ -36,7 +36,7 @@ public class NhanVienBLL {
 					dtoNhanVien.setSoBHXH(rs.getString("SoBHXH"));
 					dtoNhanVien.setSoCMND(rs.getString("SoCMND"));
 					dtoNhanVien.setSoATM(rs.getString("SoATM"));
-					dtoNhanVien.setNgaySinh(rs.getDate("NgaySinh"));
+					dtoNhanVien.setNgaySinh(rs.getString("NgaySinh"));
 					dtoNhanVien.setGioiTinh(rs.getInt("GioiTinh"));
 					arrNhanVien.add(dtoNhanVien);
 				}

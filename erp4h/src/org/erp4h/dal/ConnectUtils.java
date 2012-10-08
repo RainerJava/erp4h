@@ -63,10 +63,11 @@ public class ConnectUtils {
 			query.append(key + ", ");
 			valueInsert.append("'" + ColumnValues.get(key).toString() + "', ");
 		}
-		query = query.delete(query.length() - 1, query.length());
-		valueInsert = valueInsert.delete(valueInsert.length() - 1,
+		query = query.delete(query.length() - 2, query.length());
+		valueInsert = valueInsert.delete(valueInsert.length() - 2,
 				valueInsert.length());
 		query.append(") values (" + valueInsert.toString() + ")");
+		System.out.println(query);
 		return this.connect.executeUpdate(query.toString()) > 0;
 	}
 
