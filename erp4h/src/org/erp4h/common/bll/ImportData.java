@@ -5,8 +5,8 @@ import java.net.InetAddress;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.HashMap;
-
-import com.mysql.jdbc.ResultSetMetaData;
+import java.util.Iterator;
+import java.util.Map;
 
 public class ImportData {
 	static org.erp4h.dal.ConnectUtils con;
@@ -23,36 +23,53 @@ public class ImportData {
 		}
 	}
 
-	private static void insertData() throws Exception {
+	private static void getColumnData(String colName, int ThuNhapID)
+			throws Exception {
+//		ImportData imp = new ImportData();
 		ResultSet rs = con.Select("tblbc1209");
-		java.sql.ResultSetMetaData rsMeta=rs.getMetaData();
-		for(int i=0;i<rsMeta.getColumnCount();i++){
-			System.out.println(rsMeta.getColumnName(i+1));
-			if(rsMeta.getColumnName(i+1)==null){
-				
+		int i=0;
+		while (rs.next()) {
+			if (rs.getInt(colName) > 0) {
+				ImportData imp = new ImportData();
+				HashMap<String, Object> hs = new HashMap<String, Object>();
+				hs.put("NhanVienID", rs.getString("MaNV"));
+				hs.put("ThuNhapID", ThuNhapID);
+				hs.put("SoTien", rs.getInt(colName));
+				hs.put("Nam", 2012);
+				hs.put("Thang", 9);
+				InetAddress.getLocalHost().getHostName();
+				hs.put("CreatedAtPC", InetAddress.getLocalHost().getHostName());
+				hs.put("CreatedDate",
+						new Timestamp(new java.util.Date().getTime()));
+				con.Insert("tblThuNhap", hs);
+				i++;
 			}
 		}
-//		while (rs.next()) {
-//			if (rs.getInt("Luong") > 0) {
-//				ImportData imp = new ImportData();
-//				HashMap<String, Object> hs = new HashMap<String, Object>();
-//				hs.put("NhanVienID", rs.getString("MaNV"));
-//				hs.put("ThuNhapID", 2);
-//				hs.put("SoTien", rs.getInt("ABC"));
-//				hs.put("Nam", 2012);
-//				hs.put("Thang", 9);
-//				InetAddress.getLocalHost().getHostName();
-//				hs.put("CreatedAtPC", InetAddress.getLocalHost().getHostName());
-//				// Timestamp ts=new Timestamp(new java.util.Date().getTime());
-//				hs.put("CreatedDate",
-//						new Timestamp(new java.util.Date().getTime()));
-//				con.Insert("tblThuNhap", hs);
-//			}
-//		}
+		rs.beforeFirst();
+		System.out.println(i);
+		
+	}
+
+	private static void insertData() throws Exception {
+		ResultSet rs = con.Select("tblLoaiThuNhap", "not isnull(MapField)");
+		HashMap<Integer , Object> hm=new HashMap<Integer , Object>();
+		
+		while (rs.next()) {
+			hm.put(rs.getInt("ThuNhapID"), rs.getString("MapField"));
+		}
+		Iterator iter = hm.entrySet().iterator();
+		 
+		while (iter.hasNext()) {
+			Map.Entry mEntry = (Map.Entry) iter.next();
+			System.out.println(mEntry.getKey() + " : " + mEntry.getValue());
+			getColumnData(mEntry.getValue().toString(),(int)mEntry.getKey());
+		}
+//		for(int i=0;i<hm.size();i++)
+//			getColumnData(hm.));
+
 	}
 
 	public static void main(String[] args) throws Exception {
-
 		ImportData imp = new ImportData();
 		getData();
 		insertData();
