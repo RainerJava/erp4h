@@ -1,2 +1,7 @@
 http://bodua.com/knowledge/Java--Programming/La%CC%80m-vie%CC%A3c-vo%CC%81i-Statement-PreparedStatement-va%CC%80-CallableStatement_49.html
+
+project
 http://jdnc-incubator.java.net/documentation/bierhance/jxcomboboxspec.html
+
+connect access file
+http://www.planet-source-code.com/vb/scripts/ShowCode.asp?txtCodeId=2691&lngWId=2#SECTION_LAST

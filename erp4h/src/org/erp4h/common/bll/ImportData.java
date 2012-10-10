@@ -8,11 +8,46 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class ImportData {
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+
+public class ImportData extends JFrame{
 	static org.erp4h.dal.ConnectUtils con;
+	private JTextField tfMonth;
+	private JTextField tfYear;
 
 	public ImportData() {
+		setTitle("Import Tax Data");
 		this.con = org.erp4h.dal.DataAccess.getDAL();
+		getContentPane().setLayout(null);
+		
+		tfMonth = new JTextField();
+		tfMonth.setBounds(155, 28, 86, 20);
+		getContentPane().add(tfMonth);
+		tfMonth.setColumns(10);
+		
+		tfYear = new JTextField();
+		tfYear.setBounds(155, 59, 86, 20);
+		getContentPane().add(tfYear);
+		tfYear.setColumns(10);
+		
+		JButton btnClose = new JButton("Close");
+		btnClose.setBounds(341, 239, 91, 23);
+		getContentPane().add(btnClose);
+		
+		JButton btnImport = new JButton("Import");
+		btnImport.setBounds(240, 239, 91, 23);
+		getContentPane().add(btnImport);
+		
+		JLabel lblMonth = new JLabel("Thang");
+		lblMonth.setBounds(99, 31, 46, 14);
+		getContentPane().add(lblMonth);
+		
+		JLabel lblYear = new JLabel("Nam");
+		lblYear.setBounds(99, 62, 46, 14);
+		getContentPane().add(lblYear);
 	}
 
 	private static void getData() throws Exception {
@@ -66,12 +101,39 @@ public class ImportData {
 		}
 //		for(int i=0;i<hm.size();i++)
 //			getColumnData(hm.));
-
 	}
-
+	
+	private static void insertMultiRowData() throws Exception{
+		ResultSet rs1 = con.Select("tblLoaiThuNhap", "not isnull(MapField)");
+		ResultSet rs2 = con.Select("tblbc1209","luong>0");
+		
+		String tableName="tblThuNhap";
+		String[] columnName=new String[]{"nam","thang","nhanvienid","thunhapid","sotien"};
+		Object[][] value;
+		
+		rs2.last();
+		value=new Object[rs2.getRow()][columnName.length];
+		rs2.beforeFirst();
+		while(rs1.next()){
+			
+		}
+		int i=0;
+		while(rs2.next()){
+			value[i][0]=2012;
+			value[i][1]=9;
+			value[i][2]=rs2.getString("MaNV");
+			value[i][3]=1;
+			value[i][4]=rs2.getInt("luong");
+			i++;
+		}
+		con.InsertMultiRow("tblThuNhap", columnName, value);
+		System.out.println("Done!");
+	}
+	
 	public static void main(String[] args) throws Exception {
 		ImportData imp = new ImportData();
-		getData();
-		insertData();
+//		getData();
+//		insertData();
+		insertMultiRowData();
 	}
 }

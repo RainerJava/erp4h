@@ -54,14 +54,15 @@ public class ConnectUtils {
 		return list;
 	}
 
-	public boolean Insert(String TableName, HashMap<String, Object> ColumnValues)
+	public boolean Insert(String tableName, HashMap<String, Object> columnValues)
 			throws Exception {
-		StringBuilder query = new StringBuilder("insert into " + TableName);
+
+		StringBuilder query = new StringBuilder("insert into " + tableName);
 		StringBuilder valueInsert = new StringBuilder();
 		query.append("(");
-		for (String key : ColumnValues.keySet()) {
+		for (String key : columnValues.keySet()) {
 			query.append(key + ", ");
-			valueInsert.append("'" + ColumnValues.get(key).toString() + "', ");
+			valueInsert.append("'" + columnValues.get(key).toString() + "', ");
 		}
 		query = query.delete(query.length() - 2, query.length());
 		valueInsert = valueInsert.delete(valueInsert.length() - 2,
@@ -71,15 +72,51 @@ public class ConnectUtils {
 		return this.connect.executeUpdate(query.toString()) > 0;
 	}
 
-	//
-	public ResultSet prepareCall(String spName, ArrayList<Object> parameter) throws Exception{
-		
-		return this.connect.executeStore(spName,parameter);
+	public boolean InsertMultiRow(String tableName, String[] columnName,
+			Object[][] value) throws Exception {
+
+		StringBuilder valueInsert = new StringBuilder();
+		for (int i = 0; i < value.length; i++) {
+			valueInsert.append("(");
+			for (int j = 0; j < value[i].length; j++) {
+				valueInsert.append("'" + value[i][j] + "', ");
+			}
+			valueInsert.delete(valueInsert.length()-2, valueInsert.length());
+			valueInsert.append("),");
+		}
+		valueInsert.delete(valueInsert.length() - 1, valueInsert.length());
+		valueInsert.append(";");
+
+		StringBuilder query = new StringBuilder("insert into " + tableName);
+		query.append("(");
+		for (int i = 0; i < columnName.length; i++)
+			query.append(columnName[i] + ", ");
+		query.delete(query.length() - 2, query.length());
+		query.append(") values " + valueInsert.toString());
+		System.out.println(query);
+		return this.connect.executeUpdate(query.toString()) > 0;
 	}
 
-	public ResultSet SystemSelect(String query) throws Exception{
+	public static void main(String[] args) throws Exception {
+		ConnectUtils cu=new ConnectUtils();
+		String tableName = "TableName";
+		String[] columnName = new String[] { "col1", "col2", "col3" };
+		Object[][] value = { { "a", 11, 12 }, { "b", 21, 22 } };
+
+		cu.InsertMultiRow(tableName,columnName,value);
+	}
+
+	//
+	public ResultSet prepareCall(String spName, ArrayList<Object> parameter)
+			throws Exception {
+
+		return this.connect.executeStore(spName, parameter);
+	}
+
+	public ResultSet SystemSelect(String query) throws Exception {
 		return connect.executeQuery(query);
 	}
+
 	public ResultSet Select(String TableName) throws Exception {
 		return this.Select(TableName, null);
 	}

@@ -1,4 +1,5 @@
 package org.erp4h.dal;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -14,7 +15,7 @@ public class ConnectDB {
 	ResultSet resultset = null;
 
 	public ConnectDB() throws Exception {
-		
+
 	}
 
 	public ConnectDB(String host, String username, String password,
@@ -117,10 +118,10 @@ public class ConnectDB {
 					cs.setBoolean(i + 1, (boolean) parameter.get(i));
 					break;
 				case "String":
-					cs.setString(i+1, (String) parameter.get(i));
+					cs.setString(i + 1, (String) parameter.get(i));
 					break;
 				case "Date":
-					cs.setDate(i+1, (Date) parameter.get(i));
+					cs.setDate(i + 1, (Date) parameter.get(i));
 					break;
 				}
 			}
@@ -137,12 +138,12 @@ public class ConnectDB {
 	 * @throws new
 	 *             Exception
 	 */
-	public int executeUpdate(String Query) throws Exception {
+	public int executeUpdate(String query) throws Exception {
 		int res = Integer.MIN_VALUE;
 		try {
-			res = getStatement().executeUpdate(Query);
+			res = getStatement().executeUpdate(query);
 		} catch (Exception e) {
-			throw new Exception("Error: " + e.getMessage() + " - " + Query);
+			throw new Exception("Error: " + e.getMessage() + " - " + query);
 		} finally {
 			this.Close();
 		}
@@ -184,4 +185,33 @@ public class ConnectDB {
 		// Trả v�? statement.
 		return this.statement;
 	}
+
+	public static void main(String[] args) throws Exception {
+		ConnectDB conDB=new ConnectDB();
+		conDB.checkDriver("sun.jdbc.odbc.JdbcOdbcDriver");
+//		try {
+//			Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
+//			// set this to a MS Access DB you have on your machine
+//			String filename = "d:/java/mdbTEST.mdb";
+//			String database = "jdbc:odbc:Driver={Microsoft Access Driver (*.mdb)};DBQ=";
+//			database += filename.trim() + ";DriverID=22;READONLY=true}"; // add
+//																			// on
+//																			// to
+//																			// the
+//																			// end
+//			// now we can get the connection from the DriverManager
+//			Connection con = DriverManager.getConnection(database, "", "");
+//		} catch (Exception e) {
+//			System.out.println("Error: " + e);
+//		}
+	}
+	
+	protected void checkDriver(String driverName) throws Exception {
+		try {
+			Class.forName(driverName);
+		} catch (java.lang.ClassNotFoundException e) {
+			throw new Exception(e.getMessage() + "\n"
+					+ " Không tìm thấy trình đi�?u khiển ... ");
+		}
+	} 
 }
