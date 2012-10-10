@@ -3,18 +3,25 @@ package org.erp4h.testcase;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import org.jdesktop.swingx.JXFrame;
 import org.jdesktop.swingx.JXTitledSeparator;
 import org.jdesktop.swingx.JXTaskPane;
+import org.erp4h.bll.UserBLL;
 import org.erp4h.common.utils.XTextField;
 import javax.swing.JTextField;
+import javax.swing.event.PopupMenuListener;
+
 import java.awt.Color;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 public class jxf extends JXFrame {
 
 	private JPanel contentPane;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -35,20 +42,37 @@ public class jxf extends JXFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws Exception 
 	 */
-	public jxf() {
+	public jxf() throws Exception {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		getRootPaneExt().getContentPane().setLayout(null);
 		
-		XTextField textField = new XTextField();
-		textField.setBackground(new Color(240, 255, 255));
-		textField.setBounds(110, 58, 243, 34);
-		getRootPaneExt().getContentPane().add(textField);
+		Object[][]data=new UserBLL().getUserObj();
 		
-		XTextField textField_1 = new XTextField();
-		textField_1.setBounds(110, 109, 243, 44);
-		getRootPaneExt().getContentPane().add(textField_1);
+		textField = new JTextField();
+		textField.setBounds(78, 43, 86, 20);
+		getRootPaneExt().getContentPane().add(textField);
+		textField.setColumns(10);
+		final JComboBox comboBox = new JComboBox(data);
+//		comboBox.addPopupMenuListener(PopupMenuListener l);
+		comboBox.setBounds(78, 96, 212, 22);
+		getRootPaneExt().getContentPane().add(comboBox);
+		comboBox.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				// TODO Auto-generated method stub
+//				comboBox.setPopupVisible(true);
+			}
+		});
 
 //		contentPane = new JPanel();
 //		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

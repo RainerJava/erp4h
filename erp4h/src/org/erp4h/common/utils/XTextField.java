@@ -43,6 +43,7 @@ public class XTextField extends JTextField {
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			setBorder(BorderFactory.createLineBorder(new Color(100, 255, 255)));
+			setBackground(Color.WHITE);
 		}
 
 		@Override
