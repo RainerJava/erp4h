@@ -153,7 +153,7 @@ public class ConnectDB {
 	/**
 	 * Tạo kết nối thông qua url, nếu không thành công thì ném lỗi ra ngoài
 	 * 
-	 * @return Trả v�? kết nối
+	 * @return Trả về kết nối đến CSDL MySQL
 	 * @throws Exception
 	 *             Không thể kết nối đến máy chủ CSDL:
 	 */
@@ -182,30 +182,31 @@ public class ConnectDB {
 		if (this.statement == null ? true : this.statement.isClosed()) {
 			this.statement = this.getConnect().createStatement();
 		}
-		// Trả v�? statement.
+		// Trả về statement.
 		return this.statement;
 	}
 
 	public static void main(String[] args) throws Exception {
-		ConnectDB conDB=new ConnectDB();
+		ConnectDB conDB = new ConnectDB();
 		conDB.checkDriver("sun.jdbc.odbc.JdbcOdbcDriver");
-//		try {
-//			Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-//			// set this to a MS Access DB you have on your machine
-//			String filename = "d:/java/mdbTEST.mdb";
-//			String database = "jdbc:odbc:Driver={Microsoft Access Driver (*.mdb)};DBQ=";
-//			database += filename.trim() + ";DriverID=22;READONLY=true}"; // add
-//																			// on
-//																			// to
-//																			// the
-//																			// end
-//			// now we can get the connection from the DriverManager
-//			Connection con = DriverManager.getConnection(database, "", "");
-//		} catch (Exception e) {
-//			System.out.println("Error: " + e);
-//		}
+		// try {
+		// Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
+		// // set this to a MS Access DB you have on your machine
+		// String filename = "d:/java/mdbTEST.mdb";
+		// String database =
+		// "jdbc:odbc:Driver={Microsoft Access Driver (*.mdb)};DBQ=";
+		// database += filename.trim() + ";DriverID=22;READONLY=true}"; // add
+		// // on
+		// // to
+		// // the
+		// // end
+		// // now we can get the connection from the DriverManager
+		// Connection con = DriverManager.getConnection(database, "", "");
+		// } catch (Exception e) {
+		// System.out.println("Error: " + e);
+		// }
 	}
-	
+
 	protected void checkDriver(String driverName) throws Exception {
 		try {
 			Class.forName(driverName);
@@ -213,5 +214,27 @@ public class ConnectDB {
 			throw new Exception(e.getMessage() + "\n"
 					+ " Không tìm thấy trình đi�?u khiển ... ");
 		}
-	} 
+	}
+
+	/**
+	 * Tạo kết nối nâng cao, kết nối đến các loại CSDL khác nhau
+	 * 
+	 * @param typeRDBMS
+	 *            loại CSDL
+	 * @param driverName
+	 *            trình điều khiển tương ứng
+	 * @return connect
+	 * @throws Exception
+	 */
+	protected Connection getConnect(int typeRDBMS, String driverName)
+			throws Exception {
+		if (this.connect == null) {
+			switch (typeRDBMS) {
+
+			}
+			checkDriver(driverName);
+
+		}
+		return this.connect;
+	}
 }

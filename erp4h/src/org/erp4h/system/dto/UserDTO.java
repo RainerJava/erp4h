@@ -2,65 +2,63 @@
  * Mo ta: 
  */
 package org.erp4h.system.dto;
+
+import java.io.Serializable;
 import java.sql.Timestamp;
+
 /**
  * 
  * @author hieulv
  * @@Careate_date 01/07/2012
  */
-public class UserDTO {
-	  String UserID;
-	  String Password;
-	  String PWDLevel2;
-	  String UserName;
-	  String Email;
-	  boolean LockedUser;
-	  Timestamp LockedDate;
-	  String LockedReason;
-	  Timestamp LastLogIn;
-	  Timestamp LastChangedPassword;
-	  Timestamp DeadlineOfUsing;
-	  boolean Delegate;
-	  String NhanVienID;
-	  Timestamp CreatedDate;
-	  String Owner;
-	public UserDTO(){
+public class UserDTO implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	String UserID;
+	String Password;
+	String PWDLevel2;
+	String UserName;
+	String Email;
+	boolean LockedUser;
+	Timestamp LockedDate;
+	String LockedReason;
+	Timestamp LastLogIn;
+	Timestamp LastChangedPassword;
+	Timestamp DeadlineOfUsing;
+	boolean Delegate;
+	String NhanVienID;
+	Timestamp CreatedDate;
+	String Owner;
+
+	public UserDTO() {
 		super();
 	}
-	
-	public UserDTO(	
-			  String UserID,
-			  String Password,
-			  String PWDLevel2,
-			  String UserName,
-			  String Email,
-			  boolean LockedUser,
-			  Timestamp LockedDate,
-			  String LockedReason,
-			  Timestamp LastLogIn,
-			  Timestamp LastChangedPassword,
-			  Timestamp DeadlineOfUsing,
-			  boolean Delegate,
-			  String NhanVienID,
-			  Timestamp CreatedDate,
-			  String Owner)	{
-		  this.UserID=UserID;
-		  this.Password=Password;
-		  this.PWDLevel2=PWDLevel2;
-		  this.UserName=UserName;
-		  this.Email=Email;
-		  this.LockedUser=LockedUser;
-		  this.LockedDate=LockedDate;
-		  this.LockedReason=LockedReason;
-		  this.LastLogIn=LastLogIn;
-		  this.LastChangedPassword=LastChangedPassword;
-		  this.DeadlineOfUsing=DeadlineOfUsing;
-		  this.Delegate=Delegate;
-		  this.NhanVienID=NhanVienID;
-		  this.CreatedDate=CreatedDate;
-		  this.Owner=Owner;
+
+	public UserDTO(String UserID, String Password, String PWDLevel2,
+			String UserName, String Email, boolean LockedUser,
+			Timestamp LockedDate, String LockedReason, Timestamp LastLogIn,
+			Timestamp LastChangedPassword, Timestamp DeadlineOfUsing,
+			boolean Delegate, String NhanVienID, Timestamp CreatedDate,
+			String Owner) {
+		this.UserID = UserID;
+		this.Password = Password;
+		this.PWDLevel2 = PWDLevel2;
+		this.UserName = UserName;
+		this.Email = Email;
+		this.LockedUser = LockedUser;
+		this.LockedDate = LockedDate;
+		this.LockedReason = LockedReason;
+		this.LastLogIn = LastLogIn;
+		this.LastChangedPassword = LastChangedPassword;
+		this.DeadlineOfUsing = DeadlineOfUsing;
+		this.Delegate = Delegate;
+		this.NhanVienID = NhanVienID;
+		this.CreatedDate = CreatedDate;
+		this.Owner = Owner;
 	}
-	
+
 	public Timestamp getCreatedDate() {
 		return CreatedDate;
 	}
@@ -181,8 +179,19 @@ public class UserDTO {
 		UserName = userName;
 	}
 
+	public boolean equals(Object other) {
+		return (other instanceof UserDTO) && (UserID != null)
+	             ? UserID.equals(((UserDTO) other).UserID)
+	             : (other == this);
+	}
+	public int hashCode() {
+        return (UserID != null) 
+             ? (this.getClass().hashCode() + UserID.hashCode()) 
+             : super.hashCode();
+    }
 	@Override
-	public String toString(){
+	public String toString() {
 		return UserName;
 	}
+
 }
