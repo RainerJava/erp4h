@@ -15,7 +15,6 @@ public class ConnectDB {
 	ResultSet resultset = null;
 
 	public ConnectDB() throws Exception {
-
 	}
 
 	public ConnectDB(String host, String username, String password,
@@ -226,15 +225,24 @@ public class ConnectDB {
 	 * @return connect
 	 * @throws Exception
 	 */
-	protected Connection getConnect(int typeRDBMS, String driverName)
+	protected Connection getConnect(int typeDBMS, String driverName)
 			throws Exception {
+		switch(typeDBMS){
+		case 1: // coonect to Oracle
+			break;
+		case 2: // connect to MySQL
+			break;
+		case 3:
+			break;
+		}
 		if (this.connect == null) {
 			switch (typeRDBMS) {
-
 			}
 			checkDriver(driverName);
-
 		}
 		return this.connect;
+	}
+	protected String createUrl(){
+		return null;
 	}
 }

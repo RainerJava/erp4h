@@ -20,4 +20,10 @@
 		<nature>org.springframework.ide.eclipse.core.springnature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<variableList>
+		<variable>
+			<name>XML</name>
+			<value>file:/D:/Project/erp4h/src/org/erp4h/dao/dbtypes.xml</value>
+		</variable>
+	</variableList>
 </projectDescription>

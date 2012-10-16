@@ -8,13 +8,6 @@ import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
-
-import java.awt.Dimension;
-import java.awt.Rectangle;
 
 /**
  * @author hieulv

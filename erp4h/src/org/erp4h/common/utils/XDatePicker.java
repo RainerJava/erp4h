@@ -2,7 +2,6 @@ package org.erp4h.common.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import org.erp4h.common.SystemParameters;
 import org.jdesktop.swingx.JXDatePicker;

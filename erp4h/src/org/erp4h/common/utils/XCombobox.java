@@ -17,7 +17,12 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-public class XCombobox extends JComboBox {
+public class XCombobox extends JComboBox<Object> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public XCombobox() {
 		super();
 	}
@@ -65,8 +70,13 @@ public class XCombobox extends JComboBox {
 				{ "Joe", "Brown", "Pool", new Integer(10), new Boolean(false) } };
 
 		TableModel model = new DefaultTableModel(data, columnNames) {
-			public Class getColumnClass(int column) {
-				Class returnValue;
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			public Class<?> getColumnClass(int column) {
+				Class<?> returnValue;
 				if ((column >= 0) && (column < getColumnCount())) {
 					returnValue = getValueAt(0, column).getClass();
 				} else {
@@ -77,6 +87,11 @@ public class XCombobox extends JComboBox {
 		};
 		
 		JTable table = new JTable(model) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public Object getValueAt(int row, int col) {
 				return super.getValueAt(row, col);
 			}
