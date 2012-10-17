@@ -26,7 +26,7 @@ public class TableData extends AbstractTableModel {
     ConnectUtils connect;
     
     public TableData() throws Exception{
-    	this.connect=org.erp4h.dal.DataAccess.getDAL();
+    	this.connect=org.erp4h.dal.DataAccess.getDataAccess();
     	getTableContents();
     }
 

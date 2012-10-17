@@ -10,7 +10,7 @@ public class NhanVienBLL {
 	private ConnectUtils connect;
 
 	public NhanVienBLL() {
-		this.connect = org.erp4h.dal.DataAccess.getDAL();
+		this.connect = org.erp4h.dal.DataAccess.getDataAccess();
 	}
 
 	public ArrayList<NhanVienDTO> getArrNhanVien() {

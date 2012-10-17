@@ -6,6 +6,10 @@ import org.erp4h.system.dto.UserDTO;
 
 public class UserDAOJDBC implements UserDAO{
 
+	public UserDAOJDBC(DAOFactory daoFactory) {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public UserDTO find(Long id) throws DAOException {
 		// TODO Auto-generated method stub

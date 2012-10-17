@@ -8,7 +8,7 @@ import org.erp4h.dal.ConnectUtils;
 public class SystemBLL {
 	ConnectUtils connect;
 	public SystemBLL() throws Exception{
-		this.connect=org.erp4h.dal.DataAccess.getDAL();
+		this.connect=org.erp4h.dal.DataAccess.getDataAccess();
 	}
 	public Timestamp getServerTime() throws Exception{
 		ResultSet rs=connect.SystemSelect("select current_timestamp as currenttime");

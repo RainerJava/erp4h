@@ -13,7 +13,7 @@ public class MenuBLL {
 	ConnectUtils connect;
 	
 	public MenuBLL(){
-		this.connect=org.erp4h.dal.DataAccess.getDAL();
+		this.connect=org.erp4h.dal.DataAccess.getDataAccess();
 	}
 	
 	public void Delete(HashSet<MenuDTO> HS_Menu) throws Exception{

@@ -15,7 +15,7 @@ public class test {
 //		
 //		System.out.println(Select(s, t, null));
 		ConnectUtils conn=new ConnectUtils();
-		conn=org.erp4h.dal.DataAccess.getDAL();
+		conn=org.erp4h.dal.DataAccess.getDataAccess();
 //		ResultSet rs=con.SelectFromStore("spUser_SelectUserRight");
 //		while(rs.next()){
 //			System.out.println(rs.getString("GroupRight"));

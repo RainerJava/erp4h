@@ -12,7 +12,7 @@ public class PhanHeBLL {
 	ConnectUtils connect;
 
 	public PhanHeBLL() {
-		this.connect = org.erp4h.dal.DataAccess.getDAL();
+		this.connect = org.erp4h.dal.DataAccess.getDataAccess();
 	}
 
 	public void Delete(HashSet<PhanHeDTO> hsPhanHe) throws Exception {

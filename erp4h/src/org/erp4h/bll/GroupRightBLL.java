@@ -12,7 +12,7 @@ public class GroupRightBLL {
 
 	public GroupRightBLL() {
 		super();
-		this.connect = org.erp4h.dal.DataAccess.getDAL();
+		this.connect = org.erp4h.dal.DataAccess.getDataAccess();
 	}
 
 	public ArrayList<GroupRightDTO> getArray() throws Exception {

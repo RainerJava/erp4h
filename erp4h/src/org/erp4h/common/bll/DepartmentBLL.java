@@ -13,7 +13,7 @@ public class DepartmentBLL {
 	ConnectUtils connect;
 
 	public DepartmentBLL() {
-		this.connect = org.erp4h.dal.DataAccess.getDAL();
+		this.connect = org.erp4h.dal.DataAccess.getDataAccess();
 	}
 
 	public void Delete(HashSet<KhoaPhongDTO> HS_KhoaPhong) throws Exception {

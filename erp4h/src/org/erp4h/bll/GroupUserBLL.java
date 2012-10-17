@@ -13,7 +13,7 @@ public class GroupUserBLL {
 
 	public GroupUserBLL() {
 		super();
-		this.connect = org.erp4h.dal.DataAccess.getDAL();
+		this.connect = org.erp4h.dal.DataAccess.getDataAccess();
 	}
 
 	public ArrayList<GroupUserDTO> getArray() throws Exception {

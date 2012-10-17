@@ -5,6 +5,10 @@ import javax.swing.JTextField;
 import org.jdesktop.swingx.JXDatePicker;
 
 public class p extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField textField;
 	private JTextField textField_1;
 

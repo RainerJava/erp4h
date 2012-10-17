@@ -14,13 +14,17 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 public class ImportData extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	static org.erp4h.dal.ConnectUtils con;
 	private JTextField tfMonth;
 	private JTextField tfYear;
 
 	public ImportData() {
 		setTitle("Import Tax Data");
-		this.con = org.erp4h.dal.DataAccess.getDAL();
+		this.con = org.erp4h.dal.DataAccess.getDataAccess();
 		getContentPane().setLayout(null);
 		
 		tfMonth = new JTextField();

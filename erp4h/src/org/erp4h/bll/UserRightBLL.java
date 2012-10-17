@@ -15,7 +15,7 @@ public class UserRightBLL {
 	
 	public UserRightBLL() {
 		super();
-		this.connect=org.erp4h.dal.DataAccess.getDAL();
+		this.connect=org.erp4h.dal.DataAccess.getDataAccess();
 	}
 	
 	public ArrayList<UserRightDTO> getArray() throws Exception{

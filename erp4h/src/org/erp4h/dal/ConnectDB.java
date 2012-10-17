@@ -4,10 +4,12 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class ConnectDB {
-	String strHost;
-	String strUserName;
-	String strPassWord;
-	String strDataBase;
+	String dbType;
+	String dbHostName;
+	String dbPortNumber;
+	String dbName;
+	String dbUserName;
+	String dbPassword;
 
 	Connection connect = null;
 	Statement statement = null;
@@ -17,12 +19,23 @@ public class ConnectDB {
 	public ConnectDB() throws Exception {
 	}
 
-	public ConnectDB(String host, String username, String password,
-			String database) {
-		this.strHost = host;
-		this.strUserName = username;
-		this.strPassWord = password;
-		this.strDataBase = database;
+	public ConnectDB(String dbHostName, String dbPortNumber, String dbDatabase,
+			String dbUserName, String dbPassword) {
+		this.dbHostName = dbHostName;
+		this.dbPortNumber = dbPortNumber;
+		this.dbName = dbName;
+		this.dbUserName = dbUserName;
+		this.dbPassword = dbPassword;
+	}
+
+	public ConnectDB(String dbType, String dbHostName, String dbPortNumber,
+			String dbName, String dbUserName, String dbPassWord) {
+		this.dbType = dbType;
+		this.dbHostName = dbHostName;
+		this.dbPortNumber = dbPortNumber;
+		this.dbName = dbName;
+		this.dbUserName = dbUserName;
+		this.dbPassword = dbPassWord;
 	}
 
 	public void Close() throws SQLException {
@@ -159,12 +172,12 @@ public class ConnectDB {
 	protected Connection getConnect() throws Exception {
 		if (this.connect == null) {
 			driverTest();
-			String url = "jdbc:mysql://" + this.strHost + ":3306/"
-					+ this.strDataBase;
+			String url = "jdbc:mysql://" + this.dbHostName + ":"+this.dbPortNumber+"/"
+					+ this.dbName;
 			try {
 				// Tạo kết nối thông qua url
 				this.connect = DriverManager.getConnection(url,
-						this.strUserName, this.strPassWord);
+						this.dbUserName, this.dbPassword);
 			}
 			// Nếu không thành công thì ném lỗi ra ngoài
 			catch (java.sql.SQLException e) {
@@ -227,7 +240,7 @@ public class ConnectDB {
 	 */
 	protected Connection getConnect(int typeDBMS, String driverName)
 			throws Exception {
-		switch(typeDBMS){
+		switch (typeDBMS) {
 		case 1: // coonect to Oracle
 			break;
 		case 2: // connect to MySQL
@@ -236,13 +249,46 @@ public class ConnectDB {
 			break;
 		}
 		if (this.connect == null) {
-			switch (typeRDBMS) {
+			switch (this.dbName) {
 			}
 			checkDriver(driverName);
 		}
 		return this.connect;
 	}
-	protected String createUrl(){
-		return null;
+
+	protected String createUrl() {
+		String url = "";
+		switch (dbName) {
+		case 1:
+			// create url for Oracle database
+
+			break;
+		case 2:
+			// create url for MySQL database
+			url = "jdbc:mysql://" + this.strHost + ":3306/" + this.strDataBase;
+			try {
+				this.connect = DriverManager.getConnection(url,
+						this.strUserName, this.strPassWord);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		}
+		return url;
+	}
+
+	protected void getDBInfo() {
+		String url = "";
+		switch (dbType) {
+		case 1:
+			// create url for Oracle database
+
+			break;
+		case 2:
+			// create url for MySQL database
+			url = "jdbc:mysql://" + this.strHost + ":3306/" + this.strDataBase;
+			break;
+		}
 	}
 }

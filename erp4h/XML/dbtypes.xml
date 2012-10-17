@@ -1,19 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dbFactory>
+<dbInformation>
 	<MySQL><!--MySQL information-->
-		<dbName>MySQL</dbName>
+		<dbType>MySQL</dbType>
 		<dbDriver>com.mysql.jdbc.Driver</dbDriver>
 		<dbUrl>jdbc:mysql://</dbUrl>
-		<dbHostName>192.168.12.250</dbHostName>
-		<dbUserName>root</dbUserName>
+		<dbHost>192.168.12.250</dbHost>
+		<dbUser>root</dbUser>
 		<dbPassword>352007</dbPassword>
+		<dbPort>3306</dbPort>
+		<dbName>erp4h</dbName>
 	</MySQL>
-	<Access>
+	<MicrosoftAccess><!--Microsoft Access information-->
 		<dbName>MicrosoftAccess</dbName>
 		<dbDriver>sun.jdbc.odbc.JdbcOdbcDriver</dbDriver>
 		<dbUrl>jdbc:odbc:Driver={Microsoft Access Driver (*.mdb)}; DBQ=</dbUrl>
-		<dbHostName>192.168.12.250</dbHostName>
-		<dbUserName>root</dbUserName>
+		<dbHost>192.168.12.250</dbHost>
+		<dbUser>root</dbUser>
 		<dbPassword>352007</dbPassword>
-	</Access>
-</dbFactory>
+	</MicrosoftAccess>
+	<Oracle><!--MySQL information-->
+		<dbType>Oracle</dbType>
+		<dbDriver>oracle.jdbc.driver.OracleDriver</dbDriver>
+		<dbUrl>jdbc:oracle:thin:@</dbUrl>
+		<dbHost>172.16.1.8</dbHost>
+		<dbUser>root</dbUser>
+		<dbPassword>33odjpir</dbPassword>
+		<dbPort>1521</dbPort>
+		<dbName>medibv115</dbName>
+	</Oracle>
+</dbInformation>

@@ -36,7 +36,7 @@ public class frmThietBi extends JFrame implements TreeSelectionListener{
 	private DefaultTreeModel treeModel;
 	
 	public frmThietBi() throws Exception{
-		this.connect=org.erp4h.dal.DataAccess.getDAL();
+		this.connect=org.erp4h.dal.DataAccess.getDataAccess();
 		
 		initialize();
 		getTree();

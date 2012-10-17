@@ -21,7 +21,7 @@ public class UserBLL {
 
 	// khoi tao mot ket noi den co so du lieu
 	public UserBLL() throws Exception {
-		this.connect = org.erp4h.dal.DataAccess.getDAL();
+		this.connect = org.erp4h.dal.DataAccess.getDataAccess();
 	}
 
 	public void Delete(HashSet<UserDTO> HS_User) throws Exception {

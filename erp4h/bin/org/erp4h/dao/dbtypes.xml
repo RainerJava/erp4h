@@ -4,16 +4,16 @@
 		<dbName>MySQL</dbName>
 		<dbDriver>com.mysql.jdbc.Driver</dbDriver>
 		<dbUrl>jdbc:mysql://</dbUrl>
-		<dbHostName>192.168.12.250</dbHostName>
-		<dbUserName>root</dbUserName>
+		<dbHost>192.168.12.250</dbHost>
+		<dbUser>root</dbUser>
 		<dbPassword>352007</dbPassword>
 	</MySQL>
 	<MicrosoftAccess><!--Microsoft Access information-->
 		<dbName>MicrosoftAccess</dbName>
 		<dbDriver>sun.jdbc.odbc.JdbcOdbcDriver</dbDriver>
 		<dbUrl>jdbc:odbc:Driver={Microsoft Access Driver (*.mdb)}; DBQ=</dbUrl>
-		<dbHostName>192.168.12.250</dbHostName>
-		<dbUserName>root</dbUserName>
+		<dbHost>192.168.12.250</dbHost>
+		<dbUser>root</dbUser>
 		<dbPassword>352007</dbPassword>
 	</MicrosoftAccess>
 </dbInformation>

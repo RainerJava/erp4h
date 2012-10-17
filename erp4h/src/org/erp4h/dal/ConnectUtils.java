@@ -14,9 +14,16 @@ public class ConnectUtils {
 	}
 
 	// Tao ket noi
-	public ConnectUtils(String Host, String UserName, String Password,
-			String Database) {
-		this.connect = new ConnectDB(Host, UserName, Password, Database);
+	public ConnectUtils(String dbHostName, String dbPortNumber, String dbName,
+			String dbUserName, String dbPassword) {
+		this.connect = new ConnectDB(dbHostName, dbPortNumber, dbName, dbUserName,
+				dbPassword);
+	}
+
+	public ConnectUtils(String dbType, String dbHostName, String dbPortNumber,
+			String dbName, String dbUserName, String dbPassword) {
+		this.connect = new ConnectDB(dbType, dbHostName, dbPortNumber,
+				dbName, dbUserName, dbPassword);
 	}
 
 	private void AddCondition(StringBuilder query, String Condition) {
@@ -81,7 +88,7 @@ public class ConnectUtils {
 			for (int j = 0; j < value[i].length; j++) {
 				valueInsert.append("'" + value[i][j] + "', ");
 			}
-			valueInsert.delete(valueInsert.length()-2, valueInsert.length());
+			valueInsert.delete(valueInsert.length() - 2, valueInsert.length());
 			valueInsert.append("),");
 		}
 		valueInsert.delete(valueInsert.length() - 1, valueInsert.length());
@@ -98,12 +105,12 @@ public class ConnectUtils {
 	}
 
 	public static void main(String[] args) throws Exception {
-		ConnectUtils cu=new ConnectUtils();
+		ConnectUtils cu = new ConnectUtils();
 		String tableName = "TableName";
 		String[] columnName = new String[] { "col1", "col2", "col3" };
 		Object[][] value = { { "a", 11, 12 }, { "b", 21, 22 } };
 
-		cu.InsertMultiRow(tableName,columnName,value);
+		cu.InsertMultiRow(tableName, columnName, value);
 	}
 
 	//

@@ -16,7 +16,7 @@ public class ThietBiBLL {
 	ConnectUtils connect;
 	
 	public ThietBiBLL(){
-		this.connect=org.erp4h.dal.DataAccess.getDAL();
+		this.connect=org.erp4h.dal.DataAccess.getDataAccess();
 	}
 	public void Delete(HashSet<ThietBiDTO> HS_ThietBi) throws Exception{
 		for(ThietBiDTO DTO_ThietBi:HS_ThietBi)
