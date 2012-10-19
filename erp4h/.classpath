@@ -2,10 +2,11 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="D:/project/erp4h/src/Conectors/mysql-connector-java-5.1.20-bin.jar"/>
-	<classpathentry kind="lib" path="D:/project/erp4h/src/Conectors/ojdbc6.jar"/>
-	<classpathentry kind="lib" path="D:/project/indigo/eclipse/plugins/org.eclipse.swt_3.7.2.v3740f.jar"/>
-	<classpathentry kind="lib" path="D:/project/erp4h/src/Images/icon.jar"/>
-	<classpathentry kind="lib" path="D:/project/erp4h/src/org/erp4h/common/swingx-all-1.6.4.jar"/>
+	<classpathentry kind="lib" path="D:/Project/erp4h/src/Conectors/mysql-connector-java-5.1.20-bin.jar"/>
+	<classpathentry kind="lib" path="D:/Project/erp4h/src/Conectors/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="D:/Project/indigo/eclipse/plugins/org.eclipse.swt_3.7.2.v3740f.jar"/>
+	<classpathentry kind="lib" path="D:/Project/erp4h/src/Images/icon.jar"/>
+	<classpathentry kind="lib" path="D:/Project/erp4h/src/org/erp4h/common/swingx-all-1.6.4.jar"/>
+	<classpathentry kind="lib" path="D:/Project/erp4h/src/Conectors/javadbf-0.4.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

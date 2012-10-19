@@ -7,6 +7,8 @@ import java.util.ResourceBundle;
 public class ApplicationConstants {
 	public static final int WIDTH=400;
 	public static final int HEIGHT=300;
+	public static final String MYSQL="MySQL";
+	
 	public static HashMap<String, Object> TYPE_RDBMS;
 	public static String DRIVER_MYSQL=ApplicationConstants.getString("DRIVER_MYSQL");;
 	

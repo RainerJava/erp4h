@@ -3,12 +3,12 @@
 	<MySQL><!--MySQL information-->
 		<dbType>MySQL</dbType>
 		<dbDriver>com.mysql.jdbc.Driver</dbDriver>
-		<dbUrl>jdbc:mysql://</dbUrl>
-		<dbHost>192.168.12.250</dbHost>
-		<dbUser>root</dbUser>
+		<dbHostName>192.168.12.250</dbHostName>
+		<dbPortNumber>3306</dbPortNumber>		
+		<dbName>erp4h</dbName>		
+		<dbUserName>root</dbUserName>
 		<dbPassword>352007</dbPassword>
-		<dbPort>3306</dbPort>
-		<dbName>erp4h</dbName>
+		<dbUrl>jdbc:mysql://</dbUrl>
 	</MySQL>
 	<MicrosoftAccess><!--Microsoft Access information-->
 		<dbName>MicrosoftAccess</dbName>
@@ -21,11 +21,11 @@
 	<Oracle><!--MySQL information-->
 		<dbType>Oracle</dbType>
 		<dbDriver>oracle.jdbc.driver.OracleDriver</dbDriver>
-		<dbUrl>jdbc:oracle:thin:@</dbUrl>
-		<dbHost>172.16.1.8</dbHost>
-		<dbUser>root</dbUser>
+		<dbHostName>172.16.1.8</dbHostName>
+		<dbPortNumber>1521</dbPortNumber>		
+		<dbName>medisoft</dbName>		
+		<dbUserName>medibv115</dbUserName>
 		<dbPassword>33odjpir</dbPassword>
-		<dbPort>1521</dbPort>
-		<dbName>medibv115</dbName>
+		<dbUrl>jdbc:oracle:thin:@</dbUrl>
 	</Oracle>
 </dbInformation>

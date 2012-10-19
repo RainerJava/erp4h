@@ -22,8 +22,10 @@ public class DAOProperties {
 
     static {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        InputStream propertiesFile = classLoader.getResourceAsStream(PROPERTIES_FILE);
-
+//        InputStream propertiesFile = classLoader.getResourceAsStream(PROPERTIES_FILE);
+        InputStream propertiesFile = DAOProperties.class.getResourceAsStream(PROPERTIES_FILE);
+        System.out.println(classLoader.getResourceAsStream(PROPERTIES_FILE));
+        System.out.println(DAOProperties.class.getResourceAsStream(PROPERTIES_FILE));
         if (propertiesFile == null) {
             throw new DAOConfigurationException(
                 "Properties file '" + PROPERTIES_FILE + "' is missing in classpath.");

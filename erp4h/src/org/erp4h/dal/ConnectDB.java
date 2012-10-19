@@ -19,7 +19,7 @@ public class ConnectDB {
 	public ConnectDB() throws Exception {
 	}
 
-	public ConnectDB(String dbHostName, String dbPortNumber, String dbDatabase,
+	public ConnectDB(String dbHostName, String dbPortNumber, String dbName,
 			String dbUserName, String dbPassword) {
 		this.dbHostName = dbHostName;
 		this.dbPortNumber = dbPortNumber;
@@ -63,7 +63,7 @@ public class ConnectDB {
 	/**
 	 * Kiá»ƒm tra Class Name Náº¿u khÃ´ng tá»“n táº¡i thÃ¬ mÃ©m lá»—i ra ngoÃ i.
 	 */
-	protected void driverTest() throws Exception {
+	protected void driverTest(String driver) throws Exception {
 		try {
 			Class.forName("org.gjt.mm.mysql.Driver");
 		} catch (java.lang.ClassNotFoundException e) {
@@ -170,19 +170,38 @@ public class ConnectDB {
 	 *             Không thể kết nối đến máy chủ CSDL:
 	 */
 	protected Connection getConnect() throws Exception {
-		if (this.connect == null) {
-			driverTest();
-			String url = "jdbc:mysql://" + this.dbHostName + ":"+this.dbPortNumber+"/"
-					+ this.dbName;
-			try {
-				// Tạo kết nối thông qua url
-				this.connect = DriverManager.getConnection(url,
-						this.dbUserName, this.dbPassword);
+		switch (dbType) {
+		case "MySQL":
+			if (this.connect == null) {
+				driverTest("org.gjt.mm.mysql.Driver");
+				String url = "jdbc:mysql://" + this.dbHostName + ":"
+						+ this.dbPortNumber + "/" + this.dbName;
+				try {
+					// Tạo kết nối thông qua url
+					this.connect = DriverManager.getConnection(url,
+							this.dbUserName, this.dbPassword);
+				}
+				// Nếu không thành công thì ném lỗi ra ngoài
+				catch (java.sql.SQLException e) {
+					throw new Exception(e.getMessage() + "\n"
+							+ " Không thể kết nối đến máy chủ CSDL: " + url);
+				}
 			}
-			// Nếu không thành công thì ném lỗi ra ngoài
-			catch (java.sql.SQLException e) {
-				throw new Exception(e.getMessage() + "\n"
-						+ " Không thể kết nối đến máy chủ CSDL: " + url);
+		case "Oracle":
+			if (this.connect == null) {
+				driverTest("oracle.jdbc.driver.OracleDriver");
+				String url = "jdbc:oracle:thin:@" + this.dbHostName + ":"
+						+ this.dbPortNumber + ":" + this.dbName;
+				try {
+					// Tạo kết nối thông qua url
+					this.connect = DriverManager.getConnection(url,
+							this.dbUserName, this.dbPassword);
+				}
+				// Nếu không thành công thì ném lỗi ra ngoài
+				catch (java.sql.SQLException e) {
+					throw new Exception(e.getMessage() + "\n"
+							+ " Không thể kết nối đến máy chủ CSDL: " + url);
+				}
 			}
 		}
 		// Trả v�? kết nối
@@ -254,41 +273,5 @@ public class ConnectDB {
 			checkDriver(driverName);
 		}
 		return this.connect;
-	}
-
-	protected String createUrl() {
-		String url = "";
-		switch (dbName) {
-		case 1:
-			// create url for Oracle database
-
-			break;
-		case 2:
-			// create url for MySQL database
-			url = "jdbc:mysql://" + this.strHost + ":3306/" + this.strDataBase;
-			try {
-				this.connect = DriverManager.getConnection(url,
-						this.strUserName, this.strPassWord);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			break;
-		}
-		return url;
-	}
-
-	protected void getDBInfo() {
-		String url = "";
-		switch (dbType) {
-		case 1:
-			// create url for Oracle database
-
-			break;
-		case 2:
-			// create url for MySQL database
-			url = "jdbc:mysql://" + this.strHost + ":3306/" + this.strDataBase;
-			break;
-		}
 	}
 }
