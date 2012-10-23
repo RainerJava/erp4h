@@ -21,16 +21,19 @@ public class ConnectUtils {
 	}
 
 	// Tao ket noi
-	public ConnectUtils(String dbHostName, String dbPortNumber, String dbName,
-			String dbUserName, String dbPassword) {
-		this.connect = new ConnectDB(dbHostName, dbPortNumber, dbName,
-				dbUserName, dbPassword);
+	public ConnectUtils(String dbDriver, String dbHostName,
+			String dbPortNumber, String dbName, String dbUserName,
+			String dbPassword, String dbUrl) {
+		this.connect = new ConnectDB(dbDriver, dbHostName,
+				dbPortNumber, dbName, dbUserName,
+				dbPassword, dbUrl);
 	}
 
-	public ConnectUtils(String dbType, String dbHostName, String dbPortNumber,
-			String dbName, String dbUserName, String dbPassword) {
-		this.connect = new ConnectDB(dbType, dbHostName, dbPortNumber, dbName,
-				dbUserName, dbPassword);
+	public ConnectUtils(String dbType, String dbDriver, String dbHostName,
+			String dbPortNumber, String dbName, String dbUserName,
+			String dbPassword, String dbUrl) {
+		this.connect = new ConnectDB(dbType, dbDriver, dbHostName,
+				dbPortNumber, dbName, dbUserName, dbPassword, dbUrl);
 	}
 
 	private void AddCondition(StringBuilder query, String Condition) {
@@ -136,7 +139,7 @@ public class ConnectUtils {
 		StringBuilder query = new StringBuilder("select * from " + TableName);
 		this.AddCondition(query, Condition);
 		this.AddOrderBy(query, OrderBy);
-		// query.append(";");
+		query.append(";");
 		System.out.println(query.toString());
 		return connect.executeQuery(query.toString());
 	}
@@ -149,7 +152,7 @@ public class ConnectUtils {
 		}
 		query.delete(query.length() - 2, query.length() + 100);
 		query.append(" from " + tableName[0]);
-		query.append(";");
+		// query.append(";");
 		return query.toString();
 	}
 

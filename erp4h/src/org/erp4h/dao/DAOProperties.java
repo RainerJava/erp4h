@@ -80,7 +80,6 @@ public class DAOProperties {
                 property = null;
             }
         }
-
         return property;
     }
 }

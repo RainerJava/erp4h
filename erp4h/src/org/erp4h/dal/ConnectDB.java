@@ -5,11 +5,13 @@ import java.util.ArrayList;
 
 public class ConnectDB {
 	String dbType;
+	String dbDriver;
 	String dbHostName;
 	String dbPortNumber;
 	String dbName;
 	String dbUserName;
 	String dbPassword;
+	String dbUrl;
 
 	Connection connect = null;
 	Statement statement = null;
@@ -19,23 +21,28 @@ public class ConnectDB {
 	public ConnectDB() throws Exception {
 	}
 
-	public ConnectDB(String dbHostName, String dbPortNumber, String dbName,
-			String dbUserName, String dbPassword) {
-		this.dbHostName = dbHostName;
-		this.dbPortNumber = dbPortNumber;
-		this.dbName = dbName;
-		this.dbUserName = dbUserName;
-		this.dbPassword = dbPassword;
-	}
-
-	public ConnectDB(String dbType, String dbHostName, String dbPortNumber,
-			String dbName, String dbUserName, String dbPassWord) {
-		this.dbType = dbType;
+	public ConnectDB(String dbDriver, String dbHostName, String dbPortNumber,
+			String dbName, String dbUserName, String dbPassWord, String dbUrl) {
+		this.dbDriver = dbDriver;
 		this.dbHostName = dbHostName;
 		this.dbPortNumber = dbPortNumber;
 		this.dbName = dbName;
 		this.dbUserName = dbUserName;
 		this.dbPassword = dbPassWord;
+		this.dbUrl = dbUrl;
+	}
+
+	public ConnectDB(String dbType, String dbDriver, String dbHostName,
+			String dbPortNumber, String dbName, String dbUserName,
+			String dbPassWord, String dbUrl) {
+		this.dbType = dbType;
+		this.dbDriver = dbDriver;
+		this.dbHostName = dbHostName;
+		this.dbPortNumber = dbPortNumber;
+		this.dbName = dbName;
+		this.dbUserName = dbUserName;
+		this.dbPassword = dbPassWord;
+		this.dbUrl = dbUrl;
 	}
 
 	public void Close() throws SQLException {
@@ -170,38 +177,17 @@ public class ConnectDB {
 	 *             Không thể kết nối đến máy chủ CSDL:
 	 */
 	protected Connection getConnect() throws Exception {
-		switch (dbType) {
-		case "MySQL":
-			if (this.connect == null) {
-				driverTest("org.gjt.mm.mysql.Driver");
-				String url = "jdbc:mysql://" + this.dbHostName + ":"
-						+ this.dbPortNumber + "/" + this.dbName;
-				try {
-					// Tạo kết nối thông qua url
-					this.connect = DriverManager.getConnection(url,
-							this.dbUserName, this.dbPassword);
-				}
-				// Nếu không thành công thì ném lỗi ra ngoài
-				catch (java.sql.SQLException e) {
-					throw new Exception(e.getMessage() + "\n"
-							+ " Không thể kết nối đến máy chủ CSDL: " + url);
-				}
+		if (this.connect == null) {
+			driverTest(this.dbDriver);
+			try {
+				// Tạo kết nối thông qua url
+				this.connect = DriverManager.getConnection(this.dbUrl,
+						this.dbUserName, this.dbPassword);
 			}
-		case "Oracle":
-			if (this.connect == null) {
-				driverTest("oracle.jdbc.driver.OracleDriver");
-				String url = "jdbc:oracle:thin:@" + this.dbHostName + ":"
-						+ this.dbPortNumber + ":" + this.dbName;
-				try {
-					// Tạo kết nối thông qua url
-					this.connect = DriverManager.getConnection(url,
-							this.dbUserName, this.dbPassword);
-				}
-				// Nếu không thành công thì ném lỗi ra ngoài
-				catch (java.sql.SQLException e) {
-					throw new Exception(e.getMessage() + "\n"
-							+ " Không thể kết nối đến máy chủ CSDL: " + url);
-				}
+			// Nếu không thành công thì ném lỗi ra ngoài
+			catch (java.sql.SQLException e) {
+				throw new Exception(e.getMessage() + "\n"
+						+ " Không thể kết nối đến máy chủ CSDL: " + this.dbUrl);
 			}
 		}
 		// Trả v�? kết nối
@@ -217,27 +203,6 @@ public class ConnectDB {
 		return this.statement;
 	}
 
-	public static void main(String[] args) throws Exception {
-		ConnectDB conDB = new ConnectDB();
-		conDB.checkDriver("sun.jdbc.odbc.JdbcOdbcDriver");
-		// try {
-		// Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-		// // set this to a MS Access DB you have on your machine
-		// String filename = "d:/java/mdbTEST.mdb";
-		// String database =
-		// "jdbc:odbc:Driver={Microsoft Access Driver (*.mdb)};DBQ=";
-		// database += filename.trim() + ";DriverID=22;READONLY=true}"; // add
-		// // on
-		// // to
-		// // the
-		// // end
-		// // now we can get the connection from the DriverManager
-		// Connection con = DriverManager.getConnection(database, "", "");
-		// } catch (Exception e) {
-		// System.out.println("Error: " + e);
-		// }
-	}
-
 	protected void checkDriver(String driverName) throws Exception {
 		try {
 			Class.forName(driverName);
@@ -245,33 +210,5 @@ public class ConnectDB {
 			throw new Exception(e.getMessage() + "\n"
 					+ " Không tìm thấy trình đi�?u khiển ... ");
 		}
-	}
-
-	/**
-	 * Tạo kết nối nâng cao, kết nối đến các loại CSDL khác nhau
-	 * 
-	 * @param typeRDBMS
-	 *            loại CSDL
-	 * @param driverName
-	 *            trình điều khiển tương ứng
-	 * @return connect
-	 * @throws Exception
-	 */
-	protected Connection getConnect(int typeDBMS, String driverName)
-			throws Exception {
-		switch (typeDBMS) {
-		case 1: // coonect to Oracle
-			break;
-		case 2: // connect to MySQL
-			break;
-		case 3:
-			break;
-		}
-		if (this.connect == null) {
-			switch (this.dbName) {
-			}
-			checkDriver(driverName);
-		}
-		return this.connect;
 	}
 }

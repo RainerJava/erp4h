@@ -3,7 +3,7 @@
 	<MySQL><!--MySQL information-->
 		<dbType>MySQL</dbType>
 		<dbDriver>com.mysql.jdbc.Driver</dbDriver>
-		<dbHostName>192.168.12.250</dbHostName>
+		<dbHostName>localhost</dbHostName>
 		<dbPortNumber>3306</dbPortNumber>		
 		<dbName>erp4h</dbName>		
 		<dbUserName>root</dbUserName>
